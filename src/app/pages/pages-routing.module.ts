@@ -8,8 +8,11 @@ const routes: Routes = [{
   path: '',
   component: PagesComponent,
   children: [{
-    path: 'dashboard',
+    path: '',
     component: DashboardComponent,
+  }, {
+    path: 'account',
+    loadChildren: './account/account.module#AccountModule',
   }, {
     path: 'ui-features',
     loadChildren: './ui-features/ui-features.module#UiFeaturesModule',

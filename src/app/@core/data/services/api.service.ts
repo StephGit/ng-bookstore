@@ -3,7 +3,7 @@ import {HttpHeaders, HttpClient, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {environment} from '../../../environments/environment';
+import {environment} from '../../../../environments/environment';
 
 @Injectable()
 export class ApiService {
@@ -11,13 +11,13 @@ export class ApiService {
   headers: HttpHeaders;
 
   constructor(
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   private getDefaultHeaders(): HttpHeaders {
    return new HttpHeaders({
       'Content-Type': 'application/json',
-      'Accept': 'application/json'
+      'Accept': 'application/json',
     })
   }
 
@@ -52,7 +52,7 @@ export class ApiService {
     return this.http.put(
       `${this.apiUrl}${path}`,
       JSON.stringify(body),
-      {headers: this.setHeaders(headers)}
+      {headers: this.setHeaders(headers)},
     )
       .catch(this.formatErrors)
       .map((res: Response) => res.json());
@@ -62,7 +62,7 @@ export class ApiService {
     return this.http.post(
       `${this.apiUrl}${path}`,
       JSON.stringify(body),
-      {headers: this.setHeaders(headers)}
+      {headers: this.setHeaders(headers)},
     )
       .catch(this.formatErrors)
       .map((res: Response) => res.json());
@@ -71,7 +71,7 @@ export class ApiService {
   delete(path, headers): Observable<any> {
     return this.http.delete(
       `${this.apiUrl}${path}`,
-      {headers: this.setHeaders(headers)}
+      {headers: this.setHeaders(headers)},
     )
       .catch(this.formatErrors)
       .map((res: Response) => res.json());

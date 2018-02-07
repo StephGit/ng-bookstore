@@ -1,4 +1,4 @@
-import {ShoppingCardItem} from './shopping-card-item';
+import {ShoppingCardItem} from './shopping-card-item.model';
 
 export class ShoppingCard {
   private items: ShoppingCardItem [];

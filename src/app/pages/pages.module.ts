@@ -22,7 +22,6 @@ const PAGES_COMPONENTS = [
   declarations: [
     ...PAGES_COMPONENTS,
     DetailsComponent,
-    AccountComponent,
     CheckoutComponent,
     ShoppingCartComponent,
   ],

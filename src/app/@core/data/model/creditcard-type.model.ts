@@ -1,1 +1,3 @@
-export enum CreditCardType {}
+export enum CreditCardType {
+  MASTERCARD, VISA,
+}

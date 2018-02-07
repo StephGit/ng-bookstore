@@ -4,7 +4,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'nb-home',
-    link: '/pages/dashboard',
+    link: '',
     home: true,
   },
   {
@@ -66,7 +66,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Tree',
-        link: '/pages/components/tree',
+        link: '/components/tree',
       }, {
         title: 'Notifications',
         link: '/pages/components/notifications',
@@ -139,7 +139,7 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Login',
-        link: '/auth/login',
+        link: '/account/login',
       },
       {
         title: 'Register',

@@ -4,6 +4,10 @@ import { PagesComponent } from './pages.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
+import { DetailsComponent } from './details/details.component';
+import { AccountComponent } from './account/account.component';
+import { CheckoutComponent } from './checkout/checkout.component';
+import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -17,6 +21,10 @@ const PAGES_COMPONENTS = [
   ],
   declarations: [
     ...PAGES_COMPONENTS,
+    DetailsComponent,
+    AccountComponent,
+    CheckoutComponent,
+    ShoppingCartComponent,
   ],
 })
 export class PagesModule {

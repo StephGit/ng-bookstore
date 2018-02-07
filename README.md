@@ -22,4 +22,11 @@ This project was generated with [Angular CLI 1.6.7](https://cli.angular.io/) and
 
 
 
+## TODOs
+
+[ ] Search and Display BookInfoObjects - A 
+[ ] Login and Register - S
+[ ] Book-Detail - S 
+
+
 

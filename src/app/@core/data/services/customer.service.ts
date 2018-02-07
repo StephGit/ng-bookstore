@@ -3,12 +3,11 @@ import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {HttpHeaders} from '@angular/common/http';
-import {JwtService} from './jwt.service';
 import {ApiService} from './api.service';
-import {Customer} from '../../../../../projang/ng-bookstore/src/app/@core/data/model/index';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import {Customer} from '../model/customer.model';
 
 @Injectable()
 export class CustomerService {
@@ -21,7 +20,6 @@ export class CustomerService {
 
   constructor (
     private apiService: ApiService,
-    private jwtService: JwtService
   ) {}
 
   // Verify JWT in localstorage with server & load customer's info.
@@ -36,8 +34,6 @@ export class CustomerService {
   }
 
   setAuth(customer: Customer) {
-    // Save JWT sent from server in localstorage
-    this.jwtService.saveToken(customer.token);
     // Set current customer data into observable
     this.currentCustomerSubject.next(customer);
     // Set isAuthenticated to true
@@ -45,8 +41,6 @@ export class CustomerService {
   }
 
   purgeAuth() {
-    // Remove JWT from localstorage
-    this.jwtService.destroyToken();
     // Set current customer to an empty object
     this.currentCustomerSubject.next(new Customer());
     // Set auth status to false
@@ -57,14 +51,14 @@ export class CustomerService {
     const route = (type === 'login') ? '/login' : '';
     const headers = new HttpHeaders({
       'email': credentials.email,
-      'password': credentials.password
+      'password': credentials.password,
     });
     return this.apiService.get('/customers' + route, null , headers )
       .map(
         data => {
           this.setAuth(data.customer);
           return data;
-        }
+        },
       );
   }
 

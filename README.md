@@ -19,6 +19,10 @@ This project was generated with [Angular CLI 1.6.7](https://cli.angular.io/) and
 ## Backend
    The corresponding backend service used for this project is on Github as well: 
    https://github.com/AdrianKrebs/bookstore
+   
+## Auth
+"The main goal of the Auth module is to provide a pluggable set of components and services for easier setup of the authentication layer for the Angular applications."
+docs: https://akveo.github.io/nebular/#/docs/auth/introduction
 
 
 

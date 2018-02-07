@@ -1,0 +1,77 @@
+@import '../../../@theme/styles/themes';
+@import '~@nebular/theme/styles/global/bootstrap/hero-buttons';
+
+@include nb-install-component() {
+  nb-card {
+    flex-direction: column;
+    align-items: center;
+    height: 10em;
+    overflow: visible;
+    margin-bottom: 15px;
+    margin-top: 15px;
+
+    $bevel: btn-hero-bevel(nb-theme(card-bg));
+    $shadow: nb-theme(btn-hero-shadow);
+    box-shadow: $bevel, $shadow;
+
+    .icon-container {
+      height: 100%;
+      padding: 0.625rem;
+    }
+
+    .icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 5.75rem;
+      height: 4.75rem;
+      font-size: 3.75rem;
+      border-radius: nb-theme(card-border-radius);
+      transition: width 0.4s ease;
+      transform: translate3d(0, 0, 0);
+      -webkit-transform-style: preserve-3d;
+      -webkit-backface-visibility: hidden;
+      color: nb-theme(color-white);
+
+      &.primary {
+        @include btn-hero-primary-gradient();
+        @include btn-hero-primary-bevel-glow-shadow();
+      }
+      &.success {
+        @include btn-hero-success-gradient();
+        @include btn-hero-success-bevel-glow-shadow();
+      }
+      &.info {
+        @include btn-hero-info-gradient();
+        @include btn-hero-info-bevel-glow-shadow();
+      }
+      &.warning {
+        @include btn-hero-warning-gradient();
+        @include btn-hero-warning-bevel-glow-shadow();
+      }
+    }
+
+    .details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      padding: 0 0.5rem 0 0.75rem;
+      border-left: 1px solid transparent;
+    }
+
+    .title {
+      font-family: nb-theme(font-secondary);
+      font-size: 1.25rem;
+      font-weight: nb-theme(font-weight-bold);
+      color: nb-theme(card-fg-heading);
+    }
+
+    .status {
+      font-size: 1rem;
+      font-weight: nb-theme(font-weight-light);
+      text-transform: uppercase;
+      color: nb-theme(card-fg);
+    }
+  }
+}

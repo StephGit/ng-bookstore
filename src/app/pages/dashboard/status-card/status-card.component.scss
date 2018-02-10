@@ -68,6 +68,24 @@
       .title-row {
         color: black;
       }
+
+      .authors, .isbn, .price {
+        display: flex;
+        flex-direction: row;
+        padding: 2px;
+
+        i {
+          color: #37bd83;
+          font-size: 1.25rem;
+          width: 15px;
+        }
+
+
+      }
+
+      .desc {
+        margin-left: 10px;
+      }
     }
 
     .title {

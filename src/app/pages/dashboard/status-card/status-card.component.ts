@@ -15,9 +15,9 @@ import {Router} from "@angular/router";
       <div class="details">
         <div class="title">{{ title }}</div>
         <hr width="100%" class="title-row">
-        <div class="authors">{{ authors }}</div>
-        <div class="isbn">{{ isbn }}</div>
-        <div class="price">{{ price }}</div>
+        <div class="authors"><i class="fa fa-user"></i><div class="desc">{{ authors }}</div></div>
+        <div class="isbn"><i class="fa fa-book"></i><div class="desc">{{ isbn }}</div></div>
+          <div class="price"><i class="fa fa-dollar"></i><div class="desc">{{ price }}</div></div>
       </div>
     </nb-card>
   `,

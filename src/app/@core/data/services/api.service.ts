@@ -1,16 +1,19 @@
 import {Injectable} from '@angular/core';
 import {HttpHeaders, HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import {environment} from '../../../../environments/environment';
+// Observable class extensions
+import 'rxjs/add/observable/throw';
+
 
 @Injectable()
 export class ApiService {
   apiUrl = `${environment.api_url}`;
   headers: HttpHeaders;
 
-  constructor(private http: HttpClient,) {
+  constructor(private http: HttpClient) {
   }
 
   private getDefaultHeaders(): HttpHeaders {
@@ -34,8 +37,8 @@ export class ApiService {
   }
 
   protected formatErrors(error: any) {
-    if (error instanceof Response) {
-      return Observable.throw(error.json() || 'No internet connection/ backend connection available.');
+    if (error instanceof Response || error.name === ('HttpErrorResponse')) {
+      return Observable.throw('No internet connection/ backend connection available.');
     }
     return Observable.throw(error.json());
   }

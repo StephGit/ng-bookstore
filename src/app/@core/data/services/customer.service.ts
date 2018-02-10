@@ -17,6 +17,7 @@ export class CustomerService {
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
+  private path = '/customers';
 
   constructor (
     private apiService: ApiService,
@@ -47,19 +48,18 @@ export class CustomerService {
     this.isAuthenticatedSubject.next(false);
   }
 
-  attemptAuth(type, credentials): Observable<Customer> {
-    const route = (type === 'login') ? '/login' : '';
+  attemptAuth(credentials): Observable<Customer> {
     const headers = new HttpHeaders({
       'email': credentials.email,
       'password': credentials.password,
     });
-    return this.apiService.get('/customers' + route, null , headers )
+    return this.apiService.get(this.path + '/login', null , headers )
       .map(
         data => {
           this.setAuth(data.customer);
           return data;
-        },
-      );
+        })
+      .catch(err => this.handleError(err));
   }
 
   getCurrentCustomer(): Customer {
@@ -74,6 +74,12 @@ export class CustomerService {
         // Update the currentCustomer observable
         this.currentCustomerSubject.next(data.customer);
         return data.customer;
-      });
+      })
+  }
+ // TODO map Error-Codes
+  protected handleError(error: any) {
+    if (error.status === 401 || error.status === 404) {
+      return Observable.throw('Email or password is incorrect');
+    }
   }
 }

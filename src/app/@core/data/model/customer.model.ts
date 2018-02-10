@@ -18,5 +18,4 @@ export class Customer {
     expirationMonth: number;
     expirationYear: number
   }
-  token: string;
 }

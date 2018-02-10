@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'ngx-account',
-  template: `<router-outlet></router-outlet>`,
+  templateUrl: './account.component.html',
 })
 export class AccountComponent implements OnInit {
 

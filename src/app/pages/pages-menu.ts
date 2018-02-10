@@ -52,11 +52,11 @@ export const MENU_ITEMS: NbMenuItem[] = [
     children: [
       {
         title: 'Form Inputs',
-        link: '/pages/forms/inputs',
+        link: '/forms/inputs',
       },
       {
         title: 'Form Layouts',
-        link: '/pages/forms/layouts',
+        link: '/forms/layouts',
       },
     ],
   },

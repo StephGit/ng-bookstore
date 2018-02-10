@@ -28,7 +28,7 @@ docs: https://akveo.github.io/nebular/#/docs/auth/introduction
 
 ## TODOs
 
-[ ] Search and Display BookInfoObjects - A 
+[X] Search and Display BookInfoObjects - A 
 [ ] Login and Register - S
 [ ] Book-Detail - S 
 [ ] Handle errors from backend - i.e. see notifications on components page 

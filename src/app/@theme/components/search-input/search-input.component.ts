@@ -5,7 +5,8 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
   styleUrls: ['./search-input.component.scss'],
   template: `
     <div class="input-group">
-      <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search for a book...">
+      <input type="text" class="form-control" (keyup.enter)="onSearch(searchString)"
+             [(ngModel)]="searchString" placeholder="Search for a book...">
       <span class="input-group-btn">
             <button class="btn btn-info" (click)="onSearch(searchString)">
              <i class="fa fa-search"></i>

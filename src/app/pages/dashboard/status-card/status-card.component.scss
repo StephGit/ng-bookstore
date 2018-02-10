@@ -10,9 +10,14 @@
     margin-bottom: 15px;
     margin-top: 15px;
 
+    &:hover {
+      background-color: #a5d7ff;
+    }
+
     $bevel: btn-hero-bevel(nb-theme(card-bg));
     $shadow: nb-theme(btn-hero-shadow);
     box-shadow: $bevel, $shadow;
+
 
     .icon-container {
       height: 100%;
@@ -49,6 +54,7 @@
         @include btn-hero-warning-gradient();
         @include btn-hero-warning-bevel-glow-shadow();
       }
+
     }
 
     .details {

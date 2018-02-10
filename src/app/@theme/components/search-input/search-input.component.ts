@@ -4,13 +4,14 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
   selector: 'ngx-search-input',
   styleUrls: ['./search-input.component.scss'],
   template: `
-    <i class="control-icon ion ion-ios-search"
-       (click)="showInput()"></i>
-    <input placeholder="Type your search request here..."
-           #input
-           [class.hidden]="!isInputShown"
-           (blur)="hideInput()"
-           (input)="onInput($event)">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for a book...">
+      <span class="input-group-btn">
+            <button class="btn btn-info">
+             <i class="fa fa-search"></i>
+            </button>
+          </span>
+    </div>
   `,
 })
 export class SearchInputComponent {

@@ -1,6 +1,7 @@
 :host {
   display: flex;
   align-items: center;
+  width:100%;
 
   i.control-icon {
     &::before {
@@ -13,16 +14,10 @@
   }
 
   input {
-    border: none;
+    border: 1px solid #dadfe6;
     outline: none;
     margin-left: 1rem;
-    width: 15rem;
     transition: width 0.2s ease;
-
-    &.hidden {
-      width: 0;
-      margin: 0;
-    }
   }
 
   /deep/ search-input {

@@ -10,7 +10,6 @@ import { IconsComponent } from './icons/icons.component';
 import { ModalComponent } from './modals/modal/modal.component';
 import { TypographyComponent } from './typography/typography.component';
 import { TabsComponent, Tab1Component, Tab2Component } from './tabs/tabs.component';
-import { SearchComponent } from './search-fields/search-fields.component';
 
 const components = [
   UiFeaturesComponent,
@@ -22,7 +21,6 @@ const components = [
   TabsComponent,
   Tab1Component,
   Tab2Component,
-  SearchComponent,
 ];
 
 @NgModule({

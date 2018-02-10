@@ -5,9 +5,9 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
   styleUrls: ['./search-input.component.scss'],
   template: `
     <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for a book...">
+      <input type="text" class="form-control" [(ngModel)]="searchString" placeholder="Search for a book...">
       <span class="input-group-btn">
-            <button class="btn btn-info">
+            <button class="btn btn-info" (click)="onSearch(searchString)">
              <i class="fa fa-search"></i>
             </button>
           </span>
@@ -15,22 +15,16 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
   `,
 })
 export class SearchInputComponent {
-  @ViewChild('input') input: ElementRef;
-
   @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
   isInputShown = false;
-
-  showInput() {
-    this.isInputShown = true;
-    this.input.nativeElement.focus();
-  }
+  searchString;
 
   hideInput() {
     this.isInputShown = false;
   }
 
-  onInput(val: string) {
+  onSearch(val: string) {
     this.search.emit(val);
   }
 }

@@ -12,13 +12,20 @@ import { Component, Input } from '@angular/core';
       </div>
 
       <div class="details">
-        <div class="title">{{ title }}</div></div>
+        <div class="title">{{ title }}</div>
+        <div class="authors">{{ authors }}</div>
+        <div class="isbn">{{ isbn }}</div>
+        <div class="price">{{ price }}</div>
+      </div>
     </nb-card>
   `,
 })
 export class StatusCardComponent {
 
   @Input() title: string;
+  @Input() authors: string;
+  @Input() isbn: string;
+  @Input() price: string;
   @Input() type: string;
   @Input() on = true;
 }

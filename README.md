@@ -31,6 +31,8 @@ docs: https://akveo.github.io/nebular/#/docs/auth/introduction
 [ ] Search and Display BookInfoObjects - A 
 [ ] Login and Register - S
 [ ] Book-Detail - S 
+[ ] Handle errors from backend - i.e. see notifications on components page 
+[ ] Shopping card and checkout
 
 
 

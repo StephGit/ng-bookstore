@@ -9,9 +9,9 @@ import {CatalogService} from '../../@core/data/services/catalog.service';
 export class DashboardComponent implements OnInit {
 
 
-  books = [{title: 'I am a book'}, {title: 'I am a book'},
-    {title: 'I am a book'}, {title: 'I am a book'},
-    {title: 'I am a book'}, {title: 'I am a book'}];
+  books = [{title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'}, {title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'},
+    {title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'}, {title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'},
+    {title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'}, {title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'}];
 
   constructor(private catalogService: CatalogService) {
   }

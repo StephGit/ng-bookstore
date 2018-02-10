@@ -5,14 +5,15 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./status-card.component.scss'],
   template: `
     <nb-card>
-      <div class="icon-container">
-        <div class="icon {{ type }}">
-          <ng-content></ng-content>
-        </div>
-      </div>
+      <!--<div class="icon-container">-->
+        <!--<div class="icon {{ type }}">-->
+          <!--<ng-content></ng-content>-->
+        <!--</div>-->
+      <!--</div>-->
 
       <div class="details">
         <div class="title">{{ title }}</div>
+        <hr width="100%" class="title-row">
         <div class="authors">{{ authors }}</div>
         <div class="isbn">{{ isbn }}</div>
         <div class="price">{{ price }}</div>

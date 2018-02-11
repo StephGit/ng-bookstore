@@ -27,29 +27,9 @@ import 'style-loader!angular2-toaster/toaster.css';
         <ngx-header [position]="sidebar.id === 'left' ? 'normal': 'inverse'"></ngx-header>
       </nb-layout-header>
 
-      <nb-sidebar class="menu-sidebar"
-                   tag="menu-sidebar"
-                   responsive
-                   [right]="sidebar.id === 'right'">
-        <nb-sidebar-header>
-          <a href="#" class="btn btn-hero-success main-btn">
-            <i class="ion ion-social-github"></i> <span>Support Us</span>
-          </a>
-        </nb-sidebar-header>
-        <ng-content select="nb-menu"></ng-content>
-      </nb-sidebar>
-
       <nb-layout-column class="main-content">
         <toaster-container [toasterconfig]="config"></toaster-container>
         <ng-content select="router-outlet"></ng-content>
-      </nb-layout-column>
-
-      <nb-layout-column left class="small" *ngIf="layout.id === 'two-column' || layout.id === 'three-column'">
-        <nb-menu [items]="subMenu"></nb-menu>
-      </nb-layout-column>
-
-      <nb-layout-column right class="small" *ngIf="layout.id === 'three-column'">
-        <nb-menu [items]="subMenu"></nb-menu>
       </nb-layout-column>
 
       <nb-layout-footer fixed>
@@ -144,7 +124,7 @@ export class SampleLayoutComponent  implements OnDestroy {
       });
 
     this.apiService.httpErrorOccured.subscribe((error) => {
-      //TODO handle different error codes
+      // TODO handle different error codes
       this.showToast('error', 'An unexpected error occured', error.message);
     })
   }

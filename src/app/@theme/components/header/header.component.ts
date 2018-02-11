@@ -56,6 +56,10 @@ export class HeaderComponent implements OnInit {
     this.menuService.navigateHome();
   }
 
+  navigateToShoppingCart() {
+    this.router.navigate(['/pages/shopping-cart']);
+  }
+
   logout() {
     this.currentUserService.purgeAuth();
   }

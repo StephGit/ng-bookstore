@@ -1,15 +1,29 @@
 import { Component, OnInit } from '@angular/core';
+import {CatalogService} from "../../@core/data/services/catalog.service";
 
 @Component({
-  selector: 'app-shopping-cart',
+  selector: 'ngx-shopping-cart',
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.scss']
 })
 export class ShoppingCartComponent implements OnInit {
 
-  constructor() { }
 
-  ngOnInit() {
+  books = [{title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'},
+    {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'},
+    {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}];
+
+  searchCompleted: Boolean;
+
+  constructor(private catalogService: CatalogService) {
   }
+
+  ngOnInit(): void {
+    this.catalogService.searchResultsUpdated.subscribe((searchResults) => {
+      this.books = searchResults;
+      this.searchCompleted = true;
+    })
+  }
+
 
 }

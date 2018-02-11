@@ -1,0 +1,46 @@
+@import '../../@theme/styles/themes';
+@import '~bootstrap/scss/mixins/breakpoints';
+@import '~@nebular/theme/styles/global/bootstrap/breakpoints';
+
+@include nb-install-component() {
+  .solar-card nb-card-header {
+    border: none;
+    padding-bottom: 0;
+  }
+
+  @include media-breakpoint-down(sm) {
+    ngx-traffic {
+      display: none;
+    }
+  }
+
+  @include media-breakpoint-down(is) {
+    /deep/ nb-card.large-card {
+      height: nb-theme(card-height-medium);
+    }
+  }
+
+  .search-results {
+    padding: 0;
+  }
+
+  .carousel-control-next-icon {
+    background-image : url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23ff0000' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E");
+    color: black;
+  }
+
+  a {
+    color: nb-theme(color-fg-heading);
+  }
+
+  .list-group-item:last-child {
+    margin-bottom: 0;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  .list-group-item:first-child {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}

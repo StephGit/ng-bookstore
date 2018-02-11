@@ -1,10 +1,43 @@
-<div class="row">
-  <div class="col-md-12">
+<nb-card *ngIf="!searchCompleted">
+  <nb-card-header>
+    Recommended for you
+  </nb-card-header>
+  <nb-card-body>
     <div class="row">
-      <div *ngFor="let b of books" class="col-md-3">
-        <ngx-status-card title="{{b.title}}" authors="{{b.authors}}" isbn="{{b.isbn}}" price="{{b.price}}" type="info">
-        </ngx-status-card>
+      <div class="col-md-12">
+        <div class="row">
+          <div *ngFor="let b of books" class="col-md-3">
+            <ngx-status-card title="{{b.title}}" authors="{{b.authors}}" isbn="{{b.isbn}}" price="{{b.price}}"
+                             type="info">
+            </ngx-status-card>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </nb-card-body>
+</nb-card>
+<nb-card class="search-results" *ngIf="searchCompleted">
+  <nb-card-header>
+    Search Results
+  </nb-card-header>
+  <nb-card-body>
+    <div class="list-group">
+      <div *ngFor="let b of books">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="details">
+            <div class="title"><h5>{{ b.title }}</h5></div>
+            <div class="authors">
+              <div class="desc">by {{ b.authors }}</div>
+            </div>
+            <div class="isbn">
+              <div class="desc">{{ b.isbn }}</div>
+            </div>
+            <div class="price">
+              <div class="desc">{{ b.price | currency:'USD'}}</div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

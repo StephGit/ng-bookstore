@@ -9,9 +9,9 @@ import {CatalogService} from '../../@core/data/services/catalog.service';
 export class DashboardComponent implements OnInit {
 
 
-  books = [{title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'}, {title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'},
-    {title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'}, {title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'},
-    {title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'}, {title: 'Sapiens: A Brief History of Humankind', authors:'blalbal', isbn:'123132132', price:'7.99'}];
+  books = [{title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'},
+    {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'},
+    {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}];
 
   searchCompleted: Boolean;
 

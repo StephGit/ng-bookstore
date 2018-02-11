@@ -13,9 +13,10 @@ import {StateService} from '../../../@core/data/state.service';
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/delay';
-import {BodyOutputType, Toast, ToasterConfig, ToasterService} from "angular2-toaster";
-import {ApiService} from "../../../@core/data/services/api.service";
+import {BodyOutputType, Toast, ToasterConfig, ToasterService} from 'angular2-toaster';
+import {ApiService} from '../../../@core/data/services/api.service';
 import 'style-loader!angular2-toaster/toaster.css';
+import {NotificationService} from '../../../@core/data/services/notification.service';
 
 // TODO: move layouts into the framework
 @Component({
@@ -122,7 +123,8 @@ export class SampleLayoutComponent  implements OnDestroy {
               protected bpService: NbMediaBreakpointsService,
               protected sidebarService: NbSidebarService,
               private toasterService: ToasterService,
-              private apiService: ApiService) {
+              private apiService: ApiService,
+              private notificationService: NotificationService) {
 
     this.layoutState$ = this.stateService.onLayoutState()
       .subscribe((layout: string) => this.layout = layout);
@@ -143,10 +145,9 @@ export class SampleLayoutComponent  implements OnDestroy {
         }
       });
 
-    this.apiService.httpErrorOccured.subscribe((error) => {
-      //TODO handle different error codes
-      this.showToast('error', 'An unexpected error occured', error.message);
-    })
+    this.notificationService.getMessage().subscribe((notification) => {
+      this.showToast(notification.type, notification.title, notification.text);
+    });
   }
 
 
@@ -154,8 +155,6 @@ export class SampleLayoutComponent  implements OnDestroy {
 
   position = 'toast-top-right';
   animationType = 'fade';
-  title = 'HI there!';
-  content = `I'm cool toaster!`;
   timeout = 5000;
   toastsLimit = 5;
   type = 'default';

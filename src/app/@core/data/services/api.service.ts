@@ -6,15 +6,16 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 // Observable class extensions
 import 'rxjs/add/observable/throw';
+import {NotificationService} from './notification.service';
 
 
 @Injectable()
 export class ApiService {
   apiUrl = `${environment.api_url}`;
   headers: HttpHeaders;
-  httpErrorOccured: EventEmitter<any> = new EventEmitter();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private notificationService: NotificationService) {
   }
 
   private getDefaultHeaders(): HttpHeaders {
@@ -33,7 +34,11 @@ export class ApiService {
   }
 
   protected handleError(error: any) {
-    this.httpErrorOccured.emit(error);
+    if (error instanceof Response || error.status === 0) {
+      this.notificationService.error('No internet connection/ backend connection available.', 'Connection error');
+      return Observable.throw(error);
+    }
+    this.notificationService.error(error.statusText, error.status);
     return Observable.throw(error);
   }
 

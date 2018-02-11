@@ -9,6 +9,7 @@ import { PlayerService } from './player.service';
 import {CatalogService} from './services/catalog.service';
 import {ApiService} from './services/api.service';
 import {CustomerService} from './services/customer.service';
+import {NotificationService} from './services/notification.service';
 
 const SERVICES = [
   UserService,
@@ -19,6 +20,7 @@ const SERVICES = [
   CatalogService,
   CustomerService,
   ApiService,
+  NotificationService,
 ];
 
 @NgModule({

@@ -59,6 +59,10 @@
     }
   }
 
+  nb-action:first-child {
+    border-left: 1px solid nb-theme(separator) !important;
+  }
+
   .toggle-layout /deep/ a {
     display: block;
     text-decoration: none;

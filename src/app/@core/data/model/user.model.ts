@@ -1,11 +1,12 @@
 import {UserGroup} from './user-group.model';
 
 export class User {
-  username: string;
+  email: string;
   password: string;
+  confirmPassword: string;
   userGroup: UserGroup;
-  constructor(username: string, password: string) {
-    this.username = username;
-    this.password = password;
-  };
+  // constructor(email: string, password: string) {
+  //   this.email = email;
+  //   this.password = password;
+  // };
 }

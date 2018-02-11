@@ -37,7 +37,7 @@ export class ApiService {
   }
 
   protected formatErrors(error: any) {
-    if (error instanceof Response || error.name === ('HttpErrorResponse')) {
+    if (error instanceof Response || error.status === 500) {
       return Observable.throw('No internet connection/ backend connection available.');
     }
     return Observable.throw(error.json());

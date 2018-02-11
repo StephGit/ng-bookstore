@@ -48,7 +48,7 @@ export class CustomerService {
     this.isAuthenticatedSubject.next(false);
   }
 
-  attemptAuth(credentials): Observable<Customer> {
+  attemptAuth(credentials): Observable<any> {
     const headers = new HttpHeaders({
       'email': credentials.email,
       'password': credentials.password,
@@ -66,6 +66,18 @@ export class CustomerService {
     return this.currentCustomerSubject.value;
   }
 
+  register(customer: Customer, password: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'password': password,
+    });
+    return this.apiService.post(this.path, customer , headers )
+      .map(
+        data => {
+          return data;
+        })
+      .catch(err => this.handleError(err));
+  }
+
   // Update the customer on the server
   update(customer): Observable<Customer> {
     return this.apiService
@@ -81,5 +93,6 @@ export class CustomerService {
     if (error.status === 401 || error.status === 404) {
       return Observable.throw('Email or password is incorrect');
     }
+    return Observable.throw(error);
   }
 }

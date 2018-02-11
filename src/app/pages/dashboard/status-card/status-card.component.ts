@@ -11,10 +11,11 @@ import {Router} from "@angular/router";
           <!--<ng-content></ng-content>-->
         <!--</div>-->
       <!--</div>-->
-
       <div class="details">
+        <div >
+          <img class="book-img" src="https://images-na.ssl-images-amazon.com/images/I/41KJV7-HS0L.jpg">
+        </div>
         <div class="title">{{ title }}</div>
-        <hr width="100%" class="title-row">
         <div class="authors"><div class="desc">by {{ authors }}</div></div>
         <div class="isbn"><div class="desc">{{ isbn }}</div></div>
           <div class="price"><div class="desc">{{ price | currency:'USD'}}</div></div>

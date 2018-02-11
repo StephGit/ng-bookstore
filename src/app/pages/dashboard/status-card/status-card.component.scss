@@ -5,19 +5,25 @@
   nb-card {
     flex-direction: column;
     align-items: center;
-    height: 10em;
+    height: 20em;
     overflow: visible;
     margin-bottom: 15px;
     margin-top: 15px;
 
+    border-left: 1px solid #ebeef2;
+    border-right: 1px solid #ebeef2;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
     &:hover {
       background-color: #a5d7ff;
+    }
+    .book-img {
+      max-height: 160px;
     }
 
     $bevel: btn-hero-bevel(nb-theme(card-bg));
     $shadow: nb-theme(btn-hero-shadow);
-    box-shadow: $bevel, $shadow;
-
 
     .icon-container {
       height: 100%;
@@ -80,17 +86,12 @@
           width: 15px;
         }
 
-
       }
 
-      .desc {
-        margin-left: 10px;
-      }
     }
 
     .title {
-      font-family: nb-theme(font-secondary);
-      font-size: 1.25rem;
+      margin-top: 10px;
       font-weight: nb-theme(font-weight-bold);
       color: nb-theme(card-fg-heading);
     }
@@ -101,5 +102,8 @@
       text-transform: uppercase;
       color: nb-theme(card-fg);
     }
+
+
   }
+
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../../@core/data/model/user.model';
 import {CustomerService} from '../../../@core/data/services/customer.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -9,11 +8,9 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  showMessages: any;
-  errors: string[];
-  messages: string[];
-  user: User;
-  submitted: boolean;
+  errors: string[] = [];
+  user: any = {};
+  submitted: boolean = false;
   returnUrl: string;
 
   constructor(private route: ActivatedRoute,
@@ -26,6 +23,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    this.errors = [];
+    this.submitted = true;
     this.customerService
       .attemptAuth(this.user)
       .subscribe(
@@ -35,7 +34,7 @@ export class LoginComponent implements OnInit {
         error => {
           this.errors.push(error);
           this.submitted = false;
-        }
+        },
       );
   }
 

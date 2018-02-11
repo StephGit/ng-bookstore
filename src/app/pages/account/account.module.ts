@@ -7,6 +7,7 @@ import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {ThemeModule} from '../../@theme/theme.module';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
@@ -16,9 +17,14 @@ import {ThemeModule} from '../../@theme/theme.module';
     FormsModule,
     RouterModule,
     ThemeModule,
+    HttpClientModule,
   ],
   declarations: [
     ...routedComponents,
+    LoginComponent,
+    RegisterComponent,
+  ],
+  exports: [
     LoginComponent,
     RegisterComponent,
   ],

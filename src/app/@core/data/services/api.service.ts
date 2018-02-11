@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpHeaders, HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from '../../../../environments/environment';
 import {Observable} from 'rxjs/Observable';
@@ -12,6 +12,7 @@ import 'rxjs/add/observable/throw';
 export class ApiService {
   apiUrl = `${environment.api_url}`;
   headers: HttpHeaders;
+  httpErrorOccured: EventEmitter<any> = new EventEmitter();
 
   constructor(private http: HttpClient) {
   }
@@ -31,22 +32,15 @@ export class ApiService {
     }
   }
 
-  private extractData(res: Response) {
-    const body = res.json();
-    return body || {};
-  }
-
-  protected formatErrors(error: any) {
-    if (error instanceof Response || error.name === ('HttpErrorResponse')) {
-      return Observable.throw('No internet connection/ backend connection available.');
-    }
-    return Observable.throw(error.json());
+  protected handleError(error: any) {
+    this.httpErrorOccured.emit(error);
+    return Observable.throw(error);
   }
 
 
   get(path: string, params: HttpParams = new HttpParams(), headers: HttpHeaders): Observable<any> {
     return this.http.get(`${this.apiUrl}${path}`, {headers: this.setHeaders(headers), params: params})
-      .catch(this.formatErrors)
+      .catch((error) => this.handleError(error))
   }
 
   put(path: string, body: Object = {}, headers: HttpHeaders): Observable<any> {
@@ -55,7 +49,7 @@ export class ApiService {
       JSON.stringify(body),
       {headers: this.setHeaders(headers)},
     )
-      .catch(this.formatErrors)
+      .catch((error) => this.handleError(error))
   }
 
   post(path: string, body: Object = {}, headers: HttpHeaders): Observable<any> {
@@ -64,7 +58,7 @@ export class ApiService {
       JSON.stringify(body),
       {headers: this.setHeaders(headers)},
     )
-      .catch(this.formatErrors)
+      .catch((error) => this.handleError(error))
   }
 
   delete(path, headers): Observable<any> {
@@ -72,6 +66,6 @@ export class ApiService {
       `${this.apiUrl}${path}`,
       {headers: this.setHeaders(headers)},
     )
-      .catch(this.formatErrors)
+      .catch((error) => this.handleError(error))
   }
 }

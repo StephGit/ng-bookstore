@@ -8,11 +8,14 @@ import {
   NbThemeService,
 } from '@nebular/theme';
 
-import { StateService } from '../../../@core/data/state.service';
+import {StateService} from '../../../@core/data/state.service';
 
-import { Subscription } from 'rxjs/Subscription';
+import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/delay';
+import {BodyOutputType, Toast, ToasterConfig, ToasterService} from "angular2-toaster";
+import {ApiService} from "../../../@core/data/services/api.service";
+import 'style-loader!angular2-toaster/toaster.css';
 
 // TODO: move layouts into the framework
 @Component({
@@ -37,6 +40,7 @@ import 'rxjs/add/operator/delay';
       </nb-sidebar>
 
       <nb-layout-column class="main-content">
+        <toaster-container [toasterconfig]="config"></toaster-container>
         <ng-content select="router-outlet"></ng-content>
       </nb-layout-column>
 
@@ -116,7 +120,10 @@ export class SampleLayoutComponent  implements OnDestroy {
               protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService) {
+              protected sidebarService: NbSidebarService,
+              private toasterService: ToasterService,
+              private apiService: ApiService) {
+
     this.layoutState$ = this.stateService.onLayoutState()
       .subscribe((layout: string) => this.layout = layout);
 
@@ -135,6 +142,54 @@ export class SampleLayoutComponent  implements OnDestroy {
           this.sidebarService.collapse('menu-sidebar');
         }
       });
+
+    this.apiService.httpErrorOccured.subscribe((error) => {
+      //TODO handle different error codes
+      this.showToast('error', 'An unexpected error occured', error.message);
+    })
+  }
+
+
+  config: ToasterConfig;
+
+  position = 'toast-top-right';
+  animationType = 'fade';
+  title = 'HI there!';
+  content = `I'm cool toaster!`;
+  timeout = 5000;
+  toastsLimit = 5;
+  type = 'default';
+
+  isNewestOnTop = true;
+  isHideOnClick = true;
+  isDuplicatesPrevented = false;
+  isCloseButton = true;
+
+  types: string[] = ['default', 'info', 'success', 'warning', 'error'];
+  animations: string[] = ['fade', 'flyLeft', 'flyRight', 'slideDown', 'slideUp'];
+  positions: string[] = ['toast-top-full-width', 'toast-bottom-full-width', 'toast-top-left', 'toast-top-center',
+    'toast-top-right', 'toast-bottom-right', 'toast-bottom-center', 'toast-bottom-left', 'toast-center'];
+
+
+  private showToast(type: string, title: string, body: string) {
+    this.config = new ToasterConfig({
+      positionClass: this.position,
+      timeout: this.timeout,
+      newestOnTop: this.isNewestOnTop,
+      tapToDismiss: this.isHideOnClick,
+      preventDuplicates: this.isDuplicatesPrevented,
+      animation: this.animationType,
+      limit: this.toastsLimit,
+    });
+    const toast: Toast = {
+      type: type,
+      title: title,
+      body: body,
+      timeout: this.timeout,
+      showCloseButton: this.isCloseButton,
+      bodyOutputType: BodyOutputType.TrustedHtml,
+    };
+    this.toasterService.popAsync(toast);
   }
 
   ngOnDestroy() {

@@ -27,15 +27,14 @@ import {
 } from './components';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import {
-  OneColumnLayoutComponent,
   SampleLayoutComponent,
-  ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
+import {ToasterModule} from 'angular2-toaster';
+import {CoreModule} from '../@core/core.module';
 
-const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
+const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, ToasterModule];
 
 const NB_MODULES = [
   NbCardModule,
@@ -58,10 +57,7 @@ const COMPONENTS = [
   SearchInputComponent,
   ThemeSettingsComponent,
   TinyMCEComponent,
-  OneColumnLayoutComponent,
   SampleLayoutComponent,
-  ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
 ];
 
 const PIPES = [

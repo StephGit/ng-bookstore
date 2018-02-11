@@ -3,7 +3,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import {NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
-import {CatalogService} from "../../../@core/data/services/catalog.service";
+import {CatalogService} from '../../../@core/data/services/catalog.service';
+import {User} from '../../../@core/data/model/user.model';
+import {CurrentUserService} from '../../../@core/data/services/current-user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-header',
@@ -15,21 +18,28 @@ export class HeaderComponent implements OnInit {
 
   @Input() position = 'normal';
 
-  user: any;
+  currentUser: User;
 
-  userMenu = [{ title: 'Profile' }, { title: 'Log out' }];
+  // TODO onclick-events not working
+  userMenu = [
+    { title: 'Account', onclick: this.router.navigate(['account'])},
+    { title: 'Log out', onclick: this.logout()}];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
               private userService: UserService,
               private catalogService: CatalogService,
+              private currentUserService: CurrentUserService,
+              private router: Router,
               private analyticsService: AnalyticsService, private themeService: NbThemeService) {
   }
 
   ngOnInit() {
     this.themeService.changeTheme('default');
-    this.userService.getUsers()
-      .subscribe((users: any) => this.user = users.nick);
+    this.currentUserService.currentUser.subscribe(
+      (userData: User) => {
+        this.currentUser = userData;
+      });
   }
 
   toggleSidebar(): boolean {
@@ -44,6 +54,10 @@ export class HeaderComponent implements OnInit {
 
   goToHome() {
     this.menuService.navigateHome();
+  }
+
+  logout() {
+    this.currentUserService.purgeAuth();
   }
 
   startSearch(keywords) {

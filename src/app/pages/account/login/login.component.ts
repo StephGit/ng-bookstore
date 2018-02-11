@@ -8,7 +8,6 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  errors: string[] = [];
   user: any = {};
   submitted: boolean = false;
   returnUrl: string;
@@ -23,7 +22,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.errors = [];
     this.submitted = true;
     this.customerService
       .attemptAuth(this.user)
@@ -32,7 +30,6 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         },
         error => {
-          this.errors.push(error);
           this.submitted = false;
         },
       );

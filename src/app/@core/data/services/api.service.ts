@@ -38,7 +38,6 @@ export class ApiService {
       this.notificationService.error('No internet connection/ backend connection available.', 'Connection error');
       return Observable.throw(error);
     }
-    this.notificationService.error(error.statusText, error.status);
     return Observable.throw(error);
   }
 

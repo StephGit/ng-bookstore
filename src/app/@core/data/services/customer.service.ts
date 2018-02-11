@@ -8,45 +8,20 @@ import {ApiService} from './api.service';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import {Customer} from '../model/customer.model';
+import {NotificationService} from './notification.service';
+import {CurrentUserService} from './current-user.service';
+import {User} from '../model/user.model';
 
 @Injectable()
 export class CustomerService {
 
-  private currentCustomerSubject = new BehaviorSubject<Customer>(new Customer());
-  public currentCustomer = this.currentCustomerSubject.asObservable();
-
-  private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
-  public isAuthenticated = this.isAuthenticatedSubject.asObservable();
   private path = '/customers';
 
   constructor (
     private apiService: ApiService,
+    private notificationService: NotificationService,
+    private currentUserService: CurrentUserService,
   ) {}
-
-  // Verify JWT in localstorage with server & load customer's info.
-  // This runs once on application startup.
-  populate() {
-    const customer = JSON.parse(localStorage.getItem('curCustomer'));
-    if (customer) {
-      this.setAuth(customer);
-    } else {
-      this.purgeAuth();
-    }
-  }
-
-  setAuth(customer: Customer) {
-    // Set current customer data into observable
-    this.currentCustomerSubject.next(customer);
-    // Set isAuthenticated to true
-    this.isAuthenticatedSubject.next(true);
-  }
-
-  purgeAuth() {
-    // Set current customer to an empty object
-    this.currentCustomerSubject.next(new Customer());
-    // Set auth status to false
-    this.isAuthenticatedSubject.next(false);
-  }
 
   attemptAuth(credentials): Observable<any> {
     const headers = new HttpHeaders({
@@ -54,16 +29,12 @@ export class CustomerService {
       'password': credentials.password,
     });
     return this.apiService.get(this.path + '/login', null , headers )
-      .map(
-        data => {
-          this.setAuth(data.customer);
-          return data;
-        })
+      .map((data) => {
+        const user = new User(data, credentials.email);
+        this.currentUserService.setAuth(user);
+        return user;
+      })
       .catch(err => this.handleError(err));
-  }
-
-  getCurrentCustomer(): Customer {
-    return this.currentCustomerSubject.value;
   }
 
   register(customer: Customer, password: string): Observable<any> {
@@ -84,15 +55,25 @@ export class CustomerService {
       .put('/customer/' + customer.nr, { customer }, null)
       .map(data => {
         // Update the currentCustomer observable
-        this.currentCustomerSubject.next(data.customer);
+        this.currentUserService.setAuth(data.customer);
         return data.customer;
       })
   }
+
+  protected  extractData(res: Response) {
+    const body = res.json();
+    return body || {};
+  }
+
  // TODO map Error-Codes
   protected handleError(error: any) {
     if (error.status === 401 || error.status === 404) {
-      return Observable.throw('Email or password is incorrect');
+      this.notificationService.error('Email or password is incorrect', 'Login error');
+    } else if (error.status === 400) {
+      this.notificationService.error('Email or password is incorrect', 'Login error');
+    } else if (error.status === 409) {
+      this.notificationService.error('Email or password is incorrect', 'Login error');
     }
-    return Observable.throw(error);
+      return Observable.throw(error);
   }
 }

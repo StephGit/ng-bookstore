@@ -1,11 +1,6 @@
 <h2 class="title">Register</h2>
 <form (ngSubmit)="register()" #form="ngForm">
 
-  <div *ngIf="errors && errors.length > 0 && !submitted"
-       class="alert alert-danger" role="alert">
-    <div><strong>Oh snap!</strong></div>
-    <div *ngFor="let error of errors">{{ error }}</div>
-  </div>
   <div class="row full-name-inputs">
     <div class="col-sm-6 form-group">
       <label for="input-first-name" class="sr-only">First name</label>

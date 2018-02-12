@@ -66,8 +66,8 @@ export class HeaderComponent implements OnInit {
   startSearch(keywords) {
     console.log('searching books for keywords: ' + keywords);
     // check if current route is search or not
-    if (this.router.url !== '') {
-      this.router.navigate(['']);
+    if (this.router.url !== '/') {
+      this.router.navigate(['/']);
     }
     this.catalogService.searchBooks(keywords);
   }

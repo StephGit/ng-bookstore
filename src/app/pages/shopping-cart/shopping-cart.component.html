@@ -3,22 +3,45 @@
     Your Shopping Cart
   </nb-card-header>
   <nb-card-body>
-    <div class="list-group">
-      <div *ngFor="let b of books">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="details">
-            <div class="title"><h5>{{ b.title }}</h5></div>
-            <div class="authors">
-              <div class="desc">by {{ b.authors }}</div>
-            </div>
-            <div class="isbn">
-              <div class="desc">{{ b.isbn }}</div>
-            </div>
-            <div class="price">
-              <div class="desc">{{ b.price | currency:'USD'}}</div>
+    <div class="row">
+      <div class="list-group col-md-12">
+        <div *ngFor="let i of currentShoppingCart.items">
+          <div class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="wrapper">
+              <div class="details">
+                <div class="title"><h5>{{ i.book.title }}</h5></div>
+                <div class="authors">
+                  <div class="desc">by {{ i.book.authors }}</div>
+                </div>
+                <div class="isbn">
+                  <div class="desc">{{ i.book.isbn }}</div>
+                </div>
+                <div class="price">
+                  <div class="desc">{{ i.book.price | currency:'USD'}}</div>
+                </div>
+              </div>
+              <div class="price">
+                {{ i.book.price | currency:'USD'}}
+              </div>
+              <div class="selection">
+
+                <select class="form-control" name="quantity" id=quantity
+                        [(ngModel)]="i.quantity">
+                  <option *ngFor="let c of quantities" [value]="c">{{c}}</option>
+                </select>
+              </div>
+              <button type="button" (click)="removeFromShoppingCart(i)" class="btn btn-danger btn-icon">
+                <i class="fa fa-trash"></i>
+              </button>
             </div>
           </div>
-        </a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 menu" *ngIf="currentShoppingCart.items && currentShoppingCart.items.length > 0">
+        <div>Total price: {{totalPrice}}</div>
+        <button class="btn btn-success">Checkout</button>
       </div>
     </div>
   </nb-card-body>

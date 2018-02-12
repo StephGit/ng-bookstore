@@ -11,4 +11,12 @@ export class Book {
   numberOfPages?: number;
   descritption?: string;
   imageUrl?: string;
+
+
+  constructor(isbn?: string, authors?: string, title?: string, price?: number) {
+    this.isbn = isbn;
+    this.authors = authors;
+    this.title = title;
+    this.price = price;
+  }
 }

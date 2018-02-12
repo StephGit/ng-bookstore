@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="row">
-          <div *ngFor="let b of books" class="col-md-2">
+          <div *ngFor="let b of recommendatedBooks" class="col-md-2">
             <ngx-status-card title="{{b.title}}" authors="{{b.authors}}" isbn="{{b.isbn}}" price="{{b.price}}"
                              type="info" (onBookSelected)="navigateToDetails($event)">
             </ngx-status-card>
@@ -22,21 +22,27 @@
   </nb-card-header>
   <nb-card-body>
     <div class="list-group">
-      <div *ngFor="let b of books" (click)="navigateToDetails(b.isbn)">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="details">
-            <div class="title"><h5>{{ b.title }}</h5></div>
-            <div class="authors">
-              <div class="desc">by {{ b.authors }}</div>
+      <div *ngFor="let b of books">
+        <div class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="wrapper">
+            <div class="details" (click)="navigateToDetails(b.isbn)">
+              <div class="title"><h5>{{ b.title }}</h5></div>
+              <div class="authors">
+                <div class="desc">by {{ b.authors }}</div>
+              </div>
+              <div class="isbn">
+                <div class="desc">{{ b.isbn }}</div>
+              </div>
+              <div class="price">
+                <div class="desc">{{ b.price | currency:'USD'}}</div>
+              </div>
+
             </div>
-            <div class="isbn">
-              <div class="desc">{{ b.isbn }}</div>
-            </div>
-            <div class="price">
-              <div class="desc">{{ b.price | currency:'USD'}}</div>
-            </div>
-          </div>
-        </a>
+            <button type="button" (click)="addToShoppingCart(b)" class="btn btn-success btn-icon">
+              <i class="fa fa-cart-plus"></i>
+            </button>
+          </div><
+        </div>
       </div>
     </div>
   </nb-card-body>

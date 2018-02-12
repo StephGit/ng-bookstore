@@ -64,16 +64,6 @@
     border-left: 1px solid nb-theme(separator) !important;
   }
 
-  .toggle-layout /deep/ a {
-    display: block;
-    text-decoration: none;
-    line-height: 1;
-
-    i {
-      color: nb-theme(color-fg-highlight);
-      font-size: 2.25rem;
-    }
-  }
 
   @include media-breakpoint-down(md) {
 
@@ -82,7 +72,7 @@
     }
 
     .control-item {
-      display: none;
+      //display: none;
     }
 
     .toggle-layout {
@@ -105,18 +95,8 @@
       }
     }
 
-    .toggle-layout {
-      display: none;
-    }
-
     nb-action:not(.toggle-layout) {
       padding: 0;
-    }
-  }
-
-  @include media-breakpoint-down(xs) {
-    .right /deep/ {
-      display: none;
     }
   }
 }

@@ -74,12 +74,6 @@
     }
   }
 
-  nb-action {
-    .pointer {
-      cursor: pointer;
-    }
-  }
-
   @include media-breakpoint-down(md) {
 
     nb-action:not(.toggle-layout) {

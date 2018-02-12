@@ -21,7 +21,7 @@ export class DetailsComponent implements OnInit {
     this.bookDetail$ = this.route.paramMap
       .switchMap((params: ParamMap) => {
         // (+) before `params.get()` turns the string into a number
-        const isbn = params.get('id');
+        const isbn = params.get('isbn');
 
         return this.catalogService.getBookDetails(isbn);
       });

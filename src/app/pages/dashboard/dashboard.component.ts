@@ -13,7 +13,7 @@ export class DashboardComponent implements OnInit {
   books = [{
     title: 'Java All-in-One For Dummies ',
     authors: 'Doug Lowe',
-    isbn: '1119247799',
+    isbn: '111924779921312313',
     price: '39.99'
   }, {title: 'Java All-in-One For Dummies ', authors: 'Doug Lowe', isbn: '1119247799', price: '39.99'},
     {

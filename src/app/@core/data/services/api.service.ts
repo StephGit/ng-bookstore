@@ -34,10 +34,9 @@ export class ApiService {
   }
 
   protected handleError(error: any) {
-    if (error instanceof Response || error.status === 0) {
-      this.notificationService.error('No internet connection/ backend connection available.', 'Connection error');
-      return Observable.throw(error);
-    }
+
+    this.notificationService.error(error.statusText, 'Unexpected error');
+
     return Observable.throw(error);
   }
 

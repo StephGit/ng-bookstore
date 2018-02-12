@@ -3,8 +3,6 @@ import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   { path: '', loadChildren: 'app/pages/pages.module#PagesModule' },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
-  { path: '**', redirectTo: 'pages' },
 ];
 
 const config: ExtraOptions = {

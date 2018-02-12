@@ -29,9 +29,14 @@ export class ShoppingCartService {
     return this.currentShoppingCart;
   }
 
-  public addBookToShoppingCart(item: ShoppingCartItem) {
+  public addItemToShoppingCart(item: ShoppingCartItem) {
     this.currentShoppingCart.addItem(item);
   }
+
+  public removeItemFromShoppingCart(item: ShoppingCartItem) {
+    this.currentShoppingCart.removeItem(item);
+  }
+
 
 
 }

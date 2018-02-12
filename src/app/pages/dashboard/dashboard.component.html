@@ -22,10 +22,10 @@
   </nb-card-header>
   <nb-card-body>
     <div class="list-group">
-      <div *ngFor="let b of books" (click)="navigateToDetails(b.isbn)">
+      <div *ngFor="let b of books">
         <div class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="wrapper">
-            <div class="details">
+            <div class="details" (click)="navigateToDetails(b.isbn)">
               <div class="title"><h5>{{ b.title }}</h5></div>
               <div class="authors">
                 <div class="desc">by {{ b.authors }}</div>
@@ -41,7 +41,7 @@
             <button type="button" (click)="addToShoppingCart(b)" class="btn btn-success btn-icon">
               <i class="fa fa-cart-plus"></i>
             </button>
-          </div>
+          </div><
         </div>
       </div>
     </div>

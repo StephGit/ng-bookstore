@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
   }
 
   addToShoppingCart(book) {
-    this.cartService.addBookToShoppingCart(new ShoppingCartItem(book, 1));
+    this.cartService.addItemToShoppingCart(new ShoppingCartItem(book, 1));
   }
 
 

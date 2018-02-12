@@ -20,7 +20,7 @@ export class ShoppingCart {
 
   public removeItem(item: ShoppingCartItem) {
     const existingBook = this._items.find(i => i.book.isbn === item.book.isbn);
-    if (existingBook) {
+    if (existingBook && existingBook.quantity > 1) {
       existingBook.quantity --;
     } else {
       const index = this._items.findIndex(i => i.book.isbn === item.book.isbn);

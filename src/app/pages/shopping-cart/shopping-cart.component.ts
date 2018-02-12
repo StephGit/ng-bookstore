@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CatalogService} from "../../@core/data/services/catalog.service";
 import {ShoppingCartService} from "../../@core/data/services/shopping-cart.service";
 import {ShoppingCart} from "../../@core/data/model/shopping-cart.model";
@@ -17,6 +17,8 @@ export class ShoppingCartComponent implements OnInit {
 
   searchCompleted: Boolean;
 
+  quantities = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   constructor(private shoppingCartService: ShoppingCartService) {
 
   }
@@ -25,7 +27,7 @@ export class ShoppingCartComponent implements OnInit {
     this.currentShoppingCart = this.shoppingCartService.getCurrentShoppingCart();
   }
 
-  removeFromShoppingCart(item: ShoppingCartItem){
+  removeFromShoppingCart(item: ShoppingCartItem) {
     this.shoppingCartService.removeItemFromShoppingCart(item);
     this.currentShoppingCart = this.shoppingCartService.getCurrentShoppingCart();
   }

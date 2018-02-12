@@ -2,7 +2,7 @@
 import {ShoppingCartItem} from "./shopping-cart-item.model";
 
 export class ShoppingCart {
-  private _items: ShoppingCartItem [];
+  private _items: ShoppingCartItem [] = [];
   private price: number;
 
   public getTotalPrice(): number {

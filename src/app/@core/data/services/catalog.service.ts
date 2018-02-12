@@ -2,12 +2,13 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../../environments/environment';
+import {Book} from "../model/book.model";
 
 @Injectable()
 export class CatalogService {
 
   searchResults;
-  searchResultsUpdated: EventEmitter<any> = new EventEmitter(); // TODO bookInfo object
+  searchResultsUpdated: EventEmitter<Book []> = new EventEmitter(); // TODO bookInfo object
   isMockEnabled = `${environment.mock}`;
 
   constructor(private apiService: ApiService,) {
@@ -17,7 +18,9 @@ export class CatalogService {
   // TODO mock config for development without backend access?
   searchBooks(keywords: String): void {
     this.apiService.get('/books?keywords=' + keywords, null, null).subscribe((results) => {
-      this.searchResults = results;
+      this.searchResults = results.map((r) => {
+        return new Book(r.isbn, r.authors, r.title, r.price);
+      });
       this.searchResultsUpdated.emit(this.searchResults);
     });
   }

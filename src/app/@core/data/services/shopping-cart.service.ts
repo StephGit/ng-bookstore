@@ -1,11 +1,13 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {ShoppingCart} from "../model/shopping-cart.model";
+import {Book} from "../model/book.model";
+import {ShoppingCartItem} from "../model/shopping-cart-item.model";
 
 @Injectable()
 export class ShoppingCartService {
 
-  currentShoppingCart: ShoppingCart;
+  currentShoppingCart: ShoppingCart = new ShoppingCart();
 
   mockShoppingCart = [{
     title: 'Java All-in-One For Dummies ',
@@ -25,6 +27,10 @@ export class ShoppingCartService {
 
   public getCurrentShoppingCart() {
     return this.currentShoppingCart;
+  }
+
+  public addBookToShoppingCart(item: ShoppingCartItem) {
+    this.currentShoppingCart.addItem(item);
   }
 
 

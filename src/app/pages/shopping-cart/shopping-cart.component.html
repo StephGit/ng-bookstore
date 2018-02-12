@@ -4,18 +4,18 @@
   </nb-card-header>
   <nb-card-body>
     <div class="list-group">
-      <div *ngFor="let b of books">
+      <div *ngFor="let i of currentShoppingCart.items">
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="details">
-            <div class="title"><h5>{{ b.title }}</h5></div>
+            <div class="title"><h5>{{ i.book.title }}</h5></div>
             <div class="authors">
-              <div class="desc">by {{ b.authors }}</div>
+              <div class="desc">by {{ i.book.authors }}</div>
             </div>
             <div class="isbn">
-              <div class="desc">{{ b.isbn }}</div>
+              <div class="desc">{{ i.book.isbn }}</div>
             </div>
             <div class="price">
-              <div class="desc">{{ b.price | currency:'USD'}}</div>
+              <div class="desc">{{ i.book.price | currency:'USD'}}</div>
             </div>
           </div>
         </a>

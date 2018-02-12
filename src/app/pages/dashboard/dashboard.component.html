@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="row">
-          <div *ngFor="let b of books" class="col-md-2">
+          <div *ngFor="let b of recommendatedBooks" class="col-md-2">
             <ngx-status-card title="{{b.title}}" authors="{{b.authors}}" isbn="{{b.isbn}}" price="{{b.price}}"
                              type="info" (onBookSelected)="navigateToDetails($event)">
             </ngx-status-card>
@@ -38,7 +38,7 @@
               </div>
 
             </div>
-            <button type="button" class="btn btn-success btn-icon">
+            <button type="button" (click)="addToShoppingCart(b)" class="btn btn-success btn-icon">
               <i class="fa fa-cart-plus"></i>
             </button>
           </div>

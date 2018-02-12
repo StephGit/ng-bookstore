@@ -1,12 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {NbMenuItem, NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
+import { NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import {CatalogService} from '../../../@core/data/services/catalog.service';
 import {User} from '../../../@core/data/model/user.model';
 import {CurrentUserService} from '../../../@core/data/services/current-user.service';
 import {Router} from '@angular/router';
+import {NbUserMenuItem} from '@nebular/theme/components/user/user.component';
 
 @Component({
   selector: 'ngx-header',
@@ -19,10 +20,11 @@ export class HeaderComponent implements OnInit {
   @Input() position = 'normal';
 
   currentUser: User;
+  picture = 'assets/images/user.png';
 
-  items: NbMenuItem[]  = [
+  items: NbUserMenuItem[]  = [
     { title: 'Account', link: 'account'},
-    { title: 'Logout', data: 'logout'}];
+    { title: 'Logout', link: 'account/logout'}];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -61,18 +63,6 @@ export class HeaderComponent implements OnInit {
 
   navigateToLogin() {
     this.router.navigate(['/account/login']);
-  }
-
-  onItemClick(item: NbMenuItem) {
-    if (item.link !== undefined) {
-      this.router.navigate([item.link])
-    } else {
-      this.logout();
-    }
-  }
-
-  logout() {
-    this.currentUserService.purgeAuth();
   }
 
   startSearch(keywords) {

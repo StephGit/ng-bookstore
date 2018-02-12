@@ -8,6 +8,7 @@ import {RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {ThemeModule} from '../../@theme/theme.module';
 import {HttpClientModule} from '@angular/common/http';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
@@ -23,9 +24,11 @@ import {HttpClientModule} from '@angular/common/http';
     ...routedComponents,
     LoginComponent,
     RegisterComponent,
+    LogoutComponent,
   ],
   exports: [
     LoginComponent,
+    LogoutComponent,
     RegisterComponent,
   ],
 })

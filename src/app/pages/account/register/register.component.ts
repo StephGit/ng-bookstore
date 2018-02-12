@@ -3,6 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../../@core/data/services/customer.service';
 import {Customer} from '../../../@core/data/model/customer.model';
 import {User} from '../../../@core/data/model/user.model';
+import {Country} from '../../../@core/data/model/country.model';
+import {Address} from '../../../@core/data/model/address.model';
+import {CreditCard} from '../../../@core/data/model/creditcard.model';
 
 @Component({
   selector: 'ngx-register',
@@ -10,8 +13,8 @@ import {User} from '../../../@core/data/model/user.model';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  customer: any = {};
-  user: any = {};
+  customer: Customer;
+  user: User;
   submitted: boolean = false;
   returnUrl: string;
 
@@ -22,6 +25,10 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.user = new User();
+    this.customer = new Customer();
+    this.customer.address = new Address();
+    this.customer.creditCard = new CreditCard();
   }
 
   register() {
@@ -35,5 +42,9 @@ export class RegisterComponent implements OnInit {
           this.submitted = false;
         },
       );
+  }
+
+  showNextTab(tab: string) {
+
   }
 }

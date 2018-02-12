@@ -40,6 +40,8 @@ export class CustomerService {
   register(customer: Customer, password: string): Observable<any> {
     const headers = new HttpHeaders({
       'password': password,
+      'Content-Type': 'application/json',
+      'Accept': 'text/plain',
     });
     return this.apiService.post(this.path, customer , headers )
       .map(

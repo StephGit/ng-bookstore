@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
-import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import {CatalogService} from '../../../@core/data/services/catalog.service';
 import {User} from '../../../@core/data/model/user.model';
@@ -28,7 +27,6 @@ export class HeaderComponent implements OnInit {
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
-              private userService: UserService,
               private catalogService: CatalogService,
               private currentUserService: CurrentUserService,
               private router: Router,

@@ -21,7 +21,6 @@ import {
   FooterComponent,
   HeaderComponent,
   SearchInputComponent,
-  ThemeSettingsComponent,
   ThemeSwitcherComponent,
   TinyMCEComponent,
 } from './components';
@@ -55,7 +54,6 @@ const COMPONENTS = [
   HeaderComponent,
   FooterComponent,
   SearchInputComponent,
-  ThemeSettingsComponent,
   TinyMCEComponent,
   SampleLayoutComponent,
 ];

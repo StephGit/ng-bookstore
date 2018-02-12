@@ -42,7 +42,6 @@ import {NotificationService} from '../../../@core/data/services/notification.ser
                    state="collapsed"
                    fixed
                    [right]="sidebar.id !== 'right'">
-        <ngx-theme-settings></ngx-theme-settings>
       </nb-sidebar>
     </nb-layout>
   `,

@@ -6,7 +6,7 @@ import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import {CatalogService} from '../../../@core/data/services/catalog.service';
 import {User} from '../../../@core/data/model/user.model';
 import {CurrentUserService} from '../../../@core/data/services/current-user.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NbUserMenuItem} from '@nebular/theme/components/user/user.component';
 
 @Component({
@@ -58,7 +58,7 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToShoppingCart() {
-    this.router.navigate(['/pages/shopping-cart']);
+    this.router.navigate(['/shopping-cart']);
   }
 
   navigateToLogin() {
@@ -67,6 +67,10 @@ export class HeaderComponent implements OnInit {
 
   startSearch(keywords) {
     console.log('searching books for keywords: ' + keywords);
+    // check if current route is search or not
+    if (this.router.url !== '') {
+      this.router.navigate(['']);
+    }
     this.catalogService.searchBooks(keywords);
   }
 }

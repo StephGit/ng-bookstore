@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
   }
 
   navigateToDetails(isbn) {
-    this.router.navigate(['/pages/details/' + isbn]);
+    this.router.navigate(['/details/' + isbn]);
 
   }
 

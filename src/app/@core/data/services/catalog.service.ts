@@ -23,9 +23,9 @@ export class CatalogService {
   }
 
   getBookDetails(isbn: String): Observable<any> {
-    //return this.apiService.get('/books/isbn=' + isbn, null, null);
+    return this.apiService.get('/books/' + isbn, null, null);
 
-    return Observable.of({
+    /*return Observable.of({
       authors: 'Doug Lowe',
       binding: 'PAPERBACK',
       description: '<b>Your one-stop guide to programming with Java</b> ' +
@@ -42,7 +42,7 @@ export class CatalogService {
       publicationYear: 2017,
       publisher: 'For Dummies',
       title: 'Java All-in-One For Dummies (For Dummies (Computers))'
-    })
+    })*/
   }
 
 

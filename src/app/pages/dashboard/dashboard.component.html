@@ -24,17 +24,23 @@
     <div class="list-group">
       <div *ngFor="let b of books" (click)="navigateToDetails(b.isbn)">
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="details">
-            <div class="title"><h5>{{ b.title }}</h5></div>
-            <div class="authors">
-              <div class="desc">by {{ b.authors }}</div>
+          <div class="wrapper">
+            <div class="details">
+              <div class="title"><h5>{{ b.title }}</h5></div>
+              <div class="authors">
+                <div class="desc">by {{ b.authors }}</div>
+              </div>
+              <div class="isbn">
+                <div class="desc">{{ b.isbn }}</div>
+              </div>
+              <div class="price">
+                <div class="desc">{{ b.price | currency:'USD'}}</div>
+              </div>
+
             </div>
-            <div class="isbn">
-              <div class="desc">{{ b.isbn }}</div>
-            </div>
-            <div class="price">
-              <div class="desc">{{ b.price | currency:'USD'}}</div>
-            </div>
+            <button type="button" class="btn btn-success btn-icon">
+              <i class="fa fa-cart-plus"></i>
+            </button>
           </div>
         </a>
       </div>

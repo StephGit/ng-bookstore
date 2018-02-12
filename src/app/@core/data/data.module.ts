@@ -11,6 +11,7 @@ import {ApiService} from './services/api.service';
 import {CustomerService} from './services/customer.service';
 import {NotificationService} from './services/notification.service';
 import {CurrentUserService} from './services/current-user.service';
+import {ShoppingCartService} from './services/shopping-cart.service';
 
 const SERVICES = [
   UserService,
@@ -23,6 +24,7 @@ const SERVICES = [
   ApiService,
   NotificationService,
   CurrentUserService,
+  ShoppingCartService,
 ];
 
 @NgModule({

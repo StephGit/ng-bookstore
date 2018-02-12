@@ -2,17 +2,17 @@ import { NgModule } from '@angular/core';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import { DashboardComponent } from './dashboard.component';
-import { StatusCardComponent } from './status-card/status-card.component';
+import {DetailsComponent} from "./details.component";
+import {DetailsRoutingModule} from "./details-routing.module";
 
 
 @NgModule({
   imports: [
     ThemeModule,
+    DetailsRoutingModule
   ],
   declarations: [
-    DashboardComponent,
-    StatusCardComponent,
+    DetailsComponent
   ],
 })
-export class DashboardModule { }
+export class DetailsModule { }

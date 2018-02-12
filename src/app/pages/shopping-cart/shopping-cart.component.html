@@ -20,14 +20,15 @@
                   <div class="desc">{{ i.book.price | currency:'USD'}}</div>
                 </div>
               </div>
+              <div class="price">
+                {{ i.book.price | currency:'USD'}}
+              </div>
               <div class="selection">
+
                 <select class="form-control" name="quantity" id=quantity
                         [(ngModel)]="i.quantity">
                   <option *ngFor="let c of quantities" [value]="c">{{c}}</option>
                 </select>
-              </div>
-              <div class="price">
-                {{ i.book.price | currency:'USD'}}
               </div>
               <button type="button" (click)="removeFromShoppingCart(i)" class="btn btn-danger btn-icon">
                 <i class="fa fa-trash"></i>
@@ -39,8 +40,8 @@
     </div>
     <div class="row">
       <div class="col-md-12 menu" *ngIf="currentShoppingCart.items && currentShoppingCart.items.length > 0">
+        <div>Total price: {{totalPrice}}</div>
         <button class="btn btn-success">Checkout</button>
-        <div>{{i.getTotalPrice()}}</div>
       </div>
     </div>
   </nb-card-body>

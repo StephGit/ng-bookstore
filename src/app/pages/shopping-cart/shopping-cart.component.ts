@@ -23,6 +23,8 @@ export class ShoppingCartComponent implements OnInit {
 
   }
 
+  get totalPrice(): number { return this.currentShoppingCart.getTotalPrice(); }
+
   ngOnInit(): void {
     this.currentShoppingCart = this.shoppingCartService.getCurrentShoppingCart();
   }

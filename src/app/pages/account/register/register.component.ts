@@ -10,8 +10,8 @@ import {User} from '../../../@core/data/model/user.model';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  customer: Customer;
-  user: User;
+  customer: any = {};
+  user: any = {};
   submitted: boolean = false;
   returnUrl: string;
 
@@ -22,8 +22,6 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-    // this.customer = {};
-
   }
 
   register() {

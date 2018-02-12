@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CatalogService} from '../../@core/data/services/catalog.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ngx-dashboard',
@@ -9,13 +10,28 @@ import {CatalogService} from '../../@core/data/services/catalog.service';
 export class DashboardComponent implements OnInit {
 
 
-  books = [{title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'},
-    {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'},
-    {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}];
+  books = [{
+    title: 'Java All-in-One For Dummies ',
+    authors: 'Doug Lowe',
+    isbn: '1119247799',
+    price: '39.99'
+  }, {title: 'Java All-in-One For Dummies ', authors: 'Doug Lowe', isbn: '1119247799', price: '39.99'},
+    {
+      title: 'Java All-in-One For Dummies ',
+      authors: 'Doug Lowe',
+      isbn: '1119247799',
+      price: '39.99'
+    }, {title: 'Java All-in-One For Dummies ', authors: 'Doug Lowe', isbn: '1119247799', price: '39.99'},
+    {
+      title: 'Java All-in-One For Dummies ',
+      authors: 'Doug Lowe',
+      isbn: '1119247799',
+      price: '39.99'
+    }, {title: 'Java All-in-One For Dummies ', authors: 'Doug Lowe', isbn: '1119247799', price: '39.99'}];
 
   searchCompleted: Boolean;
 
-  constructor(private catalogService: CatalogService) {
+  constructor(private catalogService: CatalogService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -23,6 +39,11 @@ export class DashboardComponent implements OnInit {
       this.books = searchResults;
       this.searchCompleted = true;
     })
+  }
+
+  navigateToDetails(isbn) {
+    this.router.navigate(['/pages/details/' + isbn]);
+
   }
 
 

@@ -13,6 +13,7 @@ import {NotificationService} from './services/notification.service';
 import {CurrentUserService} from './services/current-user.service';
 import {LogoutGuardService} from './services/logout-guard.service';
 import {AuthGuardService} from './services/auth-guard.service';
+import {ShoppingCartService} from './services/shopping-cart.service';
 
 const SERVICES = [
   UserService,
@@ -25,6 +26,7 @@ const SERVICES = [
   ApiService,
   NotificationService,
   CurrentUserService,
+  ShoppingCartService,
   AuthGuardService,
   LogoutGuardService,
 ];

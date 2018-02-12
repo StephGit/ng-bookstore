@@ -30,7 +30,7 @@ docs: https://akveo.github.io/nebular/#/docs/auth/introduction
 
 - [x] Search and Display BookInfoObjects - A 
 - [ ] Login and Register - S
-- [ ] Book-Detail - S 
+- [ ] Book-Detail - S use [innerHTML] property binding to display formatted description
 - [x] Handle errors from backend - i.e. see notifications on components page - A
 - [ ] Shopping card and checkout
 

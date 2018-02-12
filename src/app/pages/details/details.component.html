@@ -1,3 +1,14 @@
-<p>
-  details works!
-</p>
+<nb-card *ngIf="bookDetail$ | async as bookDetail">
+  <nb-card-header>
+    {{bookDetail.title}}
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-12">
+        <img [src]="bookDetail.imageUrl">
+        <div [innerHTML]="bookDetail.description">
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

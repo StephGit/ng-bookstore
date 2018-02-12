@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Router} from "@angular/router";
 
 @Component({
   selector: 'ngx-status-card',
   styleUrls: ['./status-card.component.scss'],
   template: `
-    <nb-card (click)="navigateToDetails(isbn)">
+    <nb-card (click)="bookSelected(isbn)">
       <!--<div class="icon-container">-->
         <!--<div class="icon {{ type }}">-->
           <!--<ng-content></ng-content>-->
@@ -30,15 +30,13 @@ export class StatusCardComponent {
   @Input() isbn: string;
   @Input() price: string;
   @Input() type: string;
-  @Input() on = true;
 
+  @Output() onBookSelected: EventEmitter<string> = new EventEmitter();
 
   constructor(private router: Router) {
   }
 
-  navigateToDetails(isbn) {
-    console.log('navigating to book details with isbn: ' + isbn);
-    this.router.navigate(['/pages/details/' + isbn]);
-
+  bookSelected(isbn) {
+    this.onBookSelected.emit(isbn);
   }
 }

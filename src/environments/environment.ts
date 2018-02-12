@@ -10,5 +10,6 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://localhost:8080/bookstore/api',
+  api_url: 'http://distsys.ch:8080/bookstore/api',
+  mock: false,
 };

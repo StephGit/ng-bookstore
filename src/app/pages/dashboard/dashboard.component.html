@@ -8,7 +8,7 @@
         <div class="row">
           <div *ngFor="let b of books" class="col-md-2">
             <ngx-status-card title="{{b.title}}" authors="{{b.authors}}" isbn="{{b.isbn}}" price="{{b.price}}"
-                             type="info">
+                             type="info" (onBookSelected)="navigateToDetails($event)">
             </ngx-status-card>
           </div>
         </div>
@@ -22,7 +22,7 @@
   </nb-card-header>
   <nb-card-body>
     <div class="list-group">
-      <div *ngFor="let b of books">
+      <div *ngFor="let b of books" (click)="navigateToDetails(b.isbn)">
         <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="details">
             <div class="title"><h5>{{ b.title }}</h5></div>

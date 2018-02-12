@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CatalogService} from "../../@core/data/services/catalog.service";
+import {ShoppingCartService} from "../../@core/data/services/shopping-cart.service";
+import {ShoppingCart} from "../../@core/data/model/shopping-cart.model";
 
 @Component({
   selector: 'ngx-shopping-cart',
@@ -8,21 +10,17 @@ import {CatalogService} from "../../@core/data/services/catalog.service";
 })
 export class ShoppingCartComponent implements OnInit {
 
+  currentShoppingCart: ShoppingCart;
 
-  books = [{title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'},
-    {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'},
-    {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}, {title: 'Java All-in-One For Dummies ', authors:'Doug Lowe', isbn:'1119247799', price:'39.99'}];
 
   searchCompleted: Boolean;
 
-  constructor(private catalogService: CatalogService) {
+  constructor(private shoppingCartService: ShoppingCartService) {
+
   }
 
   ngOnInit(): void {
-    this.catalogService.searchResultsUpdated.subscribe((searchResults) => {
-      this.books = searchResults;
-      this.searchCompleted = true;
-    })
+    this.currentShoppingCart = this.shoppingCartService.getCurrentShoppingCart();
   }
 
 

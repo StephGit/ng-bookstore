@@ -1,6 +1,6 @@
 import {Book} from './book.model';
 
-export class ShoppingCardItem {
+export class ShoppingCartItem {
   book: Book;
   quantity: number;
 

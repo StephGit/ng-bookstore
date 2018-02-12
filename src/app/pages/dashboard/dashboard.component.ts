@@ -43,6 +43,10 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.books = this.catalogService.getPreviousSearchResults();
+    if (this.books && this.books.length > 0) {
+      this.searchCompleted = true;
+    }
     this.catalogService.searchResultsUpdated.subscribe((searchResults) => {
       this.books = searchResults;
       this.searchCompleted = true;

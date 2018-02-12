@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
+import {NbMenuItem, NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
 import { UserService } from '../../../@core/data/users.service';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import {CatalogService} from '../../../@core/data/services/catalog.service';
@@ -20,10 +20,9 @@ export class HeaderComponent implements OnInit {
 
   currentUser: User;
 
-  // TODO onclick-events not working
-  userMenu = [
-    { title: 'Account', onclick: this.router.navigate(['account'])},
-    { title: 'Log out', onclick: this.logout()}];
+  items: NbMenuItem[]  = [
+    { title: 'Account', link: 'account'},
+    { title: 'Logout', data: 'logout'}];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,
@@ -58,6 +57,18 @@ export class HeaderComponent implements OnInit {
 
   navigateToShoppingCart() {
     this.router.navigate(['/pages/shopping-cart']);
+  }
+
+  navigateToLogin() {
+    this.router.navigate(['/account/login']);
+  }
+
+  onItemClick(item: NbMenuItem) {
+    if (item.link !== undefined) {
+      this.router.navigate([item.link])
+    } else {
+      this.logout();
+    }
   }
 
   logout() {

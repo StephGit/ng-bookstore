@@ -34,12 +34,12 @@ export class ApiService {
   }
 
   protected handleError(error: any) {
-
-    this.notificationService.error(error.statusText, 'Unexpected error');
-
+    if (error instanceof Response || error.status === 0) {
+      this.notificationService.error('No internet connection/ backend connection available.', 'Connection error');
+      return Observable.throw(error);
+    }
     return Observable.throw(error);
   }
-
 
   get(path: string, params: HttpParams = new HttpParams(), headers: HttpHeaders): Observable<any> {
     return this.http.get(`${this.apiUrl}${path}`, {headers: this.setHeaders(headers), params: params})

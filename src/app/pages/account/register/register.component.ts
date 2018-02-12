@@ -6,6 +6,7 @@ import {User} from '../../../@core/data/model/user.model';
 import {Country} from '../../../@core/data/model/country.model';
 import {Address} from '../../../@core/data/model/address.model';
 import {CreditCard} from '../../../@core/data/model/creditcard.model';
+import {selector} from 'rxjs/operator/publish';
 
 @Component({
   selector: 'ngx-register',
@@ -17,6 +18,8 @@ export class RegisterComponent implements OnInit {
   user: User;
   submitted: boolean = false;
   returnUrl: string;
+  selected = 1;
+
 
   constructor(private route: ActivatedRoute,
               private customerService: CustomerService,
@@ -44,7 +47,7 @@ export class RegisterComponent implements OnInit {
       );
   }
 
-  showNextTab(tab: string) {
-
+  showTab(tab: number) {
+    this.selected = tab;
   }
 }

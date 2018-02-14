@@ -1,4 +1,4 @@
 export enum Country {
-  CH, DE, FR, GB, IT, US,
+  CH = 'Switzerland', DE = 'Germany', FR = 'France', GB = 'England', IT = 'Italy', US = 'United States',
 }
 

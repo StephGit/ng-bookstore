@@ -7,6 +7,8 @@ import {Country} from '../../../@core/data/model/country.model';
 import {Address} from '../../../@core/data/model/address.model';
 import {CreditCard} from '../../../@core/data/model/creditcard.model';
 import {selector} from 'rxjs/operator/publish';
+import {CreditCardType} from '../../../@core/data/model/creditcard-type.model';
+import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'ngx-register',
@@ -16,9 +18,15 @@ import {selector} from 'rxjs/operator/publish';
 export class RegisterComponent implements OnInit {
   customer: Customer;
   user: User;
+  countries = Object.values(Country);
+  cardTypes = Object.keys(CreditCardType);
+  currentYear = new Date().getFullYear();
+  maxYear = this.currentYear + 10;
   submitted: boolean = false;
   returnUrl: string;
   selected = 1;
+  rateControl = new FormControl('', [Validators.max(this.maxYear), Validators.min(this.currentYear)]);
+
 
 
   constructor(private route: ActivatedRoute,
@@ -49,5 +57,16 @@ export class RegisterComponent implements OnInit {
 
   showTab(tab: number) {
     this.selected = tab;
+  }
+
+  parseCountry(type: any) {
+    let country;
+    for (const key in Country) {
+      if (type === Country[key]) {
+        country = key;
+        break;
+      }
+    }
+    return country;
   }
 }

@@ -3,13 +3,13 @@
   <div id="tabs" class="full-width">
     <ul>
       <li [class.active]="selected == 1">
-        <a (click)="showTab(1)" data-toggle="collapse" data-target="#cardStep1">Step 1</a>
+        <a (click)="showTab(1)" data-toggle="collapse" data-target="#cardStep1">User</a>
       </li>
       <li [class.active]="selected == 2">
-        <a (click)="showTab(2)" data-toggle="collapse" data-target="#cardStep2">Step 2</a>
+        <a (click)="showTab(2)" data-toggle="collapse" data-target="#cardStep2">Address</a>
       </li>
       <li [class.active]="selected == 3">
-        <a (click)="showTab(3)" data-toggle="collapse" data-target="#cardStep3">Step 3</a>
+        <a (click)="showTab(3)" data-toggle="collapse" data-target="#cardStep3">Credit Card</a>
       </li>
     </ul>
 
@@ -18,7 +18,6 @@
     <p></p>
     <div class="row full-name-inputs">
       <div class="col-sm-6 form-group">
-
 
         <label for="input-first-name" class="sr-only">First name</label>
         <input name="fristName" [(ngModel)]="customer.firstName" id="input-first-name" #firstName="ngModel"
@@ -142,17 +141,13 @@
         </small>
       </div>
       <div class="col-sm-3 form-group">
-        <label for="input-country" class="sr-only">Country</label>
-        <input name="country" [(ngModel)]="customer.address.country" id="input-country" #country="ngModel"
-               class="form-control" placeholder="Country"
-               [class.form-control-danger]="country.invalid && country.touched"
-               required minlength="2" maxlength="2">
+        <label for="select-country" class="sr-only">Country</label>
+        <select id="select-country" name="country" [(ngModel)]="customer.address.country"
+                #country="ngModel" class="form-control" required [class.form-control-danger]="country.invalid">
+          <option *ngFor="let country of countries" [ngValue]="parseCountry(country)">{{country}}</option>
+        </select>
         <small class="form-text error" *ngIf="country.invalid && country.touched && country.errors?.required">
           Country is required!
-        </small>
-        <small class="form-text error"
-               *ngIf="country.invalid && country.touched && (country.errors?.minlength || country.errors?.maxlength)">
-          Invalid Country code
         </small>
       </div>
     </div>
@@ -163,6 +158,65 @@
   </div>
   <div class="collapse" [class.show]="selected == 3">
     <p></p>
+    <div class="form-group">
+      <label for="select-cardtype" class="sr-only">CreditCard-Type</label>
+      <select id="select-cardtype" name="cardType" [(ngModel)]="customer.creditCard.type"
+              #cardType="ngModel" class="form-control" required [class.form-control-danger]="cardType.invalid">
+        <option *ngFor="let cType of cardTypes" [ngValue]="cType">{{cType}}</option>
+      </select>
+      <small class="form-text error" *ngIf="cardType.invalid && cardType.touched && cardType.errors?.required">
+        CardType is required!
+      </small>
+    </div>
+    <div class="form-group">
+      <label for="input-cardnumber" class="sr-only">Card number</label>
+      <input [(ngModel)]="customer.creditCard.number" name="cardnumber" id="input-cardnumber" #cardnumber="ngModel"
+             class="form-control" placeholder="Card number" pattern="(\d{4}[-. ]?){4}|\d{4}[-. ]?\d{6}[-. ]?\d{5}"
+             [class.form-control-danger]="cardnumber.invalid && cardnumber.touched" required>
+      <small class="form-text error" *ngIf="cardnumber.invalid && cardnumber.touched && cardnumber.errors?.required">
+        CreditCard is
+        required!
+      </small>
+      <small class="form-text error" *ngIf="cardnumber.invalid && cardnumber.touched && cardnumber.errors?.pattern">
+        CreditCard-Number should be the
+        real one!
+      </small>
+    </div>
+    <div class="row card-date-inputs">
+      <div class="col-sm-6 form-group">
+        <label for="input-month" class="sr-only">Expiration Month</label>
+        <input name="expMonth" [(ngModel)]="customer.creditCard.expirationMonth" id="input-month" #expMonth="ngModel"
+               class="form-control" placeholder="Month"
+               [class.form-control-danger]="expMonth.invalid && expMonth.touched"
+               type="number"
+               pattern="^(1[0-2]|[1-9])$"
+               required minlength="1" maxlength="2">
+        <small class="form-text error" *ngIf="expMonth.invalid && expMonth.touched && expMonth.errors?.required">
+          Expiration month is required!
+        </small>
+        <small class="form-text error"
+               *ngIf="expMonth.invalid && expMonth.touched && (expMonth.errors?.minlength || expMonth.errors?.pattern)">
+          Month is not valid.
+        </small>
+      </div>
+      <div class="col-sm-6 form-group">
+        <label for="input-year" class="sr-only">Expiration Year</label>
+        <input name="year" [(ngModel)]="customer.creditCard.expirationYear" id="input-year" #year="ngModel"
+               class="form-control" placeholder="Year"
+               [class.form-control-danger]="year.invalid && year.touched"
+               required
+               type="number"
+
+               >
+        <small class="form-text error" *ngIf="year.invalid && year.touched && year.errors?.required">
+          Year is required!
+        </small>
+        <small class="form-text error"
+               *ngIf="year.invalid && year.touched && (year.errors?.rateControl)">
+          Year is not vaild.
+        </small>
+      </div>
+    </div>
     <div class="d-flex justify-content-center">
       <a class="btn btn-lg btn-hero-success" (click)="showTab(2)">Previous</a>
       <button [disabled]="submitted || !form.valid" class="btn btn-lg btn-hero-success" [class.btn-pulse]="submitted">

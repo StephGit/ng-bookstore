@@ -4,6 +4,7 @@ import {ShoppingCartService} from "../../@core/data/services/shopping-cart.servi
 import {ShoppingCart} from "../../@core/data/model/shopping-cart.model";
 import {Book} from "../../@core/data/model/book.model";
 import {ShoppingCartItem} from "../../@core/data/model/shopping-cart-item.model";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'ngx-shopping-cart',
@@ -19,7 +20,7 @@ export class ShoppingCartComponent implements OnInit {
 
   quantities = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-  constructor(private shoppingCartService: ShoppingCartService) {
+  constructor(private shoppingCartService: ShoppingCartService, private router: Router) {
 
   }
 
@@ -34,5 +35,7 @@ export class ShoppingCartComponent implements OnInit {
     this.currentShoppingCart = this.shoppingCartService.getCurrentShoppingCart();
   }
 
-
+  navigateToCheckout() {
+    this.router.navigate(['/checkout'])
+  }
 }

@@ -46,10 +46,6 @@
     font-weight: nb-theme(font-weight-bolder);
   }
 
-  .quantity {
-    max-width: 30px;
-  }
-
   .menu {
     margin-top: 20px;
   }
@@ -63,6 +59,32 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+  }
+
+  .quantity-selector {
+    width: 100px;
+  }
+
+  .btn-icon{
+    max-width: 70px;
+    float: right;
+
+  }
+
+  .checkout-btn {
+    margin-top: 2em;
+  }
+
+  .totalprice {
+    font-size: 1.2em;
+  }
+
+  .price {
+    //font-size: 1em;
+  }
+
+  .title {
+    font-size: 1.3em;
   }
 
 }

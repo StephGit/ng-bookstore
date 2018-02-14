@@ -19,7 +19,12 @@ const routes: Routes = [{
   }, {
     path: 'shopping-cart',
     loadChildren: './shopping-cart/shopping-cart.module#ShoppingCartModule',
-  }, {
+  },
+    {
+      path: 'checkout',
+      loadChildren: './checkout/checkout.module#CheckoutModule',
+    },
+    {
     path: 'details',
     loadChildren: './details/details.module#DetailsModule',
   },

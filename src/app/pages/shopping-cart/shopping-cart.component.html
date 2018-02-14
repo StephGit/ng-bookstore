@@ -40,7 +40,7 @@
     <div class="row">
       <div class="col-md-12 menu" *ngIf="currentShoppingCart.items && currentShoppingCart.items.length > 0">
         <div class="totalprice">Total price: {{ totalPrice | currency:'USD'}}</div>
-        <button class="btn btn-success checkout-btn">Checkout</button>
+        <button class="btn btn-success checkout-btn" (click)="navigateToCheckout()">Checkout</button>
       </div>
     </div>
   </nb-card-body>

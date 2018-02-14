@@ -52,6 +52,8 @@ export class DashboardComponent implements OnInit {
       this.books = searchResults;
       this.searchCompleted = true;
     })
+
+    // TODO don't allow a second add to the shopping cart when searching again
   }
 
   navigateToDetails(isbn) {
@@ -60,8 +62,8 @@ export class DashboardComponent implements OnInit {
   }
 
   addToShoppingCart(book: Book) {
-    this.cartService.addItemToShoppingCart(new ShoppingCartItem(book, 1));
     book.isAddedToCart = true;
+    this.cartService.addItemToShoppingCart(new ShoppingCartItem(book, 1));
     this.notificationService.info(book.title + ' ' + book.price, '1 item added to Cart');
   }
 

@@ -14,11 +14,8 @@ import { LogoutComponent } from './logout/logout.component';
 @NgModule({
   imports: [
     AccountRoutingModule,
-    CommonModule,
-    FormsModule,
     RouterModule,
     ThemeModule,
-    HttpClientModule,
   ],
   declarations: [
     ...routedComponents,

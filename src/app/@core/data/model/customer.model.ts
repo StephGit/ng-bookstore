@@ -1,28 +1,17 @@
-import {CreditCardType} from './creditcard-type.model';
-import {Country} from './country.model';
+import {CreditCard} from './creditcard.model';
+import {Address} from './address.model';
 
 export class Customer {
   nr: number;
   email: string;
   firstName: string;
   lastName: string;
-  address: {
-    street: string;
-    city: string;
-    postalCode: string;
-    country: Country;
-  };
-  creditCard: {
-    type: CreditCardType;
-    number: number;
-    expirationMonth: number;
-    expirationYear: number
-  }
+  address: Address;
+  creditCard: CreditCard;
 
-  constructor(nr: number = -1, email: string = '', firstName: string = '', lastName: string = '',
-              address: { street: string; city: string; postalCode: string; country: Country },
-              creditCard: { type: CreditCardType; number: number;
-              expirationMonth: number; expirationYear: number }) {
+  constructor(nr?: number, email?: string, firstName?: string, lastName?: string,
+              address?: Address,
+              creditCard?: CreditCard) {
     this.nr = nr;
     this.email = email;
     this.firstName = firstName;

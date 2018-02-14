@@ -6,8 +6,11 @@ export class User {
   password: string;
   confirmPassword: string;
   userGroup: UserGroup;
-  constructor( id: number = -1, email: string = '') {
+  constructor( id?: number, email?: string, password?: string, confirmPassword?: string, userGroup?: UserGroup) {
     this.id = id;
-    this.email = email.trim();
+    this.email = email;
+    this.password = password;
+    this.confirmPassword = confirmPassword;
+    this.userGroup = userGroup;
   }
 }

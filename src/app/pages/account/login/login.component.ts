@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {CustomerService} from '../../../@core/data/services/customer.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {User} from '../../../@core/data/model/user.model';
 
 @Component({
   selector: 'ngx-login',
@@ -8,7 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  user: any = {};
+  user: User;
   submitted: boolean = false;
   returnUrl: string;
 
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.user = new User();
   }
 
   login() {

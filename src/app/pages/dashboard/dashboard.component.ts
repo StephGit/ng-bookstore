@@ -5,6 +5,7 @@ import {ShoppingCartService} from '../../@core/data/services/shopping-cart.servi
 import {Book} from '../../@core/data/model/book.model';
 import {ShoppingCart} from '../../@core/data/model/shopping-cart.model';
 import {ShoppingCartItem} from '../../@core/data/model/shopping-cart-item.model';
+import {NotificationService} from "../../@core/data/services/notification.service";
 
 @Component({
   selector: 'ngx-dashboard',
@@ -39,7 +40,7 @@ export class DashboardComponent implements OnInit {
 
   constructor(private catalogService: CatalogService,
               private cartService: ShoppingCartService,
-              private router: Router) {
+              private router: Router, private notificationService: NotificationService) {
   }
 
   ngOnInit(): void {
@@ -58,8 +59,10 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  addToShoppingCart(book) {
+  addToShoppingCart(book: Book) {
     this.cartService.addItemToShoppingCart(new ShoppingCartItem(book, 1));
+    book.isAddedToCart = true;
+    this.notificationService.info(book.title + ' ' + book.price, '1 item added to Cart');
   }
 
 

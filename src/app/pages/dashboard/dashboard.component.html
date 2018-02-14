@@ -36,12 +36,11 @@
               <div class="price">
                 <div class="desc">{{ b.price | currency:'USD'}}</div>
               </div>
-
             </div>
-            <button type="button" (click)="addToShoppingCart(b)" class="btn btn-success btn-icon">
+            <button *ngIf="!b.isAddedToCart" type="button" (click)="addToShoppingCart(b)" class="btn btn-success btn-icon">
               <i class="fa fa-cart-plus"></i>
             </button>
-          </div><
+          </div>
         </div>
       </div>
     </div>

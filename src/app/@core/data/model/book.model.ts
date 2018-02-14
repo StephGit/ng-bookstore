@@ -11,6 +11,7 @@ export class Book {
   numberOfPages?: number;
   descritption?: string;
   imageUrl?: string;
+  isAddedToCart?: boolean;
 
 
   constructor(isbn?: string, authors?: string, title?: string, price?: number) {

@@ -1,4 +1,4 @@
-# bookstore-app
+# ng-bookstore
 
 This main goal of this project is to create a reference implementation of a state of the art single page application with angular5.
 

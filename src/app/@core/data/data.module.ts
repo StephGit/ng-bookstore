@@ -9,6 +9,7 @@ import {LogoutGuardService} from './services/logout-guard.service';
 import {NotificationService} from './services/notification.service';
 import {ShoppingCartService} from './services/shopping-cart.service';
 import {StateService} from './state.service';
+import {CreditcardYearDirective} from "./directives/creditcard-year-directive";
 
 const SERVICES = [
   ApiService,
@@ -25,6 +26,9 @@ const SERVICES = [
 @NgModule({
   imports: [
     CommonModule,
+  ],
+  declarations: [
+    CreditcardYearDirective,
   ],
   providers: [
     ...SERVICES,

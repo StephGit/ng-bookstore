@@ -18,6 +18,6 @@ export class CreditcardYearDirective implements Validator {
         'message': 'The year must be a valid number between ' + currentYear + ' and ' + maxYear,
       },
     };
-    return isValid ? null : message;
+    return isValid ? {'ngxCreditcardYear': true} : message;
   }
 }

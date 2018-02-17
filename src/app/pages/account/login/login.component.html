@@ -18,7 +18,7 @@
       <div class="form-group">
         <label for="input-password" class="sr-only">Password</label>
         <input name="password" [(ngModel)]="user.password" type="password" id="input-password" class="form-control"
-               paceholder="Password" #password="ngModel"
+               placeholder="Password" #password="ngModel"
                [class.form-control-danger]="password.invalid && password.touched"
                required
                minlength="8"

@@ -1,0 +1,57 @@
+<div class="form-group">
+  <label for="input-street" class="sr-only">Street</label>
+  <input name="street" [(ngModel)]="customer.address.street" id="input-street" class="form-control"
+         placeholder="Street" #street="ngModel"
+         [class.form-control-danger]="street.invalid && street.touched" required minlength="2" maxlength="70">
+  <small class="form-text error" *ngIf="street.invalid && street.touched && street.errors?.required">Street is
+    required!
+  </small>
+  <small class="form-text error"
+         *ngIf="street.invalid && street.touched && (street.errors?.minlength || street.errors?.maxlength)">
+    Street should contain between 2 to 20 characters
+  </small>
+</div>
+
+<div class="row city-country">
+  <div class="col-sm-3 form-group">
+    <label for="input-postal-code" class="sr-only">PostalCode</label>
+    <input name="postalCode" [(ngModel)]="customer.address.postalCode" id="input-postal-code" #postalCode="ngModel"
+           class="form-control" placeholder="Postal code"
+           [class.form-control-danger]="postalCode.invalid && postalCode.touched"
+           required minlength="4" maxlength="5">
+    <small class="form-text error" *ngIf="postalCode.invalid && postalCode.touched && postalCode.errors?.required">
+      Postal code is required!
+    </small>
+    <small class="form-text error"
+           *ngIf="postalCode.invalid && postalCode.touched && (postalCode.errors?.minlength || postalCode.errors?.maxlength)">
+      Invalid postal code
+    </small>
+  </div>
+  <div class="col-sm-6 form-group">
+    <label for="input-city" class="sr-only">City</label>
+    <input name="city" [(ngModel)]="customer.address.city" id="input-city" #city="ngModel"
+           class="form-control" placeholder="City"
+           [class.form-control-danger]="city.invalid && city.touched"
+           required minlength="2" maxlength="70">
+    <small class="form-text error" *ngIf="city.invalid && city.touched && city.errors?.required">
+      City is required!
+    </small>
+    <small class="form-text error"
+           *ngIf="city.invalid && city.touched && (city.errors?.minlength || city.errors?.maxlength)">
+      City should contain from 2 to 70 characters
+    </small>
+  </div>
+  <div class="col-sm-3 form-group">
+    <label for="select-country" class="sr-only">Country</label>
+    <select id="select-country" name="country" [(ngModel)]="customer.address.country"
+            #country="ngModel" class="form-control" required
+            [class.form-control-danger]="country.invalid && country.touched"
+            [class.form-control-placeholder]="country.invalid && country.untouched">
+      <option value="undefined" disabled selected hidden>Country</option>
+      <option *ngFor="let country of countries" [ngValue]="parseCountry(country)">{{country}}</option>
+    </select>
+    <small class="form-text error" *ngIf="country.invalid && country.touched && country.errors?.required">
+      Country is required!
+    </small>
+  </div>
+</div>

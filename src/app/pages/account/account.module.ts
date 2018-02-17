@@ -6,6 +6,10 @@ import {RouterModule} from '@angular/router';
 import {ThemeModule} from '../../@theme/theme.module';
 import { LogoutComponent } from './logout/logout.component';
 import {CoreModule} from '../../@core/core.module';
+import { ChangeUserDataComponent } from './change-user-data/change-user-data.component';
+import { ChangeAddressDataComponent } from './change-address-data/change-address-data.component';
+import { ChangePaymentDataComponent } from './change-payment-data/change-payment-data.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 
 @NgModule({
@@ -19,6 +23,10 @@ import {CoreModule} from '../../@core/core.module';
     LoginComponent,
     RegisterComponent,
     LogoutComponent,
+    ChangeUserDataComponent,
+    ChangeAddressDataComponent,
+    ChangePaymentDataComponent,
+    ChangePasswordComponent,
   ],
   exports: [
     LoginComponent,

@@ -143,7 +143,7 @@
       <div class="col-sm-3 form-group">
         <label for="select-country" class="sr-only">Country</label>
         <select id="select-country" name="country" [(ngModel)]="customer.address.country"
-                #country="ngModel" class="form-control" required [class.form-control-danger]="country.invalid">
+                #country="ngModel" class="form-control" required [class.form-control-danger]="country.invalid && country.touched">
           <option *ngFor="let country of countries" [ngValue]="parseCountry(country)">{{country}}</option>
         </select>
         <small class="form-text error" *ngIf="country.invalid && country.touched && country.errors?.required">
@@ -152,8 +152,8 @@
       </div>
     </div>
     <div class="d-flex justify-content-center">
-      <a class="btn btn-lg btn-hero-success" (click)="showTab(1)">Previous</a>
-      <a class="btn btn-lg btn-hero-success" (click)="showTab(3)">Next</a>
+      <a class="btn btn-lg btn-hero-success multibtn" (click)="showTab(1)">Previous</a>
+      <a class="btn btn-lg btn-hero-success multibtn" (click)="showTab(3)">Next</a>
     </div>
   </div>
   <div class="collapse" [class.show]="selected == 3">
@@ -161,7 +161,7 @@
     <div class="form-group">
       <label for="select-cardtype" class="sr-only">CreditCard-Type</label>
       <select id="select-cardtype" name="cardType" [(ngModel)]="customer.creditCard.type"
-              #cardType="ngModel" class="form-control" required [class.form-control-danger]="cardType.invalid">
+              #cardType="ngModel" class="form-control" required [class.form-control-danger]="cardType.invalid && cardType.touched">
         <option *ngFor="let cType of cardTypes" [ngValue]="cType">{{cType}}</option>
       </select>
       <small class="form-text error" *ngIf="cardType.invalid && cardType.touched && cardType.errors?.required">
@@ -174,12 +174,10 @@
              class="form-control" placeholder="Card number" pattern="(\d{4}[-. ]?){4}|\d{4}[-. ]?\d{6}[-. ]?\d{5}"
              [class.form-control-danger]="cardnumber.invalid && cardnumber.touched" required>
       <small class="form-text error" *ngIf="cardnumber.invalid && cardnumber.touched && cardnumber.errors?.required">
-        CreditCard is
-        required!
+        CreditCard is required!
       </small>
       <small class="form-text error" *ngIf="cardnumber.invalid && cardnumber.touched && cardnumber.errors?.pattern">
-        CreditCard-Number should be the
-        real one!
+        CreditCard-Number should be the real one!
       </small>
     </div>
     <div class="row card-date-inputs">
@@ -217,8 +215,8 @@
       </div>
     </div>
     <div class="d-flex justify-content-center">
-      <a class="btn btn-lg btn-hero-success" (click)="showTab(2)">Previous</a>
-      <button [disabled]="submitted || !form.valid" class="btn btn-lg btn-hero-success" [class.btn-pulse]="submitted">
+      <a class="btn btn-lg btn-hero-success multibtn" (click)="showTab(2)">Previous</a>
+      <button [disabled]="submitted || !form.valid" class="btn btn-lg btn-hero-success multibtn" [class.btn-pulse]="submitted">
         Register
       </button>
     </div>

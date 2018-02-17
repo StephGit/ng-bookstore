@@ -5,6 +5,7 @@ import {AccountRoutingModule, routedComponents} from './account-routing.module';
 import {RouterModule} from '@angular/router';
 import {ThemeModule} from '../../@theme/theme.module';
 import { LogoutComponent } from './logout/logout.component';
+import {CoreModule} from '../../@core/core.module';
 
 
 @NgModule({

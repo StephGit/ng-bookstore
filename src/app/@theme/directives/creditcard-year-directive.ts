@@ -3,7 +3,7 @@ import {NG_VALIDATORS, FormControl, Validator, ValidationErrors, AbstractControl
 
 
 @Directive({
-  selector: '[creditcardYear]',
+  selector: '[ngxCreditcardYear]',
   providers: [{provide: NG_VALIDATORS, useExisting: CreditcardYearDirective, multi: true}],
 })
 export class CreditcardYearDirective implements Validator {
@@ -18,6 +18,6 @@ export class CreditcardYearDirective implements Validator {
         'message': 'The year must be a valid number between ' + currentYear + ' and ' + maxYear,
       },
     };
-    return isValid ? {'ngxCreditcardYear': true} : message;
+    return isValid ? null : message;
   }
 }

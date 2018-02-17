@@ -206,15 +206,14 @@
                [class.form-control-danger]="year.invalid && year.touched"
                required
                type="number"
-               creditcardYear="year">
+               ngxCreditcardYear>
         <small class="form-text error" *ngIf="year.invalid && year.touched && year.errors?.required">
           Year is required!
         </small>
         <small class="form-text error"
-               *ngIf="year.invalid && year.touched && (year.errors?.ngxCreditcardYear)">
-          Year is not vaild.
+               *ngIf="year.invalid && year.touched && (year.errors?.years)">
+         {{year.errors.years.message}}
         </small>
-        <input type="text" name="birthYear" #year2="ngModel" ngModel required creditcardYear/>
       </div>
     </div>
     <div class="d-flex justify-content-center">

@@ -11,7 +11,7 @@ import {NotificationService} from './services/notification.service';
 import {ShoppingCartService} from './services/shopping-cart.service';
 import {CurrentUserService} from './services/current-user.service';
 import {HttpClientModule} from '@angular/common/http';
-import {CreditcardYearDirective} from './directives/creditcard-year-directive';
+import {CreditcardYearDirective} from '../@theme/directives/creditcard-year-directive';
 
 const SERVICES = [
   ApiService,
@@ -28,12 +28,6 @@ const SERVICES = [
   imports: [
     CommonModule,
     HttpClientModule,
-  ],
-  exports: [
-    CreditcardYearDirective,
-  ],
-  declarations: [
-    CreditcardYearDirective,
   ],
   providers: [
     ...SERVICES,

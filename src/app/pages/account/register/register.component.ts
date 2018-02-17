@@ -25,6 +25,7 @@ export class RegisterComponent implements OnInit {
   submitted: boolean = false;
   returnUrl: string;
   selected = 1;
+  messages: any;
   rateControl = new FormControl('', [Validators.max(this.maxYear), Validators.min(this.currentYear)]);
 
 

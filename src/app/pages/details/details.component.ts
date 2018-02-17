@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {CatalogService} from "../../@core/data/services/catalog.service";
+import {CatalogService} from "../../@core/services/catalog.service";
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import 'rxjs/add/operator/switchMap';

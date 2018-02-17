@@ -1,11 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
-import { AnalyticsService } from '../../../@core/utils/analytics.service';
-import {CatalogService} from '../../../@core/data/services/catalog.service';
-import {User} from '../../../@core/data/model/user.model';
-import {CurrentUserService} from '../../../@core/data/services/current-user.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {CatalogService} from '../../../@core/services/catalog.service';
+import {User} from '../../../@core/model/user.model';
+import {CurrentUserService} from '../../../@core/services/current-user.service';
+import {Router} from '@angular/router';
 import {NbUserMenuItem} from '@nebular/theme/components/user/user.component';
 
 @Component({
@@ -30,7 +29,7 @@ export class HeaderComponent implements OnInit {
               private catalogService: CatalogService,
               private currentUserService: CurrentUserService,
               private router: Router,
-              private analyticsService: AnalyticsService, private themeService: NbThemeService) {
+              private themeService: NbThemeService) {
   }
 
   ngOnInit() {

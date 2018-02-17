@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {CatalogService} from "../../@core/data/services/catalog.service";
-import {ShoppingCartService} from "../../@core/data/services/shopping-cart.service";
-import {ShoppingCart} from "../../@core/data/model/shopping-cart.model";
-import {Book} from "../../@core/data/model/book.model";
-import {ShoppingCartItem} from "../../@core/data/model/shopping-cart-item.model";
+import {CatalogService} from "../../@core/services/catalog.service";
+import {ShoppingCartService} from "../../@core/services/shopping-cart.service";
+import {ShoppingCart} from "../../@core/model/shopping-cart.model";
+import {Book} from "../../@core/model/book.model";
+import {ShoppingCartItem} from "../../@core/model/shopping-cart-item.model";
 import {Router} from "@angular/router";
 
 @Component({

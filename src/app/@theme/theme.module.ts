@@ -21,7 +21,6 @@ import {
   FooterComponent,
   HeaderComponent,
   SearchInputComponent,
-  ThemeSwitcherComponent,
   TinyMCEComponent,
 } from './components';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
@@ -31,7 +30,6 @@ import {
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import {ToasterModule} from 'angular2-toaster';
-import {CoreModule} from '../@core/core.module';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, ToasterModule];
 
@@ -50,7 +48,6 @@ const NB_MODULES = [
 ];
 
 const COMPONENTS = [
-  ThemeSwitcherComponent,
   HeaderComponent,
   FooterComponent,
   SearchInputComponent,

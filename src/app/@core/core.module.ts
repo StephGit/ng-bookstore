@@ -1,40 +1,45 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NbAuthModule, NbDummyAuthProvider } from '@nebular/auth';
 
 import { throwIfAlreadyLoaded } from './module-import-guard';
-import { DataModule } from './data/data.module';
-import { AnalyticsService } from './utils/analytics.service';
-import {ToasterModule} from "angular2-toaster";
+import {AuthGuardService} from './services/auth-guard.service';
+import {CatalogService} from './services/catalog.service';
+import {CustomerService} from './services/customer.service';
+import {ApiService} from './services/api.service';
+import {LogoutGuardService} from './services/logout-guard.service';
+import {NotificationService} from './services/notification.service';
+import {ShoppingCartService} from './services/shopping-cart.service';
+import {CurrentUserService} from './services/current-user.service';
+import {HttpClientModule} from '@angular/common/http';
+import {CreditcardYearDirective} from './directives/creditcard-year-directive';
 
-const NB_CORE_PROVIDERS = [
-  ...DataModule.forRoot().providers,
-  ...NbAuthModule.forRoot({
-    providers: {
-      email: {
-        service: NbDummyAuthProvider,
-        config: {
-          delay: 3000,
-          login: {
-            rememberMe: true,
-          },
-        },
-      },
-    },
-  }).providers,
-  AnalyticsService,
+const SERVICES = [
+  ApiService,
+  AuthGuardService,
+  CatalogService,
+  CurrentUserService,
+  CustomerService,
+  LogoutGuardService,
+  NotificationService,
+  ShoppingCartService,
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    ToasterModule
+    HttpClientModule,
   ],
   exports: [
-    NbAuthModule,
+    CreditcardYearDirective,
   ],
-  declarations: [],
+  declarations: [
+    CreditcardYearDirective,
+  ],
+  providers: [
+    ...SERVICES,
+  ],
 })
+
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
     throwIfAlreadyLoaded(parentModule, 'CoreModule');
@@ -44,7 +49,7 @@ export class CoreModule {
     return <ModuleWithProviders>{
       ngModule: CoreModule,
       providers: [
-        ...NB_CORE_PROVIDERS,
+        ...SERVICES,
       ],
     };
   }

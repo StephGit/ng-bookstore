@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {CatalogService} from '../../@core/data/services/catalog.service';
+import {CatalogService} from '../../@core/services/catalog.service';
 import {Router} from '@angular/router';
-import {ShoppingCartService} from '../../@core/data/services/shopping-cart.service';
-import {Book} from '../../@core/data/model/book.model';
-import {ShoppingCart} from '../../@core/data/model/shopping-cart.model';
-import {ShoppingCartItem} from '../../@core/data/model/shopping-cart-item.model';
-import {NotificationService} from "../../@core/data/services/notification.service";
+import {ShoppingCartService} from '../../@core/services/shopping-cart.service';
+import {Book} from '../../@core/model/book.model';
+import {ShoppingCart} from '../../@core/model/shopping-cart.model';
+import {ShoppingCartItem} from '../../@core/model/shopping-cart-item.model';
+import {NotificationService} from "../../@core/services/notification.service";
 
 @Component({
   selector: 'ngx-dashboard',

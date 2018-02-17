@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {CustomerService} from '../../../@core/data/services/customer.service';
+import {CustomerService} from '../../../@core/services/customer.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {User} from '../../../@core/data/model/user.model';
+import {User} from '../../../@core/model/user.model';
 
 @Component({
   selector: 'ngx-login',

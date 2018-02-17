@@ -8,15 +8,13 @@ import {
   NbThemeService,
 } from '@nebular/theme';
 
-import {StateService} from '../../../@core/data/state.service';
-
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/delay';
 import {BodyOutputType, Toast, ToasterConfig, ToasterService} from 'angular2-toaster';
-import {ApiService} from '../../../@core/data/services/api.service';
+import {ApiService} from '../../../@core/services/api.service';
 import 'style-loader!angular2-toaster/toaster.css';
-import {NotificationService} from '../../../@core/data/services/notification.service';
+import {NotificationService} from '../../../@core/services/notification.service';
 
 // TODO: move layouts into the framework
 @Component({
@@ -89,29 +87,27 @@ export class SampleLayoutComponent  implements OnDestroy {
       link: '/pages/ui-features/tabs',
     },
   ];
-  layout: any = {};
-  sidebar: any = {};
-
-  protected layoutState$: Subscription;
-  protected sidebarState$: Subscription;
+  layout: any = {
+    name: 'One Column',
+    icon: 'nb-layout-default',
+    id: 'one-column',
+    selected: true,
+  };
+  sidebar: any = {
+    name: 'Left Sidebar',
+    icon: 'nb-layout-sidebar-left',
+    id: 'left',
+    selected: true,
+  };
   protected menuClick$: Subscription;
 
-  constructor(protected stateService: StateService,
-              protected menuService: NbMenuService,
+  constructor(protected menuService: NbMenuService,
               protected themeService: NbThemeService,
               protected bpService: NbMediaBreakpointsService,
               protected sidebarService: NbSidebarService,
               private toasterService: ToasterService,
               private apiService: ApiService,
               private notificationService: NotificationService) {
-
-    this.layoutState$ = this.stateService.onLayoutState()
-      .subscribe((layout: string) => this.layout = layout);
-
-    this.sidebarState$ = this.stateService.onSidebarState()
-      .subscribe((sidebar: string) => {
-        this.sidebar = sidebar;
-      });
 
     const isBp = this.bpService.getByName('is');
     this.menuClick$ = this.menuService.onItemSelect()
@@ -171,8 +167,6 @@ export class SampleLayoutComponent  implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.layoutState$.unsubscribe();
-    this.sidebarState$.unsubscribe();
     this.menuClick$.unsubscribe();
   }
 }

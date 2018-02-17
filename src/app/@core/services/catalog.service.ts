@@ -1,7 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {Observable} from 'rxjs/Observable';
-import {environment} from '../../../../environments/environment';
+import {environment} from '../../../environments/environment';
 import {Book} from "../model/book.model";
 
 @Injectable()

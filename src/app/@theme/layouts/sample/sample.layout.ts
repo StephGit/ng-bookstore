@@ -23,7 +23,7 @@ import {NotificationService} from '../../../@core/services/notification.service'
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
       <nb-layout-header fixed>
-        <ngx-header [position]="sidebar.id === 'left' ? 'normal': 'inverse'"></ngx-header>
+        <ngx-header></ngx-header>
       </nb-layout-header>
 
       <nb-layout-column class="main-content">
@@ -34,59 +34,10 @@ import {NotificationService} from '../../../@core/services/notification.service'
       <nb-layout-footer fixed>
         <ngx-footer></ngx-footer>
       </nb-layout-footer>
-
-      <nb-sidebar class="settings-sidebar"
-                   tag="settings-sidebar"
-                   state="collapsed"
-                   fixed
-                   [right]="sidebar.id !== 'right'">
-      </nb-sidebar>
     </nb-layout>
   `,
 })
-export class SampleLayoutComponent  implements OnDestroy {
-
-  subMenu: NbMenuItem[] = [
-    {
-      title: 'PAGE LEVEL MENU',
-      group: true,
-    },
-    {
-      title: 'Buttons',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/buttons',
-    },
-    {
-      title: 'Grid',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/grid',
-    },
-    {
-      title: 'Icons',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/icons',
-    },
-    {
-      title: 'Modals',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/modals',
-    },
-    {
-      title: 'Typography',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/typography',
-    },
-    {
-      title: 'Animated Searches',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/search-fields',
-    },
-    {
-      title: 'Tabs',
-      icon: 'ion ion-android-radio-button-off',
-      link: '/pages/ui-features/tabs',
-    },
-  ];
+export class SampleLayoutComponent {
   layout: any = {
     name: 'One Column',
     icon: 'nb-layout-default',
@@ -99,26 +50,9 @@ export class SampleLayoutComponent  implements OnDestroy {
     id: 'left',
     selected: true,
   };
-  protected menuClick$: Subscription;
 
-  constructor(protected menuService: NbMenuService,
-              protected themeService: NbThemeService,
-              protected bpService: NbMediaBreakpointsService,
-              protected sidebarService: NbSidebarService,
-              private toasterService: ToasterService,
-              private apiService: ApiService,
+  constructor(private toasterService: ToasterService,
               private notificationService: NotificationService) {
-
-    const isBp = this.bpService.getByName('is');
-    this.menuClick$ = this.menuService.onItemSelect()
-      .withLatestFrom(this.themeService.onMediaQueryChange())
-      .delay(20)
-      .subscribe(([item, [bpFrom, bpTo]]: [any, [NbMediaBreakpoint, NbMediaBreakpoint]]) => {
-
-        if (bpTo.width <= isBp.width) {
-          this.sidebarService.collapse('menu-sidebar');
-        }
-      });
 
     this.notificationService.getMessage().subscribe((notification) => {
       this.showToast(notification.type, notification.title, notification.text);
@@ -128,7 +62,7 @@ export class SampleLayoutComponent  implements OnDestroy {
 
   config: ToasterConfig;
 
-  position = 'toast-top-right';
+  position = 'toast-top-left';
   animationType = 'fade';
   timeout = 5000;
   toastsLimit = 5;
@@ -164,9 +98,5 @@ export class SampleLayoutComponent  implements OnDestroy {
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
     this.toasterService.popAsync(toast);
-  }
-
-  ngOnDestroy() {
-    this.menuClick$.unsubscribe();
   }
 }

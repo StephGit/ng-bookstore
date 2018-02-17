@@ -1,3 +1,36 @@
-<p>
-  overview works!
-</p>
+<h2 class="title">Account Overview</h2>
+<nb-actions fullwidth="" size="medium" class="medium full-width">
+   <nb-action>
+    <i class="nb-list"></i><span>Orders</span>
+  </nb-action>
+  <nb-action>
+    <i class="fa fa-credit-card-alt"></i><span>Credit Card</span>
+  </nb-action>
+</nb-actions>
+
+<div class="row">
+  <div *ngIf="loading"> Loading Data
+    <img
+      src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
+  </div>
+  <div class="col-md-12">
+    <div class="customer">
+      <div class="row">
+        <p class="h6 desc">Name: {{customer.firstName}} {{customer.lastName}}</p>
+      </div>
+      <div class="row">
+        <p class="h6 desc">Email: {{customer.email}}</p>
+      </div>
+      <div class="row">
+        <div class="desc">Street: {{customer.address.street}}</div>
+      </div>
+      <div class="row">
+        <div class="desc">Postcode/City: {{customer.address.postalCode}} {{customer.address.city}}</div>
+      </div>
+      <div class="row">
+        <div class="desc">Country: {{customer.address.country}}</div>
+      </div>
+    </div>
+  </div>
+</div>
+

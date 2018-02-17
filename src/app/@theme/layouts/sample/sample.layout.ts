@@ -100,6 +100,7 @@ export class SampleLayoutComponent  implements OnDestroy {
     selected: true,
   };
   protected menuClick$: Subscription;
+  protected notificate$: Subscription;
 
   constructor(protected menuService: NbMenuService,
               protected themeService: NbThemeService,
@@ -120,7 +121,7 @@ export class SampleLayoutComponent  implements OnDestroy {
         }
       });
 
-    this.notificationService.getMessage().subscribe((notification) => {
+   this.notificate$ = this.notificationService.getMessage().subscribe((notification) => {
       this.showToast(notification.type, notification.title, notification.text);
     });
   }
@@ -168,5 +169,6 @@ export class SampleLayoutComponent  implements OnDestroy {
 
   ngOnDestroy() {
     this.menuClick$.unsubscribe();
+    this.notificate$.unsubscribe();
   }
 }

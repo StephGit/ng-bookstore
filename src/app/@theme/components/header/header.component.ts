@@ -21,8 +21,8 @@ export class HeaderComponent implements OnInit {
   picture = 'assets/images/user.png';
 
   items: NbUserMenuItem[]  = [
-    { title: 'Account', link: 'account'},
-    { title: 'Logout', link: 'account/logout'}];
+    { title: 'Account', link: '/account/overview'},
+    { title: 'Logout', link: '/account/logout'}];
 
   constructor(private sidebarService: NbSidebarService,
               private menuService: NbMenuService,

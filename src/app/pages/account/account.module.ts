@@ -10,6 +10,7 @@ import { ChangeUserDataComponent } from './change-user-data/change-user-data.com
 import { ChangeAddressDataComponent } from './change-address-data/change-address-data.component';
 import { ChangePaymentDataComponent } from './change-payment-data/change-payment-data.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
+import { OverviewComponent } from './overview/overview.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
     ChangeAddressDataComponent,
     ChangePaymentDataComponent,
     ChangePasswordComponent,
+    OverviewComponent,
   ],
   exports: [
     LoginComponent,

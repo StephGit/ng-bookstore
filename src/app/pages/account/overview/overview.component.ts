@@ -41,12 +41,6 @@ export class OverviewComponent implements OnInit {
         this.user = user;
       });
 
-    this.customerService.currentCustomer
-      .subscribe(customer => {
-        this.customer = customer;
-      });
-
-
     this.customerService.find(this.user.id)
       .subscribe(
         result => {
@@ -58,6 +52,11 @@ export class OverviewComponent implements OnInit {
           this.router.navigate(['/account/logout']);
         },
       );
+
+    this.customerService.currentCustomer
+      .subscribe(customer => {
+        this.customer = customer;
+      });
 
     this.orderService.searchOrders(this.customer.nr, this.orderYear)
       .subscribe(

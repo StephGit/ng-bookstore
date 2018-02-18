@@ -30,7 +30,9 @@ docs: https://akveo.github.io/nebular/#/docs/auth/introduction
 
 - [x] Search and Display BookInfoObjects - A 
 - [x] Login and Register - S
-- [ ] Account - S
+- [x] Account - S
+- [ ] Make Dynamic Form Valdiation work - S
+- [ ] Make great changes happen again - you'll love it - S 
 - [ ] Book-Detail - S use [innerHTML] property binding to display formatted description - A
 - [x] Handle errors from backend - i.e. see notifications on components page - A
 - [x] Shopping cart - A --> table with isbn, title, price, recalculate totalprice when quantity updated ngModelChange="updateTotalPrice"

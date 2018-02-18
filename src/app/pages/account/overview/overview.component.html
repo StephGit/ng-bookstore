@@ -34,7 +34,7 @@
           (click)="updateCreditCard()">Edit Payment-Data
   </button>
 </div>
-<div class="row" *ngIf="orders">
+<div class="row" *ngIf="orders !== undefined && orders !== null">
   <nb-card class="orders">
     <nb-card-header>
       Your Orders:

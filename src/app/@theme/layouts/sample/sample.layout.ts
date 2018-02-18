@@ -1,18 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
-import {
-  NbMediaBreakpoint,
-  NbMediaBreakpointsService,
-  NbMenuItem,
-  NbMenuService,
-  NbSidebarService,
-  NbThemeService,
-} from '@nebular/theme';
 
 import {Subscription} from 'rxjs/Subscription';
 import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/delay';
 import {BodyOutputType, Toast, ToasterConfig, ToasterService} from 'angular2-toaster';
-import {ApiService} from '../../../@core/services/api.service';
 import 'style-loader!angular2-toaster/toaster.css';
 import {NotificationService} from '../../../@core/services/notification.service';
 
@@ -37,7 +28,7 @@ import {NotificationService} from '../../../@core/services/notification.service'
     </nb-layout>
   `,
 })
-export class SampleLayoutComponent {
+export class SampleLayoutComponent implements OnDestroy {
   layout: any = {
     name: 'One Column',
     icon: 'nb-layout-default',
@@ -51,14 +42,15 @@ export class SampleLayoutComponent {
     selected: true,
   };
 
+  protected notificate$: Subscription;
+
   constructor(private toasterService: ToasterService,
               private notificationService: NotificationService) {
 
-    this.notificationService.getMessage().subscribe((notification) => {
+   this.notificate$ = this.notificationService.getMessage().subscribe((notification) => {
       this.showToast(notification.type, notification.title, notification.text);
     });
   }
-
 
   config: ToasterConfig;
 
@@ -98,5 +90,9 @@ export class SampleLayoutComponent {
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
     this.toasterService.popAsync(toast);
+  }
+
+  ngOnDestroy() {
+    this.notificate$.unsubscribe();
   }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {HttpHeaders} from '@angular/common/http';
 import {ApiService} from './api.service';
 
@@ -16,6 +15,8 @@ import {User} from '../model/user.model';
 export class CustomerService {
 
   private path = '/customers';
+  private currentCustomerSubject = new BehaviorSubject<Customer>(new Customer());
+  public currentCustomer = this.currentCustomerSubject.asObservable().distinctUntilChanged();
 
   constructor (
     private apiService: ApiService,
@@ -30,7 +31,7 @@ export class CustomerService {
     });
     return this.apiService.get(this.path + '/login', null , headers )
       .map((data) => {
-        const user = new User(data, credentials.email);
+        const user = new User(data, credentials.email, credentials.password);
         this.currentUserService.setAuth(user);
         return user;
       })
@@ -46,6 +47,10 @@ export class CustomerService {
     return this.apiService.post(this.path, customer , headers )
       .map(
         data => {
+          customer.nr = data;
+          const user = new User(customer.nr, customer.email, password);
+          this.currentCustomerSubject.next(customer);
+          this.currentUserService.setAuth(user);
           return data;
         })
       .catch(err => this.handleError(err));
@@ -54,13 +59,24 @@ export class CustomerService {
   // Update the customer on the server
   update(customer): Observable<Customer> {
     return this.apiService
-      .put('/customer/' + customer.nr, { customer }, null)
+      .put(this.path + '/' + customer.nr, { customer }, null)
       .map(data => {
         // Update the currentCustomer observable
         this.currentUserService.setAuth(data.customer);
         return data.customer;
       })
   }
+
+  find(nr: number): Observable<Customer> {
+    return this.apiService
+      .get(this.path + '/' + nr, null, null)
+      .map(data => {
+        this.currentCustomerSubject.next(data);
+        return data;
+      })
+      .catch(err => this.handleError(err));
+  }
+
 
   protected  extractData(res: Response) {
     const body = res.json();

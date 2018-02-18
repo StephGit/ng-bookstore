@@ -1,55 +1,57 @@
-<h2 class="title">Register</h2>
-<form (ngSubmit)="register()" #form="ngForm">
-  <div id="tabs" class="full-width">
-    <ul>
-      <li [class.active]="selected == 1">
-        <a (click)="showTab(1)" data-toggle="collapse" data-target="#cardStep1">User</a>
-      </li>
-      <li [class.active]="selected == 2">
-        <a (click)="showTab(2)" data-toggle="collapse" data-target="#cardStep2">Address</a>
-      </li>
-      <li [class.active]="selected == 3">
-        <a (click)="showTab(3)" data-toggle="collapse" data-target="#cardStep3">Credit Card</a>
-      </li>
-    </ul>
+<div class="row justify-content-center">
+  <div class="flex-centered col-lg-6 col-md-6 col-sm-12">
+    <h2 class="title">Register</h2>
+    <form (ngSubmit)="register()" #form="ngForm">
+      <div id="tabs" class="full-width">
+        <ul>
+          <li [class.active]="selected == 1">
+            <a (click)="showTab(1)" data-toggle="collapse" data-target="#cardStep1">User</a>
+          </li>
+          <li [class.active]="selected == 2">
+            <a (click)="showTab(2)" data-toggle="collapse" data-target="#cardStep2">Address</a>
+          </li>
+          <li [class.active]="selected == 3">
+            <a (click)="showTab(3)" data-toggle="collapse" data-target="#cardStep3">Credit Card</a>
+          </li>
+        </ul>
 
-  </div>
-  <div class="collapse show" [class.show]="selected == 1">
-    <p></p>
-    <ngx-change-user-data
-      [customer]="customer"
-      [user]="user"
-    ></ngx-change-user-data>
-    <div class="d-flex justify-content-center">
-      <a class="btn btn-lg btn-hero-success" (click)="showTab(2)">
-        Next
-      </a>
+      </div>
+      <div class="collapse show" [class.show]="selected == 1">
+        <p></p>
+        <ngx-change-user-data
+          [customer]="customer"
+          [user]="user"
+        ></ngx-change-user-data>
+        <div class="d-flex justify-content-center">
+          <a class="btn btn-lg btn-hero-success" (click)="showTab(2)">
+            Next
+          </a>
+        </div>
+      </div>
+      <div class="collapse" [class.show]="selected == 2">
+        <p></p>
+        <ngx-change-address-data [customer]="customer"></ngx-change-address-data>
+        <div class="d-flex justify-content-center">
+          <a class="btn btn-lg btn-hero-success multibtn" (click)="showTab(1)">Previous</a>
+          <a class="btn btn-lg btn-hero-success multibtn" (click)="showTab(3)">Next</a>
+        </div>
+      </div>
+      <div class="collapse" [class.show]="selected == 3">
+        <p></p>
+        <ngx-change-payment-data [customer]="customer"></ngx-change-payment-data>
+        <div class="d-flex justify-content-center">
+          <a class="btn btn-lg btn-hero-success multibtn" (click)="showTab(2)">Previous</a>
+          <button [disabled]="submitted || !form.valid" class="btn btn-lg btn-hero-success multibtn"
+                  [class.btn-pulse]="submitted">
+            Register
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="links">
+      <small class="form-text">
+        Already have an account? <a routerLink="../login" class="pointer"><strong>Sign in</strong></a>
+      </small>
     </div>
   </div>
-  <div class="collapse" [class.show]="selected == 2">
-    <p></p>
-    <ngx-change-address-data [customer]="customer"></ngx-change-address-data>
-    <div class="d-flex justify-content-center">
-      <a class="btn btn-lg btn-hero-success multibtn" (click)="showTab(1)">Previous</a>
-      <a class="btn btn-lg btn-hero-success multibtn" (click)="showTab(3)">Next</a>
-    </div>
-  </div>
-  <div class="collapse" [class.show]="selected == 3">
-    <p></p>
-    <ngx-change-payment-data [customer]="customer"></ngx-change-payment-data>
-    <div class="d-flex justify-content-center">
-      <a class="btn btn-lg btn-hero-success multibtn" (click)="showTab(2)">Previous</a>
-      <button [disabled]="submitted || !form.valid" class="btn btn-lg btn-hero-success multibtn" [class.btn-pulse]="submitted">
-        Register
-      </button>
-    </div>
-  </div>
-</form>
-<div class="links">
-  <small class="form-text">
-    Already have an account? <a routerLink="../login" class="pointer"><strong>Sign in</strong></a>
-  </small>
 </div>
-
-
-

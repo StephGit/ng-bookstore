@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {CustomerService} from '../../../@core/services/customer.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {User} from '../../../@core/model/user.model';
+import {NotificationService} from '../../../@core/services/notification.service';
 
 @Component({
   selector: 'ngx-login',
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private customerService: CustomerService,
+              private notificationService: NotificationService,
               private router: Router) { }
 
   ngOnInit() {
@@ -30,6 +32,7 @@ export class LoginComponent implements OnInit {
       .subscribe(
         result => {
           this.router.navigate([this.returnUrl]);
+          this.notificationService.success('Enjoy the world of books', 'Welcome to the ng-bookstore');
         },
         error => {
           this.submitted = false;

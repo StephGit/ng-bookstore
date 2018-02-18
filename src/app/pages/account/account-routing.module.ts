@@ -23,9 +23,9 @@ const routes: Routes = [{
       component: LogoutComponent,
       canActivate: [LogoutGuardService],
     }, {
-      path: '',
+      path: 'overview',
       component: OverviewComponent,
-      canActivate: [AuthGuardService],
+      // canActivate: [AuthGuardService],
     }, {
       path: '',
       component: LoginComponent,

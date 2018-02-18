@@ -60,10 +60,22 @@
     }
   }
 
+  nb-user div {
+
+    .user-picture {
+      width: 2em !important;
+      height: 2em !important;
+    }
+
+    .user-context-menu ul li > a {
+      padding: 0.375rem 2rem !important;
+    }
+
+  }
+
   nb-action:first-child {
     border-left: 1px solid nb-theme(separator) !important;
   }
-
 
   @include media-breakpoint-down(md) {
 

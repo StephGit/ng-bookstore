@@ -6,6 +6,8 @@ import {User} from '../../../@core/model/user.model';
 import {Router} from '@angular/router';
 import {NotificationService} from '../../../@core/services/notification.service';
 import {Subscription} from 'rxjs/Subscription';
+import {Country} from '../../../@core/model/country.model';
+import {OrderService} from '../../../@core/services/order.service';
 
 @Component({
   selector: 'ngx-overview',
@@ -16,15 +18,20 @@ export class OverviewComponent implements OnInit, OnDestroy {
 
   private customer: Customer;
   private user: User;
+  private orders: any[];
   private loading: boolean = true;
+  Country: typeof Country = Country;
+  private orderYear = new Date().getFullYear();
 
   private currentUser$: Subscription;
   private currentCustomer$: Subscription;
   private findCustomer$: Subscription;
+  private customerOrders$: Subscription;
 
   constructor(private customerService: CustomerService,
               private currentUserService: CurrentUserService,
               private notificationService: NotificationService,
+              private orderService: OrderService,
               private router: Router) { }
 
   ngOnInit() {
@@ -52,12 +59,19 @@ export class OverviewComponent implements OnInit, OnDestroy {
         },
       );
 
+    this.customerOrders$ = this.orderService.searchOrders(this.customer.nr, this.orderYear)
+      .subscribe(
+        result => {
+          this.orders = result;
+        }
+      )
   }
 
   ngOnDestroy(): void {
      this.currentCustomer$.unsubscribe();
      this.currentUser$.unsubscribe();
      this.findCustomer$.unsubscribe();
+     this.customerOrders$.unsubscribe();
   }
 
 }

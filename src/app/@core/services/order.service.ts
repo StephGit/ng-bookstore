@@ -2,11 +2,13 @@ import {Injectable} from '@angular/core';
 import {ApiService} from './api.service';
 import {Observable} from 'rxjs/Observable';
 import {Order} from '../model/order.model';
+import {NotificationService} from './notification.service';
 
 @Injectable()
 export class OrderService {
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,
+              private notificationService: NotificationService) {
   }
 
 
@@ -26,5 +28,16 @@ export class OrderService {
     return this.apiService.delete('/orders?nr=' + nr, null);
   }
 
+  // TODO handle errors and map Error-Codes
+  protected handleError(error: any) {
+    if (error.status === 401 || error.status === 404) {
+      this.notificationService.error('Email or password is incorrect', 'Login error');
+    } else if (error.status === 400) {
+      this.notificationService.error('Email or password is incorrect', 'Login error');
+    } else if (error.status === 409) {
+      this.notificationService.error('Email or password is incorrect', 'Login error');
+    }
+    return Observable.throw(error);
+  }
 
 }

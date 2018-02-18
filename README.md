@@ -29,7 +29,7 @@ docs: https://akveo.github.io/nebular/#/docs/auth/introduction
 ## TODOs
 
 - [x] Search and Display BookInfoObjects - A 
-- [ ] Login and Register - S
+- [x] Login and Register - S
 - [ ] Account - S
 - [ ] Book-Detail - S use [innerHTML] property binding to display formatted description - A
 - [x] Handle errors from backend - i.e. see notifications on components page - A

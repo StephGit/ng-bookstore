@@ -1,4 +1,3 @@
-
 import {ShoppingCartItem} from "./shopping-cart-item.model";
 
 export class ShoppingCart {
@@ -12,7 +11,7 @@ export class ShoppingCart {
   public addItem(item: ShoppingCartItem) {
     const existingBook = this._items.find(i => i.book.isbn === item.book.isbn);
     if (existingBook) {
-      existingBook.quantity ++;
+      existingBook.quantity++;
     } else {
       this._items.push(item);
     }
@@ -21,8 +20,6 @@ export class ShoppingCart {
   public removeItem(item: ShoppingCartItem) {
     const existingBook = this._items.find(i => i.book.isbn === item.book.isbn);
     if (existingBook && existingBook.quantity > 1) {
-      existingBook.quantity --;
-    } else {
       const index = this._items.findIndex(i => i.book.isbn === item.book.isbn);
       this._items.splice(index, 1);
     }

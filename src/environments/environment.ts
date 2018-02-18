@@ -11,5 +11,5 @@
 export const environment = {
   production: false,
   api_url: 'http://distsys.ch:8080/bookstore/api',
-  mock: false,
+  mock: true,
 };

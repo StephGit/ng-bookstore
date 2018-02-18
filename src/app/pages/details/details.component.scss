@@ -1,13 +1,31 @@
 @import '../../@theme/styles/themes';
 
-
 @include nb-install-component() {
   nb-card {
     .description {
       margin-top: 20px;
     }
 
-
   }
 
+  .wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .details {
+    margin-left: 30px;
+    flex-direction: column;
+  }
+
+  .description {
+    margin-top: 20px;
+  }
+
+  .price {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-top: 1.5em;
+  }
 }

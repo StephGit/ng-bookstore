@@ -7,6 +7,7 @@ import {LogoutComponent} from './logout/logout.component';
 import {LogoutGuardService} from '../../@core/services/logout-guard.service';
 import {AuthGuardService} from '../../@core/services/auth-guard.service';
 import {OverviewComponent} from './overview/overview.component';
+import {EditAccountDataComponent} from './edit-account-data/edit-account-data.component';
 
 const routes: Routes = [{
   path: '',
@@ -25,6 +26,10 @@ const routes: Routes = [{
     }, {
       path: 'overview',
       component: OverviewComponent,
+      // canActivate: [AuthGuardService],
+    }, {
+      path: 'edit',
+      component: EditAccountDataComponent,
       // canActivate: [AuthGuardService],
     }, {
       path: '',

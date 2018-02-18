@@ -12,8 +12,10 @@ import {ShoppingCartService} from './services/shopping-cart.service';
 import {CurrentUserService} from './services/current-user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {OrderService} from './services/order.service';
+import {AdService} from './services/ad.service';
 
 const SERVICES = [
+  AdService,
   ApiService,
   AuthGuardService,
   CatalogService,

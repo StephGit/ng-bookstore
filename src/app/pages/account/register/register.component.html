@@ -22,6 +22,19 @@
           [customer]="customer"
           [user]="user"
         ></ngx-change-user-data>
+        <div class="form-group">
+          <label for="input-email" class="sr-only">Email address</label>
+          <input name="email" [(ngModel)]="customer.email" id="input-email" #email="ngModel"
+                 class="form-control" placeholder="Email address" pattern=".+@.+..+"
+                 [class.form-control-danger]="email.invalid && email.touched" required>
+          <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">Email is
+            required!
+          </small>
+          <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.pattern">Email should be the
+            real one!
+          </small>
+        </div>
+        <ngx-change-password [user]="user"></ngx-change-password>
         <div class="d-flex justify-content-center">
           <a class="btn btn-lg btn-hero-success" (click)="showTab(2)">
             Next

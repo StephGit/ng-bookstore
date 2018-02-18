@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {User} from '../../../@core/model/user.model';
+import {Customer} from '../../../@core/model/customer.model';
 
 @Component({
   selector: 'ngx-change-password',
@@ -7,6 +8,8 @@ import {User} from '../../../@core/model/user.model';
 })
 export class ChangePasswordComponent {
 
-  constructor() { }
   @Input() user: User;
+  @Input() customer: Customer;
+
+  constructor() { }
 }

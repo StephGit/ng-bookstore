@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Customer} from '../../../@core/model/customer.model';
+import {CreditCardType} from '../../../@core/model/creditcard-type.model';
+import {User} from '../../../@core/model/user.model';
 
 @Component({
   selector: 'ngx-change-payment-data',
@@ -9,8 +11,9 @@ import {Customer} from '../../../@core/model/customer.model';
 
 export class ChangePaymentDataComponent {
 
-  constructor() { }
-
+  @Input() user: User;
   @Input() customer: Customer;
+  cardTypes = Object.keys(CreditCardType);
 
+  constructor() { }
 }

@@ -1,5 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {Customer} from '../../../@core/model/customer.model';
+import {Country} from '../../../@core/model/country.model';
+import {User} from '../../../@core/model/user.model';
 
 @Component({
   selector: 'ngx-change-address-data',
@@ -8,7 +10,21 @@ import {Customer} from '../../../@core/model/customer.model';
 })
 export class ChangeAddressDataComponent {
 
-  constructor() { }
-
+  @Input() user: User;
   @Input() customer: Customer;
+  countries = Object.values(Country);
+
+  constructor() {
+  }
+
+  parseCountry(type: any) {
+    let country;
+    for (const key in Country) {
+      if (type === Country[key]) {
+        country = key;
+        break;
+      }
+    }
+    return country;
+  }
 }

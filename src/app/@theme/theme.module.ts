@@ -30,7 +30,9 @@ import {
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import {ToasterModule} from 'angular2-toaster';
-import {CreditcardYearDirective} from './directives/creditcard-year-directive';
+import {CreditcardYearDirective} from './directives/creditcard-year.directive';
+import {AdDirective} from './directives/ad.directive';
+import {ProvideParentFormDirective} from './directives/provide-parent-form.directive';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, ToasterModule];
 
@@ -63,6 +65,12 @@ const PIPES = [
   TimingPipe,
 ];
 
+const DIRECTIVES = [
+  AdDirective,
+  CreditcardYearDirective,
+  ProvideParentFormDirective,
+];
+
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
     {
@@ -76,8 +84,8 @@ const NB_THEME_PROVIDERS = [
 
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
-  exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES, CreditcardYearDirective],
-  declarations: [...COMPONENTS, ...PIPES, CreditcardYearDirective],
+  exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES, ...DIRECTIVES],
+  declarations: [...COMPONENTS, ...PIPES, ...DIRECTIVES],
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {

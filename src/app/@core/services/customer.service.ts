@@ -59,11 +59,11 @@ export class CustomerService {
   // Update the customer on the server
   update(customer): Observable<Customer> {
     return this.apiService
-      .put(this.path + '/' + customer.nr, { customer }, null)
+      .put(this.path + '/' + customer.nr, customer, null)
       .map(data => {
         // Update the currentCustomer observable
-        this.currentUserService.setAuth(data.customer);
-        return data.customer;
+        this.currentCustomerSubject.next(data);
+        return data;
       })
   }
 
@@ -72,6 +72,20 @@ export class CustomerService {
       .get(this.path + '/' + nr, null, null)
       .map(data => {
         this.currentCustomerSubject.next(data);
+        return data;
+      })
+      .catch(err => this.handleError(err));
+  }
+
+  changePassword(user: User): Observable<User> {
+    const headers = new HttpHeaders({
+      'email': user.email,
+      'Content-Type': 'text/plain',
+      'Accept': 'application/json',
+    });
+    return this.apiService
+      .put(this.path + '/login', user.password, headers)
+      .map(data => {
         return data;
       })
       .catch(err => this.handleError(err));

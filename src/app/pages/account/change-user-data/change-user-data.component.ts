@@ -8,8 +8,8 @@ import {User} from '../../../@core/model/user.model';
 })
 export class ChangeUserDataComponent {
 
-  constructor() { }
-
-  @Input() customer: Customer;
   @Input() user: User;
+  @Input() customer: Customer;
+
+  constructor() { }
 }

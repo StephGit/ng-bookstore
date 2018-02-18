@@ -20,6 +20,7 @@ export class OrderService {
     return this.apiService.get('/orders/' + nr, null, null);
   }
 
+  // TODO map
   public searchOrders(customerNr: number, year: number): Observable<any> {
     return this.apiService.get('/orders?customerNr=' + customerNr + '&year=' + year, null, null);
   }

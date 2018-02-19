@@ -4,21 +4,25 @@ import {Observable} from 'rxjs/Observable';
 import {Order} from '../model/order.model';
 import {NotificationService} from './notification.service';
 import {HttpParams} from '@angular/common/http';
+import {ErrorService} from './error.service';
 
 @Injectable()
 export class OrderService {
 
   constructor(private apiService: ApiService,
+              private errorService: ErrorService,
               private notificationService: NotificationService) {
   }
 
 
   public placeOrder(order: Order): Observable<any> {
-    return this.apiService.post('/orders', order, null);
+    return this.apiService.post('/orders', order, null)
+      .catch(err => this.handleError(err, 'place'));;
   }
 
   public findOrder(nr: number): Observable<any> {
-    return this.apiService.get('/orders/' + nr, null, null);
+    return this.apiService.get('/orders/' + nr, null, null)
+      .catch(err => this.handleError(err, 'find'));;
   }
 
   // TODO map
@@ -28,22 +32,18 @@ export class OrderService {
         customerNr: customerNr.toString(),
         year: year.toString(),
       }
-    }), null);
+    }), null)
+      .catch(err => this.handleError(err, 'search'));;
   }
 
   public cancelOrder(nr: number): Observable<any> {
-    return this.apiService.delete('/orders?nr=' + nr, null);
+    return this.apiService.delete('/orders?nr=' + nr, null)
+      .catch(err => this.handleError(err, 'cancel'));;
   }
 
-  // TODO handle errors and map Error-Codes
-  protected handleError(error: any) {
-    if (error.status === 401 || error.status === 404) {
-      this.notificationService.error('Email or password is incorrect', 'Login error');
-    } else if (error.status === 400) {
-      this.notificationService.error('Email or password is incorrect', 'Login error');
-    } else if (error.status === 409) {
-      this.notificationService.error('Email or password is incorrect', 'Login error');
-    }
+  protected handleError(error: any, method: string) {
+    this.notificationService.error(
+      this.errorService.getCustomerError([method, error.status]), 'Order error');
     return Observable.throw(error);
   }
 

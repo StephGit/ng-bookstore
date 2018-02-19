@@ -56,7 +56,7 @@ export class CustomerService {
           this.currentUserService.setAuth(user);
           return data;
         })
-      .catch(err => this.handleError(err, 'Register'));
+      .catch(err => this.handleError(err, 'register'));
   }
 
   // Update the customer on the server
@@ -68,7 +68,7 @@ export class CustomerService {
         this.currentCustomerSubject.next(data);
         return data;
       })
-      .catch(err => this.handleError(err, 'Update'));
+      .catch(err => this.handleError(err, 'update'));
   }
 
   find(nr: number): Observable<Customer> {
@@ -78,7 +78,7 @@ export class CustomerService {
         this.currentCustomerSubject.next(data);
         return data;
       })
-      .catch(err => this.handleError(err, 'Find'));
+      .catch(err => this.handleError(err, 'find'));
   }
 
   changePassword(user: User): Observable<User> {
@@ -92,7 +92,7 @@ export class CustomerService {
       .map(data => {
         return data;
       })
-      .catch(err => this.handleError(err, 'Password-Change'));
+      .catch(err => this.handleError(err, 'changePassword'));
   }
 
 
@@ -101,10 +101,9 @@ export class CustomerService {
     return body || {};
   }
 
- // TODO map Error-Codes
   protected handleError(error: any, method: string) {
     this.notificationService.error(
-      this.errorService.getCustomerErrors().get([method, error.status]), method + ' error');
+      this.errorService.getCustomerError([method, error.status]), 'Customer error');
     return Observable.throw(error);
   }
 }

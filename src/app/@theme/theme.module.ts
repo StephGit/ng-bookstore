@@ -20,6 +20,7 @@ import {
 import {
   FooterComponent,
   HeaderComponent,
+  ShoppingCartAddButtonComponent,
   SearchInputComponent,
   TinyMCEComponent,
 } from './components';
@@ -33,6 +34,7 @@ import {ToasterModule} from 'angular2-toaster';
 import {CreditcardYearDirective} from './directives/creditcard-year.directive';
 import {AdDirective} from './directives/ad.directive';
 import {ProvideParentFormDirective} from './directives/provide-parent-form.directive';
+import {BookListComponent} from './components/book-list-item/book-list.component';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, ToasterModule];
 
@@ -52,6 +54,8 @@ const NB_MODULES = [
 
 const COMPONENTS = [
   HeaderComponent,
+  ShoppingCartAddButtonComponent,
+  BookListComponent,
   FooterComponent,
   SearchInputComponent,
   TinyMCEComponent,

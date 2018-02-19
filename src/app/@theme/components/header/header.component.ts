@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
     { title: 'Logout', link: '/account/logout'}];
 
   constructor(private sidebarService: NbSidebarService,
-              private menuService: NbMenuService,
               private catalogService: CatalogService,
               private currentUserService: CurrentUserService,
               private router: Router,
@@ -63,8 +62,6 @@ export class HeaderComponent implements OnInit {
   }
 
   startSearch(keywords) {
-    console.log('searching books for keywords: ' + keywords);
-    // check if current route is search or not
     if (this.router.url !== '/') {
       this.router.navigate(['/']);
     }

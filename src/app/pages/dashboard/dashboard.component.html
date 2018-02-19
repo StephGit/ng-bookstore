@@ -21,28 +21,6 @@
     Search Results
   </nb-card-header>
   <nb-card-body>
-    <div class="list-group">
-      <div *ngFor="let b of books">
-        <div class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="wrapper">
-            <div class="details" (click)="navigateToDetails(b.isbn)">
-              <div class="title">{{ b.title }}</div>
-              <div class="authors">
-                <div class="desc">by {{ b.authors }}</div>
-              </div>
-              <div class="isbn">
-                <div class="desc">{{ b.isbn }}</div>
-              </div>
-              <div class="price">
-                <div class="desc">{{ b.price | currency:'USD'}}</div>
-              </div>
-            </div>
-            <button *ngIf="!b.isAddedToCart" type="button" (click)="addToShoppingCart(b)" class="btn btn-success btn-icon">
-              <i class="fa fa-cart-plus"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
+  <ngx-book-list [books]="books"></ngx-book-list>
   </nb-card-body>
 </nb-card>

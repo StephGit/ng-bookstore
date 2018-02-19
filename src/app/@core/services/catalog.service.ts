@@ -36,10 +36,9 @@ export class CatalogService {
     return this.searchResults;
   }
 
-  getBookDetails(isbn: String): Observable<any> {
-    return this.apiService.get('/books/' + isbn, null, null)
-      .catch(err => this.handleError(err, 'find'));
-
+  getBookDetails(isbn: String): Observable<Book> {
+    return this.apiService.get<Book>('/books/' + isbn, null, null)
+    .catch(err => this.handleError(err, 'find'));
   }
 
   protected handleError(error: any, method: string) {

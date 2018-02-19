@@ -3,6 +3,7 @@ import {CatalogService} from "../../@core/services/catalog.service";
 import {Observable} from "rxjs/Observable";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 import 'rxjs/add/operator/switchMap';
+import {Book} from "../../@core/model/book.model";
 
 @Component({
   selector: 'ngx-details',
@@ -11,11 +12,11 @@ import 'rxjs/add/operator/switchMap';
 })
 export class DetailsComponent implements OnInit {
 
-  bookDetail$: Observable<any>;
+  bookDetail$: Observable<Book>;
   isbn;
 
 
-  constructor(private catalogService: CatalogService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private catalogService: CatalogService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.bookDetail$ = this.route.paramMap

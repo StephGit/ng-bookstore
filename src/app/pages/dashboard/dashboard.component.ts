@@ -15,7 +15,7 @@ import {NotificationService} from "../../@core/services/notification.service";
 export class DashboardComponent implements OnInit {
 
   recommendatedBooks = [{
-    title: 'Java All-in-One For Dummies ',
+    title: 'Java All-in-One For Dummies',
     authors: 'Doug Lowe',
     isbn: '111924779921312313',
     price: '39.99',
@@ -39,8 +39,7 @@ export class DashboardComponent implements OnInit {
   searchCompleted: Boolean;
 
   constructor(private catalogService: CatalogService,
-              private cartService: ShoppingCartService,
-              private router: Router, private notificationService: NotificationService) {
+              private router: Router) {
   }
 
   ngOnInit(): void {
@@ -59,12 +58,6 @@ export class DashboardComponent implements OnInit {
   navigateToDetails(isbn) {
     this.router.navigate(['/details/' + isbn]);
 
-  }
-
-  addToShoppingCart(book: Book) {
-    book.isAddedToCart = true;
-    this.cartService.addItemToShoppingCart(new ShoppingCartItem(book, 1));
-    this.notificationService.info(book.title + ' ' + book.price, '1 item added to Cart');
   }
 
 

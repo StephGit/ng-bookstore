@@ -31,7 +31,8 @@ export class CustomerService {
       'email': credentials.email,
       'password': credentials.password,
     });
-    return this.apiService.get(this.path + '/login', null , headers )
+    // TODO add type to get call
+    return this.apiService.get<any>(this.path + '/login', null , headers )
       .map((data) => {
         const user = new User(data, credentials.email, credentials.password);
         this.currentUserService.setAuth(user);
@@ -71,7 +72,7 @@ export class CustomerService {
 
   find(nr: number): Observable<Customer> {
     return this.apiService
-      .get(this.path + '/' + nr, null, null)
+      .get<Customer>(this.path + '/' + nr, null, null)
       .map(data => {
         this.currentCustomerSubject.next(data);
         return data;
@@ -100,8 +101,7 @@ export class CustomerService {
   }
 
  // TODO map Error-Codes
-  protected handleError(error: any, methode: string) {
-    this.errorService.getCustomerErrors().
+  protected handleError(error: any) {
     if (error.status === 401 || error.status === 404) {
       this.notificationService.error('Email or password is incorrect', 'Login error');
     } else if (error.status === 400) {

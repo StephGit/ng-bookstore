@@ -3,6 +3,7 @@ import {ApiService} from './api.service';
 import {Observable} from 'rxjs/Observable';
 import {Order} from '../model/order.model';
 import {NotificationService} from './notification.service';
+import {HttpParams} from '@angular/common/http';
 
 @Injectable()
 export class OrderService {
@@ -22,7 +23,12 @@ export class OrderService {
 
   // TODO map
   public searchOrders(customerNr: number, year: number): Observable<any> {
-    return this.apiService.get('/orders?customerNr=' + customerNr + '&year=' + year, null, null);
+    return this.apiService.get('/orders', new HttpParams({
+      fromObject: {
+        customerNr: customerNr.toString(),
+        year: year.toString(),
+      }
+    }), null);
   }
 
   public cancelOrder(nr: number): Observable<any> {

@@ -10,6 +10,7 @@ import {Customer} from '../model/customer.model';
 import {NotificationService} from './notification.service';
 import {CurrentUserService} from './current-user.service';
 import {User} from '../model/user.model';
+import {ErrorService} from './error.service';
 
 @Injectable()
 export class CustomerService {
@@ -20,6 +21,7 @@ export class CustomerService {
 
   constructor (
     private apiService: ApiService,
+    private errorService: ErrorService,
     private notificationService: NotificationService,
     private currentUserService: CurrentUserService,
   ) {}
@@ -98,7 +100,8 @@ export class CustomerService {
   }
 
  // TODO map Error-Codes
-  protected handleError(error: any) {
+  protected handleError(error: any, methode: string) {
+    this.errorService.getCustomerErrors().
     if (error.status === 401 || error.status === 404) {
       this.notificationService.error('Email or password is incorrect', 'Login error');
     } else if (error.status === 400) {

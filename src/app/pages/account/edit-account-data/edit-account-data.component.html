@@ -1,0 +1,16 @@
+<div class="row justify-content-center">
+  <div class="flex-centered col-lg-6 col-md-6 col-sm-12">
+    <h2 class="title">Update {{adItem.title}}</h2>
+    <form (ngSubmit)="update()" #form="ngForm" >
+      <p></p>
+      <ng-template ngxAdHost></ng-template>
+      <div class="d-flex justify-content-center">
+        <a class="btn btn-lg btn-hero-success multibtn" routerLink="/account/overview">Cancel</a>
+        <button [disabled]="submitted || !form.valid" class="btn btn-lg btn-hero-success multibtn"
+                [class.btn-pulse]="submitted">
+          Save
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -29,12 +29,10 @@
               {{bookDetail.numberOfPages}}
             </div>
             <div class="price">
-              {{bookDetail.price  | currency:'USD'}}
+              {{bookDetail.price | currency:'USD'}}
             </div>
             <div class="add-btn">
-              <button type="button" (click)="addToShoppingCart(b)" class="btn btn-success btn-icon">
-                <i class="fa fa-cart-plus"></i>
-              </button>
+              <ngx-shopping-cart-add-button [book]="bookDetail"></ngx-shopping-cart-add-button>
             </div>
             <div class="description" [innerHTML]="bookDetail.description">
             </div>

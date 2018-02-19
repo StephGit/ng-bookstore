@@ -37,7 +37,7 @@ export class CustomerService {
         this.currentUserService.setAuth(user);
         return user;
       })
-      .catch(err => this.handleError(err));
+      .catch(err => this.handleError(err, 'Login'));
   }
 
   register(customer: Customer, password: string): Observable<any> {
@@ -55,7 +55,7 @@ export class CustomerService {
           this.currentUserService.setAuth(user);
           return data;
         })
-      .catch(err => this.handleError(err));
+      .catch(err => this.handleError(err, 'Register'));
   }
 
   // Update the customer on the server
@@ -67,6 +67,7 @@ export class CustomerService {
         this.currentCustomerSubject.next(data);
         return data;
       })
+      .catch(err => this.handleError(err, 'Update'));
   }
 
   find(nr: number): Observable<Customer> {
@@ -76,7 +77,7 @@ export class CustomerService {
         this.currentCustomerSubject.next(data);
         return data;
       })
-      .catch(err => this.handleError(err));
+      .catch(err => this.handleError(err, 'Find'));
   }
 
   changePassword(user: User): Observable<User> {
@@ -90,7 +91,7 @@ export class CustomerService {
       .map(data => {
         return data;
       })
-      .catch(err => this.handleError(err));
+      .catch(err => this.handleError(err, 'Password-Change'));
   }
 
 
@@ -100,15 +101,9 @@ export class CustomerService {
   }
 
  // TODO map Error-Codes
-  protected handleError(error: any, methode: string) {
-    this.errorService.getCustomerErrors().
-    if (error.status === 401 || error.status === 404) {
-      this.notificationService.error('Email or password is incorrect', 'Login error');
-    } else if (error.status === 400) {
-      this.notificationService.error('Email or password is incorrect', 'Login error');
-    } else if (error.status === 409) {
-      this.notificationService.error('Email or password is incorrect', 'Login error');
-    }
-      return Observable.throw(error);
+  protected handleError(error: any, method: string) {
+    this.notificationService.error(
+      this.errorService.getCustomerErrors().get([method, error.status]), method + ' error');
+    return Observable.throw(error);
   }
 }

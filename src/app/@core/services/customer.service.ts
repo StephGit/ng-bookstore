@@ -31,7 +31,8 @@ export class CustomerService {
       'email': credentials.email,
       'password': credentials.password,
     });
-    return this.apiService.get(this.path + '/login', null , headers )
+    // TODO add type to get call
+    return this.apiService.get<any>(this.path + '/login', null , headers )
       .map((data) => {
         const user = new User(data, credentials.email, credentials.password);
         this.currentUserService.setAuth(user);
@@ -72,7 +73,7 @@ export class CustomerService {
 
   find(nr: number): Observable<Customer> {
     return this.apiService
-      .get(this.path + '/' + nr, null, null)
+      .get<Customer>(this.path + '/' + nr, null, null)
       .map(data => {
         this.currentCustomerSubject.next(data);
         return data;

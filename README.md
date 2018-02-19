@@ -39,6 +39,7 @@ docs: https://akveo.github.io/nebular/#/docs/auth/introduction
 - [ ] Checkout overview - A
 - [ ] Checkout address managment - S
 - [ ] Admin component to add books
+- [ ] Refactor http calls: HTTP Params instead string query params, Auto parsing to Objects
 
 
 

@@ -10,7 +10,6 @@ import {User} from '../../../@core/model/user.model';
 })
 
 export class ChangePaymentDataComponent {
-
   @Input() user: User;
   @Input() customer: Customer;
   cardTypes = Object.keys(CreditCardType);

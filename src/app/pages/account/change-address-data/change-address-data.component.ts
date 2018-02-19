@@ -9,7 +9,6 @@ import {User} from '../../../@core/model/user.model';
   styles: ['.form-control-placeholder {color: #a4abb3 !important;}'],
 })
 export class ChangeAddressDataComponent {
-
   @Input() user: User;
   @Input() customer: Customer;
   countries = Object.values(Country);

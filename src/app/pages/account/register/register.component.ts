@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
     this.customer.creditCard = new CreditCard();
   }
 
-  register() {
+  doRegister() {
     this.submitted = true;
     this.customerService
       .register(this.customer, this.user.password)

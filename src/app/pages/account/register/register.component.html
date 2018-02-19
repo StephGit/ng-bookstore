@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
   <div class="flex-centered col-lg-6 col-md-6 col-sm-12">
     <h2 class="title">Register</h2>
-    <form (ngSubmit)="register()" #form="ngForm">
+    <form name="register" (ngSubmit)="doRegister()" #register="ngForm">
       <div id="tabs" class="full-width">
         <ul>
           <li [class.active]="selected == 1">
@@ -54,7 +54,7 @@
         <ngx-change-payment-data [customer]="customer"></ngx-change-payment-data>
         <div class="d-flex justify-content-center">
           <a class="btn btn-lg btn-hero-success multibtn" (click)="showTab(2)">Previous</a>
-          <button [disabled]="submitted || !form.valid" class="btn btn-lg btn-hero-success multibtn"
+          <button [disabled]="submitted || !register.valid" class="btn btn-lg btn-hero-success multibtn"
                   [class.btn-pulse]="submitted">
             Register
           </button>

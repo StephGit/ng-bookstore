@@ -23,9 +23,9 @@ const SERVICES = [
   CurrentUserService,
   CustomerService,
   ErrorService,
-  OrderService,
   LogoutGuardService,
   NotificationService,
+  OrderService,
   ShoppingCartService,
 ];
 

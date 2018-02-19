@@ -26,11 +26,11 @@ const routes: Routes = [{
     }, {
       path: 'overview',
       component: OverviewComponent,
-      // canActivate: [AuthGuardService],
+      canActivate: [AuthGuardService],
     }, {
       path: 'edit',
       component: EditAccountDataComponent,
-      // canActivate: [AuthGuardService],
+      canActivateChild: [AuthGuardService],
     }, {
       path: '',
       component: LoginComponent,

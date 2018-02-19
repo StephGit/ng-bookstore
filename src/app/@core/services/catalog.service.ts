@@ -4,6 +4,8 @@ import {Observable} from 'rxjs/Observable';
 import {environment} from '../../../environments/environment';
 import {Book} from '../model/book.model';
 import {HttpParams} from '@angular/common/http';
+import {NotificationService} from './notification.service';
+import {ErrorService} from './error.service';
 
 @Injectable()
 export class CatalogService {
@@ -12,7 +14,9 @@ export class CatalogService {
   searchResultsUpdated: EventEmitter<Book []> = new EventEmitter();
   isMockEnabled = `${environment.mock}`;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService,
+              private errorService: ErrorService,
+              private notificationService: NotificationService) {
   }
 
 
@@ -21,9 +25,11 @@ export class CatalogService {
       fromObject: {
         keywords: keywords,
       },
-    }), null).subscribe((results) => {
-      this.searchResultsUpdated.emit(results);
-    });
+    }), null)
+      .catch(err => this.handleError(err, 'search'))
+      .subscribe((results) => {
+        this.searchResultsUpdated.emit(results);
+      });
   }
 
   getPreviousSearchResults() {
@@ -31,9 +37,15 @@ export class CatalogService {
   }
 
   getBookDetails(isbn: String): Observable<any> {
-    return this.apiService.get('/books/' + isbn, null, null);
+    return this.apiService.get('/books/' + isbn, null, null)
+      .catch(err => this.handleError(err, 'find'));
 
   }
 
+  protected handleError(error: any, method: string) {
+    this.notificationService.error(
+      this.errorService.getCatalogError([method, error.status]), 'Catalog error');
+    return Observable.throw(error);
+  }
 
 }

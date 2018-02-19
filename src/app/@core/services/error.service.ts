@@ -11,6 +11,7 @@ export class ErrorService {
   constructor() {
     this.setCustomerErrors();
     this.setOrderErrors();
+    this.setCatalogErrors();
   }
 
   private setCustomerErrors() {
@@ -33,6 +34,13 @@ export class ErrorService {
     this.orderErrors.set(['find', 404], 'No order with the specified number exists.');
   }
 
+  private setCatalogErrors() {
+    this.catalogErrors.set(['add', 409], 'A book with the same ISBN number already exists.');
+    this.catalogErrors.set(['find', 404], 'No book with the specified ISBN number exists.');
+    this.catalogErrors.set(['update', 400], 'The ISBN number of the book data does not match the path parameter.');
+    this.catalogErrors.set(['update', 404], 'No book with the specified ISBN number exists.');
+  }
+
   getCustomerError(key: [string, number]): string {
     return this.customerErrors.get(key);
   }
@@ -40,5 +48,10 @@ export class ErrorService {
   getOrderError(key: [string, number]): string {
     return this.orderErrors.get(key);
   }
+
+  getCatalogError(key: [string, number]): string {
+    return this.catalogErrors.get(key);
+  }
+
 
 }

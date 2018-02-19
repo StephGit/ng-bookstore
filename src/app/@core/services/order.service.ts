@@ -17,12 +17,12 @@ export class OrderService {
 
   public placeOrder(order: Order): Observable<any> {
     return this.apiService.post('/orders', order, null)
-      .catch(err => this.handleError(err, 'place'));;
+      .catch(err => this.handleError(err, 'place'));
   }
 
   public findOrder(nr: number): Observable<any> {
     return this.apiService.get('/orders/' + nr, null, null)
-      .catch(err => this.handleError(err, 'find'));;
+      .catch(err => this.handleError(err, 'find'));
   }
 
   // TODO map
@@ -31,14 +31,14 @@ export class OrderService {
       fromObject: {
         customerNr: customerNr.toString(),
         year: year.toString(),
-      }
+      },
     }), null)
-      .catch(err => this.handleError(err, 'search'));;
+      .catch(err => this.handleError(err, 'search'));
   }
 
   public cancelOrder(nr: number): Observable<any> {
     return this.apiService.delete('/orders?nr=' + nr, null)
-      .catch(err => this.handleError(err, 'cancel'));;
+      .catch(err => this.handleError(err, 'cancel'));
   }
 
   protected handleError(error: any, method: string) {

@@ -13,6 +13,7 @@ import {CurrentUserService} from './services/current-user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {OrderService} from './services/order.service';
 import {AdService} from './services/ad.service';
+import {ErrorService} from './services/error.service';
 
 const SERVICES = [
   AdService,
@@ -21,6 +22,7 @@ const SERVICES = [
   CatalogService,
   CurrentUserService,
   CustomerService,
+  ErrorService,
   OrderService,
   LogoutGuardService,
   NotificationService,

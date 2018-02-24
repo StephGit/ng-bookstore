@@ -170,6 +170,38 @@ var Book = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "../../../../../src/app/@core/model/country.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Country; });
+var Country;
+(function (Country) {
+    Country["CH"] = "Switzerland";
+    Country["DE"] = "Germany";
+    Country["FR"] = "France";
+    Country["GB"] = "England";
+    Country["IT"] = "Italy";
+    Country["US"] = "United States";
+})(Country || (Country = {}));
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/@core/model/creditcard-type.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CreditCardType; });
+var CreditCardType;
+(function (CreditCardType) {
+    CreditCardType["MASTERCARD"] = "MASTERCARD";
+    CreditCardType["VISA"] = "VISA";
+})(CreditCardType || (CreditCardType = {}));
+
+
+/***/ }),
+
 /***/ "../../../../../src/app/@core/model/customer.model.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -185,6 +217,23 @@ var Customer = /** @class */ (function () {
         this.creditCard = creditCard;
     }
     return Customer;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/@core/model/order.model.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return Order; });
+var Order = /** @class */ (function () {
+    function Order(customerNr, items) {
+        this.customerNr = customerNr;
+        this.items = items;
+    }
+    return Order;
 }());
 
 
@@ -675,7 +724,7 @@ var CustomerService = /** @class */ (function () {
             _this.currentUserService.setAuth(user);
             return user;
         })
-            .catch(function (err) { return _this.handleError(err, 'Login'); });
+            .catch(function (err) { return _this.handleError(err, 'login'); });
     };
     CustomerService.prototype.register = function (customer, password) {
         var _this = this;
@@ -802,6 +851,7 @@ var ErrorService = /** @class */ (function () {
         this.catalogErrors.set(['update', 404], 'No book with the specified ISBN number exists.');
     };
     ErrorService.prototype.getCustomerError = function (key) {
+        console.log(this.customerErrors.get(key));
         return this.customerErrors.get(key);
     };
     ErrorService.prototype.getOrderError = function (key) {
@@ -923,9 +973,11 @@ var NotificationService = /** @class */ (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__api_service__ = __webpack_require__("../../../../../src/app/@core/services/api.service.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_Observable__ = __webpack_require__("../../../../rxjs/_esm5/Observable.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__notification_service__ = __webpack_require__("../../../../../src/app/@core/services/notification.service.ts");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__error_service__ = __webpack_require__("../../../../../src/app/@core/services/error.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__model_order_model__ = __webpack_require__("../../../../../src/app/@core/model/order.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__notification_service__ = __webpack_require__("../../../../../src/app/@core/services/notification.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__angular_common_http__ = __webpack_require__("../../../common/esm5/http.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__error_service__ = __webpack_require__("../../../../../src/app/@core/services/error.service.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__current_user_service__ = __webpack_require__("../../../../../src/app/@core/services/current-user.service.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -941,14 +993,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
+
 var OrderService = /** @class */ (function () {
-    function OrderService(apiService, errorService, notificationService) {
+    function OrderService(apiService, errorService, notificationService, currentUserService) {
         this.apiService = apiService;
         this.errorService = errorService;
         this.notificationService = notificationService;
+        this.currentUserService = currentUserService;
     }
-    OrderService.prototype.placeOrder = function (order) {
+    OrderService.prototype.placeOrder = function (orderItems) {
         var _this = this;
+        var customer = this.currentUserService.getCurrentUser();
+        var order = new __WEBPACK_IMPORTED_MODULE_3__model_order_model__["a" /* Order */](customer.id, orderItems);
         return this.apiService.post('/orders', order, null)
             .catch(function (err) { return _this.handleError(err, 'place'); });
     };
@@ -960,7 +1017,7 @@ var OrderService = /** @class */ (function () {
     // TODO map
     OrderService.prototype.searchOrders = function (customerNr, year) {
         var _this = this;
-        return this.apiService.get('/orders', new __WEBPACK_IMPORTED_MODULE_4__angular_common_http__["d" /* HttpParams */]({
+        return this.apiService.get('/orders', new __WEBPACK_IMPORTED_MODULE_5__angular_common_http__["d" /* HttpParams */]({
             fromObject: {
                 customerNr: customerNr.toString(),
                 year: year.toString(),
@@ -980,8 +1037,9 @@ var OrderService = /** @class */ (function () {
     OrderService = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["B" /* Injectable */])(),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__api_service__["a" /* ApiService */],
-            __WEBPACK_IMPORTED_MODULE_5__error_service__["a" /* ErrorService */],
-            __WEBPACK_IMPORTED_MODULE_3__notification_service__["a" /* NotificationService */]])
+            __WEBPACK_IMPORTED_MODULE_6__error_service__["a" /* ErrorService */],
+            __WEBPACK_IMPORTED_MODULE_4__notification_service__["a" /* NotificationService */],
+            __WEBPACK_IMPORTED_MODULE_7__current_user_service__["a" /* CurrentUserService */]])
     ], OrderService);
     return OrderService;
 }());
@@ -1108,6 +1166,238 @@ var BookListComponent = /** @class */ (function () {
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1__core_services_shopping_cart_service__["a" /* ShoppingCartService */], __WEBPACK_IMPORTED_MODULE_2__core_services_notification_service__["a" /* NotificationService */]])
     ], BookListComponent);
     return BookListComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/@theme/components/change-address-data/change-address-data.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div ngxProvideParentForm>\r\n  <div class=\"form-group\">\r\n    <label for=\"input-street\" class=\"sr-only\">Street</label>\r\n    <input name=\"street\" [(ngModel)]=\"customer.address.street\" id=\"input-street\" class=\"form-control\"\r\n           placeholder=\"Street\" #street=\"ngModel\"\r\n           [class.form-control-danger]=\"street.invalid && street.touched\"\r\n           ngModel\r\n           required minlength=\"2\" maxlength=\"70\">\r\n    <small class=\"form-text error\" *ngIf=\"street.invalid && street.touched && street.errors?.required\">Street is\r\n      required!\r\n    </small>\r\n    <small class=\"form-text error\"\r\n           *ngIf=\"street.invalid && street.touched && (street.errors?.minlength || street.errors?.maxlength)\">\r\n      Street should contain between 2 to 20 characters\r\n    </small>\r\n  </div>\r\n\r\n  <div class=\"row city-country\">\r\n    <div class=\"col-sm-3 form-group\">\r\n      <label for=\"input-postal-code\" class=\"sr-only\">PostalCode</label>\r\n      <input name=\"postalCode\" [(ngModel)]=\"customer.address.postalCode\" id=\"input-postal-code\" #postalCode=\"ngModel\"\r\n             class=\"form-control\" placeholder=\"Postal code\"\r\n             [class.form-control-danger]=\"postalCode.invalid && postalCode.touched\"\r\n             required\r\n             minlength=\"4\" maxlength=\"5\">\r\n      <small class=\"form-text error\" *ngIf=\"postalCode.invalid && postalCode.touched && postalCode.errors?.required\">\r\n        Postal code is required!\r\n      </small>\r\n      <small class=\"form-text error\"\r\n             *ngIf=\"postalCode.invalid && postalCode.touched && (postalCode.errors?.minlength || postalCode.errors?.maxlength)\">\r\n        Invalid postal code\r\n      </small>\r\n    </div>\r\n    <div class=\"col-sm-6 form-group\">\r\n      <label for=\"input-city\" class=\"sr-only\">City</label>\r\n      <input name=\"city\" [(ngModel)]=\"customer.address.city\" id=\"input-city\" #city=\"ngModel\"\r\n             class=\"form-control\" placeholder=\"City\"\r\n             [class.form-control-danger]=\"city.invalid && city.touched\"\r\n             required\r\n             minlength=\"2\" maxlength=\"70\">\r\n      <small class=\"form-text error\" *ngIf=\"city.invalid && city.touched && city.errors?.required\">\r\n        City is required!\r\n      </small>\r\n      <small class=\"form-text error\"\r\n             *ngIf=\"city.invalid && city.touched && (city.errors?.minlength || city.errors?.maxlength)\">\r\n        City should contain from 2 to 70 characters\r\n      </small>\r\n    </div>\r\n    <div class=\"col-sm-3 form-group\">\r\n      <label for=\"select-country\" class=\"sr-only\">Country</label>\r\n      <select id=\"select-country\" name=\"country\" [(ngModel)]=\"customer.address.country\"\r\n              #country=\"ngModel\" class=\"form-control\"\r\n              required\r\n              [class.form-control-danger]=\"country.invalid && country.touched\"\r\n              [class.form-control-placeholder]=\"country.invalid && country.untouched\">\r\n        <option value=\"undefined\" disabled selected hidden>Country</option>\r\n        <option *ngFor=\"let country of countries\" [ngValue]=\"parseCountry(country)\">{{country}}</option>\r\n      </select>\r\n      <small class=\"form-text error\" *ngIf=\"country.invalid && country.touched && country.errors?.required\">\r\n        Country is required!\r\n      </small>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/@theme/components/change-address-data/change-address-data.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChangeAddressDataComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_model_customer_model__ = __webpack_require__("../../../../../src/app/@core/model/customer.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_model_country_model__ = __webpack_require__("../../../../../src/app/@core/model/country.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_model_user_model__ = __webpack_require__("../../../../../src/app/@core/model/user.model.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ChangeAddressDataComponent = /** @class */ (function () {
+    function ChangeAddressDataComponent() {
+        this.countries = Object.values(__WEBPACK_IMPORTED_MODULE_2__core_model_country_model__["a" /* Country */]);
+    }
+    ChangeAddressDataComponent.prototype.parseCountry = function (type) {
+        var country;
+        for (var key in __WEBPACK_IMPORTED_MODULE_2__core_model_country_model__["a" /* Country */]) {
+            if (type === __WEBPACK_IMPORTED_MODULE_2__core_model_country_model__["a" /* Country */][key]) {
+                country = key;
+                break;
+            }
+        }
+        return country;
+    };
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__core_model_user_model__["a" /* User */])
+    ], ChangeAddressDataComponent.prototype, "user", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__core_model_customer_model__["a" /* Customer */])
+    ], ChangeAddressDataComponent.prototype, "customer", void 0);
+    ChangeAddressDataComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'ngx-change-address-data',
+            template: __webpack_require__("../../../../../src/app/@theme/components/change-address-data/change-address-data.component.html"),
+            styles: ['.form-control-placeholder {color: #a4abb3 !important;}'],
+        }),
+        __metadata("design:paramtypes", [])
+    ], ChangeAddressDataComponent);
+    return ChangeAddressDataComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/@theme/components/change-password/change-password.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div ngxProvideParentForm>\r\n  <div class=\"form-group\" ngxProvideParentForm>\r\n    <label for=\"input-password\" class=\"sr-only\">Password</label>\r\n    <input name=\"password\" [(ngModel)]=\"user.password\" type=\"password\" id=\"input-password\"\r\n           class=\"form-control\" placeholder=\"Password\" #password=\"ngModel\"\r\n           [class.form-control-danger]=\"password.invalid && password.touched\"\r\n           required\r\n           [minlength]=\"8\"\r\n           [maxlength]=\"20\">\r\n    <small class=\"form-text error\" *ngIf=\"password.invalid && password.touched && password.errors?.required\">Password\r\n      is required!\r\n    </small>\r\n    <small class=\"form-text error\"\r\n           *ngIf=\"password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)\">\r\n      Password should contains from 8 to 20 characters\r\n    </small>\r\n  </div>\r\n\r\n  <div class=\"form-group\">\r\n    <label for=\"input-re-password\" class=\"sr-only\">Repeat password</label>\r\n    <input name=\"rePass\" [(ngModel)]=\"user.confirmPassword\" type=\"password\" id=\"input-re-password\"\r\n           class=\"form-control\" placeholder=\"Confirm Password\" #rePass=\"ngModel\"\r\n           [class.form-control-danger]=\"(rePass.invalid || password.value != rePass.value) && rePass.touched\"\r\n           required>\r\n    <small class=\"form-text error\" *ngIf=\"rePass.invalid && rePass.touched && rePass.errors?.required\">Password\r\n      confirmation is required!\r\n    </small>\r\n    <small class=\"form-text error\"\r\n           *ngIf=\"rePass.touched && (password.value != rePass.value) && !rePass.errors?.required\">Password does not\r\n      match the confirm password.\r\n    </small>\r\n  </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/@theme/components/change-password/change-password.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChangePasswordComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_model_user_model__ = __webpack_require__("../../../../../src/app/@core/model/user.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_model_customer_model__ = __webpack_require__("../../../../../src/app/@core/model/customer.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_forms__ = __webpack_require__("../../../forms/esm5/forms.js");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ChangePasswordComponent = /** @class */ (function () {
+    function ChangePasswordComponent() {
+    }
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_11" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_3__angular_forms__["e" /* NgForm */]),
+        __metadata("design:type", Object)
+    ], ChangePasswordComponent.prototype, "form", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__core_model_user_model__["a" /* User */])
+    ], ChangePasswordComponent.prototype, "user", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__core_model_customer_model__["a" /* Customer */])
+    ], ChangePasswordComponent.prototype, "customer", void 0);
+    ChangePasswordComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'ngx-change-password',
+            template: __webpack_require__("../../../../../src/app/@theme/components/change-password/change-password.component.html"),
+        }),
+        __metadata("design:paramtypes", [])
+    ], ChangePasswordComponent);
+    return ChangePasswordComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/@theme/components/change-payment-data/change-payment-data.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div ngxProvideParentForm>\r\n  <div class=\"form-group\">\r\n    <label for=\"select-cardtype\" class=\"sr-only\">CreditCard-Type</label>\r\n    <select id=\"select-cardtype\" name=\"cardType\" [(ngModel)]=\"customer.creditCard.type\"\r\n            #cardType=\"ngModel\" class=\"form-control\" required ngxProvideParentForm\r\n            [class.form-control-danger]=\"cardType.invalid && cardType.touched\"\r\n            [class.form-control-placeholder]=\"cardType.invalid && cardType.untouched\">\r\n      <option value=\"undefined\" disabled selected hidden>CreditCard-Type</option>\r\n      <option *ngFor=\"let cType of cardTypes\" [ngValue]=\"cType\">{{cType}}</option>\r\n    </select>\r\n    <small class=\"form-text error\" *ngIf=\"cardType.invalid && cardType.touched && cardType.errors?.required\">\r\n      CardType is required!\r\n    </small>\r\n  </div>\r\n  <div class=\"form-group\">\r\n    <label for=\"input-cardnumber\" class=\"sr-only\">Card number</label>\r\n    <input [(ngModel)]=\"customer.creditCard.number\" name=\"cardnumber\" id=\"input-cardnumber\"\r\n           #cardnumber=\"ngModel\"\r\n           class=\"form-control\" placeholder=\"Card number\" pattern=\"^(\\d{4}[-. ]?){4}|(\\d{4}[-. ]?\\d{6}[-. ]?\\d{5})$\"\r\n           [class.form-control-danger]=\"cardnumber.invalid && cardnumber.touched\"\r\n           ngModel\r\n           required>\r\n    <small class=\"form-text error\" *ngIf=\"cardnumber.invalid && cardnumber.touched && cardnumber.errors?.required\">\r\n      CreditCard is required!\r\n    </small>\r\n    <small class=\"form-text error\" *ngIf=\"cardnumber.invalid && cardnumber.touched && cardnumber.errors?.pattern\">\r\n      CreditCard-Number should be the real one!\r\n    </small>\r\n  </div>\r\n  <div class=\"row card-date-inputs\">\r\n    <div class=\"col-sm-6 form-group\">\r\n      <label for=\"input-month\" class=\"sr-only\">Expiration Month</label>\r\n      <input name=\"expMonth\" [(ngModel)]=\"customer.creditCard.expirationMonth\" id=\"input-month\" #expMonth=\"ngModel\"\r\n             class=\"form-control\" placeholder=\"Month\"\r\n             [class.form-control-danger]=\"expMonth.invalid && expMonth.touched\"\r\n             type=\"number\"\r\n             pattern=\"^(1[0-2]|[1-9])$\"\r\n             required\r\n             ngModel\r\n             minlength=\"1\" maxlength=\"2\">\r\n      <small class=\"form-text error\" *ngIf=\"expMonth.invalid && expMonth.touched && expMonth.errors?.required\">\r\n        Expiration month is required!\r\n      </small>\r\n      <small class=\"form-text error\"\r\n             *ngIf=\"expMonth.invalid && expMonth.touched && (expMonth.errors?.minlength || expMonth.errors?.pattern)\">\r\n        Month is not valid.\r\n      </small>\r\n    </div>\r\n    <div class=\"col-sm-6 form-group\">\r\n      <label for=\"input-year\" class=\"sr-only\">Expiration Year</label>\r\n      <input name=\"year\" [(ngModel)]=\"customer.creditCard.expirationYear\" id=\"input-year\" #year=\"ngModel\"\r\n             class=\"form-control\" placeholder=\"Year\"\r\n             [class.form-control-danger]=\"year.invalid && year.touched\"\r\n             required\r\n             ngModel\r\n             type=\"number\"\r\n             ngxCreditcardYear>\r\n      <small class=\"form-text error\" *ngIf=\"year.invalid && year.touched && year.errors?.required\">\r\n        Year is required!\r\n      </small>\r\n      <small class=\"form-text error\"\r\n             *ngIf=\"year.invalid && year.touched && (year.errors?.years)\">\r\n        {{year.errors.years.message}}\r\n      </small>\r\n    </div>\r\n  </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/@theme/components/change-payment-data/change-payment-data.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChangePaymentDataComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_model_customer_model__ = __webpack_require__("../../../../../src/app/@core/model/customer.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_model_creditcard_type_model__ = __webpack_require__("../../../../../src/app/@core/model/creditcard-type.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__core_model_user_model__ = __webpack_require__("../../../../../src/app/@core/model/user.model.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ChangePaymentDataComponent = /** @class */ (function () {
+    function ChangePaymentDataComponent() {
+        this.cardTypes = Object.keys(__WEBPACK_IMPORTED_MODULE_2__core_model_creditcard_type_model__["a" /* CreditCardType */]);
+    }
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_3__core_model_user_model__["a" /* User */])
+    ], ChangePaymentDataComponent.prototype, "user", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__core_model_customer_model__["a" /* Customer */])
+    ], ChangePaymentDataComponent.prototype, "customer", void 0);
+    ChangePaymentDataComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'ngx-change-payment-data',
+            template: __webpack_require__("../../../../../src/app/@theme/components/change-payment-data/change-payment-data.component.html"),
+            styles: ['.form-control-placeholder {color: #a4abb3 !important;}'],
+        }),
+        __metadata("design:paramtypes", [])
+    ], ChangePaymentDataComponent);
+    return ChangePaymentDataComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../../../../src/app/@theme/components/change-user-data/change-user-data.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"row full-name-inputs\" ngxProvideParentForm>\r\n  <div class=\"col-sm-6 form-group\">\r\n\r\n    <label for=\"input-first-name\" class=\"sr-only\">First name</label>\r\n    <input name=\"fristName\" [(ngModel)]=\"customer.firstName\" id=\"input-first-name\" #firstName=\"ngModel\"\r\n           class=\"form-control\" placeholder=\"First name\"\r\n           [class.form-control-danger]=\"firstName.invalid && firstName.touched\"\r\n           required minlength=\"2\" maxlength=\"20\">\r\n    <small class=\"form-text error\" *ngIf=\"firstName.invalid && firstName.touched && firstName.errors?.required\">\r\n      First name is required!\r\n    </small>\r\n    <small class=\"form-text error\"\r\n           *ngIf=\"firstName.invalid && firstName.touched && (firstName.errors?.minlength || firstName.errors?.maxlength)\">\r\n      First name should contains from 2 to 20 characters\r\n    </small>\r\n  </div>\r\n  <div class=\"col-sm-6 form-group\">\r\n    <label for=\"input-last-name\" class=\"sr-only\">Last name</label>\r\n    <input name=\"lastName\" [(ngModel)]=\"customer.lastName\" id=\"input-last-name\" #lastName=\"ngModel\"\r\n           class=\"form-control\" placeholder=\"Last name\"\r\n           [class.form-control-danger]=\"lastName.invalid && lastName.touched\"\r\n           required minlength=\"2\" maxlength=\"70\">\r\n    <small class=\"form-text error\" *ngIf=\"lastName.invalid && lastName.touched && lastName.errors?.required\">\r\n      Full name is required!\r\n    </small>\r\n    <small class=\"form-text error\"\r\n           *ngIf=\"lastName.invalid && lastName.touched && (lastName.errors?.minlength || lastName.errors?.maxlength)\">\r\n      Full name should contain from 2 to 70 characters\r\n    </small>\r\n  </div>\r\n</div>\r\n"
+
+/***/ }),
+
+/***/ "../../../../../src/app/@theme/components/change-user-data/change-user-data.component.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChangeUserDataComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/esm5/core.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__core_model_customer_model__ = __webpack_require__("../../../../../src/app/@core/model/customer.model.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__core_model_user_model__ = __webpack_require__("../../../../../src/app/@core/model/user.model.ts");
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+var ChangeUserDataComponent = /** @class */ (function () {
+    function ChangeUserDataComponent() {
+    }
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_2__core_model_user_model__["a" /* User */])
+    ], ChangeUserDataComponent.prototype, "user", void 0);
+    __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])(),
+        __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1__core_model_customer_model__["a" /* Customer */])
+    ], ChangeUserDataComponent.prototype, "customer", void 0);
+    ChangeUserDataComponent = __decorate([
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+            selector: 'ngx-change-user-data',
+            template: __webpack_require__("../../../../../src/app/@theme/components/change-user-data/change-user-data.component.html"),
+        }),
+        __metadata("design:paramtypes", [])
+    ], ChangeUserDataComponent);
+    return ChangeUserDataComponent;
 }());
 
 
@@ -2085,12 +2375,20 @@ var DEFAULT_THEME = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__directives_ad_directive__ = __webpack_require__("../../../../../src/app/@theme/directives/ad.directive.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__directives_provide_parent_form_directive__ = __webpack_require__("../../../../../src/app/@theme/directives/provide-parent-form.directive.ts");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_book_list_item_book_list_component__ = __webpack_require__("../../../../../src/app/@theme/components/book-list-item/book-list.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_change_address_data_change_address_data_component__ = __webpack_require__("../../../../../src/app/@theme/components/change-address-data/change-address-data.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_change_payment_data_change_payment_data_component__ = __webpack_require__("../../../../../src/app/@theme/components/change-payment-data/change-payment-data.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_change_password_change_password_component__ = __webpack_require__("../../../../../src/app/@theme/components/change-password/change-password.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__components_change_user_data_change_user_data_component__ = __webpack_require__("../../../../../src/app/@theme/components/change-user-data/change-user-data.component.ts");
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
+
+
 
 
 
@@ -2128,6 +2426,10 @@ var COMPONENTS = [
     __WEBPACK_IMPORTED_MODULE_5__components__["c" /* SearchInputComponent */],
     __WEBPACK_IMPORTED_MODULE_5__components__["e" /* TinyMCEComponent */],
     __WEBPACK_IMPORTED_MODULE_7__layouts__["a" /* SampleLayoutComponent */],
+    __WEBPACK_IMPORTED_MODULE_18__components_change_user_data_change_user_data_component__["a" /* ChangeUserDataComponent */],
+    __WEBPACK_IMPORTED_MODULE_15__components_change_address_data_change_address_data_component__["a" /* ChangeAddressDataComponent */],
+    __WEBPACK_IMPORTED_MODULE_16__components_change_payment_data_change_payment_data_component__["a" /* ChangePaymentDataComponent */],
+    __WEBPACK_IMPORTED_MODULE_17__components_change_password_change_password_component__["a" /* ChangePasswordComponent */],
 ];
 var PIPES = [
     __WEBPACK_IMPORTED_MODULE_6__pipes__["a" /* CapitalizePipe */],

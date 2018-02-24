@@ -103,7 +103,7 @@ export class CustomerService {
 
   protected handleError(error: any, method: string) {
     this.notificationService.error(
-      this.errorService.getCustomerError([method, error.status]), 'Customer error');
+      this.errorService.getCustomerError({method: method, status: error.status}), 'Customer error');
     return Observable.throw(error);
   }
 }

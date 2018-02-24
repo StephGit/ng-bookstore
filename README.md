@@ -36,10 +36,14 @@ docs: https://akveo.github.io/nebular/#/docs/auth/introduction
 - [x] Book-Detail - A
 - [x] Handle errors from backend - i.e. see notifications on components page - A
 - [x] Shopping cart - A --> table with isbn, title, price, recalculate totalprice when quantity updated ngModelChange="updateTotalPrice"
-- [ ] Checkout overview - A
-- [ ] Checkout address managment - S
+- [x] Checkout overview - A
+- [ ] Checkout address selection - S
 - [ ] Admin component to add books
 - [ ] Disable all button when action is not allowed
+- [ ] view and cancel order on account view
+- [ ] guards for order placement/ checkout
+- [ ] Total price on checkout view - A
+
 
 
 

@@ -5,17 +5,22 @@ import {Order} from '../model/order.model';
 import {NotificationService} from './notification.service';
 import {HttpParams} from '@angular/common/http';
 import {ErrorService} from './error.service';
+import {CurrentUserService} from './current-user.service';
+import {OrderItem} from '../model/oder-item.model';
 
 @Injectable()
 export class OrderService {
 
   constructor(private apiService: ApiService,
               private errorService: ErrorService,
-              private notificationService: NotificationService) {
+              private notificationService: NotificationService,
+              private currentUserService: CurrentUserService) {
   }
 
 
-  public placeOrder(order: Order): Observable<any> {
+  public placeOrder(orderItems: OrderItem []): Observable<Order> {
+    const customer = this.currentUserService.getCurrentUser();
+    const order: Order = new Order(customer.id, orderItems);
     return this.apiService.post('/orders', order, null)
       .catch(err => this.handleError(err, 'place'));
   }

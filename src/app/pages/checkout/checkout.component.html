@@ -16,12 +16,14 @@
           <tbody>
           <tr *ngFor="let item of currentShoppingCart.items">
             <td>{{item.book.title}}</td>
-            <td>{{item.book.price  | currency:'USD'}}</td>
+            <td>{{item.book.price | currency:'USD'}}</td>
             <td>{{item.quantity}}</td>
           </tr>
           </tbody>
         </table>
-        <button class="btn btn-success" (click)="placeOrder()">Place Order</button>
+        <div>
+          <button class="btn btn-success" (click)="placeOrder()">Place Order</button>
+        </div>
       </div>
     </div>
   </nb-card-body>

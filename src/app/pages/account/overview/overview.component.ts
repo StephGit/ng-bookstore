@@ -20,12 +20,12 @@ import {ChangePaymentDataComponent} from '../../../@theme/components/change-paym
 })
 export class OverviewComponent implements OnInit {
 
-  private customer: Customer;
-  private user: User;
-  private orders: any[];
-  private loading: boolean = true;
+  customer: Customer;
+  user: User;
+  orders: any[];
+  loading: boolean = true;
   Country: typeof Country = Country;
-  private orderYear = new Date().getFullYear();
+  orderYear = new Date().getFullYear();
 
   constructor(private adService: AdService,
               private customerService: CustomerService,

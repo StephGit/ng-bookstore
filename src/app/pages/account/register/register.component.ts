@@ -3,12 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../../@core/services/customer.service';
 import {Customer} from '../../../@core/model/customer.model';
 import {User} from '../../../@core/model/user.model';
-import {Country} from '../../../@core/model/country.model';
 import {Address} from '../../../@core/model/address.model';
 import {CreditCard} from '../../../@core/model/creditcard.model';
-import {selector} from 'rxjs/operator/publish';
-import {CreditCardType} from '../../../@core/model/creditcard-type.model';
-import {FormControl, Validators} from '@angular/forms';
 
 @Component({
   selector: 'ngx-register',

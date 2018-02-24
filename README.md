@@ -21,8 +21,8 @@ This project was generated with [Angular CLI 1.6.7](https://cli.angular.io/) and
    https://github.com/AdrianKrebs/bookstore
    
 ## Auth
-testuser:
-testpassword: 
+testuser: test@tester.ch
+testpassword: testertest
 
 
 ## TODOs
@@ -30,7 +30,7 @@ testpassword:
 - [x] Search and Display BookInfoObjects - A 
 - [x] Login and Register - S
 - [x] Account - S
-- [ ] Make Dynamic Form Valdiation work - S
+- [x] Make Dynamic Form Valdiation work - S
 - [ ] Make great changes happen again - you'll love it - S 
 - [x] Book-Detail - A
 - [x] Handle errors from backend - i.e. see notifications on components page - A
@@ -42,6 +42,9 @@ testpassword:
 - [ ] view and cancel order on account view
 - [ ] guards for order placement/ checkout
 - [ ] Total price on checkout view - A
+- [ ] Make error service return errors - S
+- [ ] I18n
+- [ ] Redux state handling
 
 
 

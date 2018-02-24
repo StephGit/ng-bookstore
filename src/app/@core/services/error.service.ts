@@ -42,6 +42,7 @@ export class ErrorService {
   }
 
   getCustomerError(key: [string, number]): string {
+    console.log(this.customerErrors.get(key));
     return this.customerErrors.get(key);
   }
 

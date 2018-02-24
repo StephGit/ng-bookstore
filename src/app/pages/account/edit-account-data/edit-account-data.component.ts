@@ -5,7 +5,7 @@ import {AdService} from '../../../@core/services/ad.service';
 import {Router} from '@angular/router';
 import {NotificationService} from '../../../@core/services/notification.service';
 import {CustomerService} from '../../../@core/services/customer.service';
-import {ChangePasswordComponent} from '../change-password/change-password.component';
+import {ChangePasswordComponent} from '../../../@theme/components/change-password/change-password.component';
 
 @Component({
   selector: 'ngx-edit-account-data',

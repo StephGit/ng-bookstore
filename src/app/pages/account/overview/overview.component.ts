@@ -7,11 +7,11 @@ import {Router} from '@angular/router';
 import {NotificationService} from '../../../@core/services/notification.service';
 import {Country} from '../../../@core/model/country.model';
 import {OrderService} from '../../../@core/services/order.service';
-import {ChangePasswordComponent} from '../change-password/change-password.component';
+import {ChangePasswordComponent} from '../../../@theme/components/change-password/change-password.component';
 import {AdItem} from '../../../@core/model/ad-item.model';
 import {AdService} from '../../../@core/services/ad.service';
-import {ChangeAddressDataComponent} from '../change-address-data/change-address-data.component';
-import {ChangePaymentDataComponent} from '../change-payment-data/change-payment-data.component';
+import {ChangeAddressDataComponent} from '../../../@theme/components/change-address-data/change-address-data.component';
+import {ChangePaymentDataComponent} from '../../../@theme/components/change-payment-data/change-payment-data.component';
 
 @Component({
   selector: 'ngx-overview',

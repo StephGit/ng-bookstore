@@ -35,6 +35,10 @@ import {CreditcardYearDirective} from './directives/creditcard-year.directive';
 import {AdDirective} from './directives/ad.directive';
 import {ProvideParentFormDirective} from './directives/provide-parent-form.directive';
 import {BookListComponent} from './components/book-list-item/book-list.component';
+import {ChangeAddressDataComponent} from './components/change-address-data/change-address-data.component';
+import {ChangePaymentDataComponent} from './components/change-payment-data/change-payment-data.component';
+import {ChangePasswordComponent} from './components/change-password/change-password.component';
+import {ChangeUserDataComponent} from './components/change-user-data/change-user-data.component';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, ToasterModule];
 
@@ -60,6 +64,10 @@ const COMPONENTS = [
   SearchInputComponent,
   TinyMCEComponent,
   SampleLayoutComponent,
+  ChangeUserDataComponent,
+  ChangeAddressDataComponent,
+  ChangePaymentDataComponent,
+  ChangePasswordComponent,
 ];
 
 const PIPES = [

@@ -38,7 +38,7 @@ export class CustomerService {
         this.currentUserService.setAuth(user);
         return user;
       })
-      .catch(err => this.handleError(err, 'Login'));
+      .catch(err => this.handleError(err, 'login'));
   }
 
   register(customer: Customer, password: string): Observable<any> {

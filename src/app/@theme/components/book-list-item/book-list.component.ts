@@ -12,7 +12,7 @@ import {NotificationService} from '../../../@core/services/notification.service'
       <div *ngFor="let b of books">
         <div class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="wrapper">
-            <div class="details col-md-4">
+            <div class="details col-md-4" (click)="bookSelected(b.isbn)">
               <div class="title">{{ b.title }}</div>
               <div class="authors">
                 <div class="desc">by {{ b.authors }}</div>
@@ -21,11 +21,11 @@ import {NotificationService} from '../../../@core/services/notification.service'
                 <div class="desc">{{ b.isbn }}</div>
               </div>
             </div>
-            <div class="price  col-md-4">
+            <div class="price  col-md-4" (click)="bookSelected(b.isbn)">
               {{ b.price | currency:'USD'}}
             </div>
             <div class="col-md-2">
-                <ngx-shopping-cart-add-button [book]="b"></ngx-shopping-cart-add-button>
+              <ngx-shopping-cart-add-button [book]="b"></ngx-shopping-cart-add-button>
             </div>
           </div>
         </div>
@@ -36,10 +36,16 @@ import {NotificationService} from '../../../@core/services/notification.service'
 export class BookListComponent {
   @Input()
   books: Book [];
+  @Output()
+  onBookSelected: EventEmitter<string> = new EventEmitter();
 
 
   constructor(private cartService: ShoppingCartService, private notificationService: NotificationService) {
   }
 
+
+  bookSelected(isbn) {
+    this.onBookSelected.emit(isbn);
+  }
 
 }

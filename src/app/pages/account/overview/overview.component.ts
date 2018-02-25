@@ -12,6 +12,7 @@ import {AdItem} from '../../../@core/model/ad-item.model';
 import {AdService} from '../../../@core/services/ad.service';
 import {ChangeAddressDataComponent} from '../../../@theme/components/change-address-data/change-address-data.component';
 import {ChangePaymentDataComponent} from '../../../@theme/components/change-payment-data/change-payment-data.component';
+import {Order} from '../../../@core/model/order.model';
 
 @Component({
   selector: 'ngx-overview',
@@ -22,7 +23,7 @@ export class OverviewComponent implements OnInit {
 
   customer: Customer;
   user: User;
-  orders: any[];
+  orders: Order [];
   loading: boolean = true;
   Country: typeof Country = Country;
   orderYear = new Date().getFullYear();
@@ -61,6 +62,10 @@ export class OverviewComponent implements OnInit {
     this.orderService.searchOrders(this.customer.nr, this.orderYear)
       .subscribe(
         result => {
+          // hack since date from backend is not a valid javascript date format
+          result.forEach((o) => {
+            o.date = new Date(o.date.substring(0, o.date.length - 6));
+          });
           this.orders = result;
         },
       )

@@ -38,10 +38,9 @@ testpassword: testertest
 - [x] Checkout overview - A
 - [ ] Checkout address selection - S
 - [ ] Admin component to add books
-- [ ] Disable all button when action is not allowed
-- [ ] view and cancel order on account view
+- [ ] view and cancel order on account view - A
 - [ ] guards for order placement/ checkout
-- [ ] Total price on checkout view - A
+- [x] Total price on checkout view - A
 - [ ] Make error service return errors - S
 - [ ] I18n
 - [ ] Redux state handling

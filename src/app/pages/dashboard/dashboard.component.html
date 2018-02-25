@@ -21,6 +21,6 @@
     Search Results
   </nb-card-header>
   <nb-card-body>
-  <ngx-book-list [books]="books"></ngx-book-list>
+  <ngx-book-list [books]="books" (onBookSelected)="navigateToDetails($event)"></ngx-book-list>
   </nb-card-body>
 </nb-card>

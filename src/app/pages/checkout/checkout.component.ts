@@ -29,4 +29,8 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
+
+  get totalPrice(): number { return this.currentShoppingCart.getTotalPrice(); }
+
+
 }

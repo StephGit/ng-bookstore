@@ -32,7 +32,7 @@ export class OrderService {
 
   // TODO map
   public searchOrders(customerNr: number, year: number): Observable<any> {
-    return this.apiService.get('/orders', new HttpParams({
+    return this.apiService.get<Order []>('/orders', new HttpParams({
       fromObject: {
         customerNr: customerNr.toString(),
         year: year.toString(),

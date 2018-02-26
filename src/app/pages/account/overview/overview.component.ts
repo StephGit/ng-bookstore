@@ -33,7 +33,8 @@ export class OverviewComponent implements OnInit {
               private currentUserService: CurrentUserService,
               private notificationService: NotificationService,
               private orderService: OrderService,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit() {
 
@@ -46,6 +47,11 @@ export class OverviewComponent implements OnInit {
       .subscribe(
         result => {
           this.loading = false;
+          this.customerService.currentCustomer
+            .subscribe(customer => {
+              this.customer = customer;
+              this.getOrders();
+            });
         },
         error => {
           this.notificationService.error(
@@ -54,21 +60,8 @@ export class OverviewComponent implements OnInit {
         },
       );
 
-    this.customerService.currentCustomer
-      .subscribe(customer => {
-        this.customer = customer;
-      });
 
-    this.orderService.searchOrders(this.customer.nr, this.orderYear)
-      .subscribe(
-        result => {
-          // hack since date from backend is not a valid javascript date format
-          result.forEach((o) => {
-            o.date = new Date(o.date.substring(0, o.date.length - 6));
-          });
-          this.orders = result;
-        },
-      )
+
   }
 
   updatePassword() {
@@ -84,5 +77,26 @@ export class OverviewComponent implements OnInit {
   updateCreditCard() {
     this.adService.setAd(new AdItem(ChangePaymentDataComponent, 'Credit-Card', null, this.customer));
     this.router.navigate(['/account/edit'])
+  }
+
+  cancelOrder(o: Order) {
+    this.orderService.cancelOrder(o.nr).subscribe(result => {
+      this.notificationService.info('Order successfully canceled', 'Order canceled');
+      this.getOrders();
+    });
+  }
+
+
+  private getOrders() {
+    this.orderService.searchOrders(this.customer.nr, this.orderYear)
+      .subscribe(
+        result => {
+          // hack since date from backend is not a valid javascript date format
+          result.forEach((o) => {
+            o.date = new Date(o.date.substring(0, o.date.length - 6));
+          });
+          this.orders = result;
+        },
+      )
   }
 }

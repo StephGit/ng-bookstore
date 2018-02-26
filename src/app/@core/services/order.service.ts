@@ -42,7 +42,7 @@ export class OrderService {
   }
 
   public cancelOrder(nr: number): Observable<any> {
-    return this.apiService.delete('/orders?nr=' + nr, null)
+    return this.apiService.delete('/orders/' + nr, null)
       .catch(err => this.handleError(err, 'cancel'));
   }
 

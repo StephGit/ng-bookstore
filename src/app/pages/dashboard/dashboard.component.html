@@ -1,4 +1,4 @@
-<nb-card *ngIf="!searchCompleted">
+<nb-card *ngIf="!books || books.length === 0">
   <nb-card-header>
     Recommended for you
   </nb-card-header>
@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="row">
-          <div *ngFor="let b of recommendatedBooks" class="col-md-2">
+          <div *ngFor="let b of recommendedBooks" class="col-md-2">
             <ngx-status-card title="{{b.title}}" authors="{{b.authors}}" isbn="{{b.isbn}}" price="{{b.price}}"
                              type="info" (onBookSelected)="navigateToDetails($event)">
             </ngx-status-card>
@@ -16,11 +16,11 @@
     </div>
   </nb-card-body>
 </nb-card>
-<nb-card class="search-results" *ngIf="searchCompleted">
+<nb-card class="search-results" *ngIf="books && books.length > 0">
   <nb-card-header>
     Search Results
   </nb-card-header>
   <nb-card-body>
-  <ngx-book-list [books]="books" (onBookSelected)="navigateToDetails($event)"></ngx-book-list>
+    <ngx-book-list [books]="books" (onBookSelected)="navigateToDetails($event)"></ngx-book-list>
   </nb-card-body>
 </nb-card>

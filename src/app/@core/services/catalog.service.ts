@@ -12,6 +12,24 @@ export class CatalogService {
 
   searchResults: Book [];
   searchResultsUpdated: EventEmitter<Book []> = new EventEmitter();
+  recommendedBooks = [{
+    title: 'Java All-in-One For Dummies',
+    authors: 'Doug Lowe',
+    isbn: '111924779921312313',
+    price: '39.99',
+  }, {title: 'Java All-in-One For Dummies ', authors: 'Doug Lowe', isbn: '1119247799', price: '39.99'},
+    {
+      title: 'Java All-in-One For Dummies ',
+      authors: 'Doug Lowe',
+      isbn: '1119247799',
+      price: '39.99',
+    }, {title: 'Java All-in-One For Dummies ', authors: 'Doug Lowe', isbn: '1119247799', price: '39.99'},
+    {
+      title: 'Java All-in-One For Dummies ',
+      authors: 'Doug Lowe',
+      isbn: '1119247799',
+      price: '39.99',
+    }, {title: 'Java All-in-One For Dummies ', authors: 'Doug Lowe', isbn: '1119247799', price: '39.99'}]
   isMockEnabled = `${environment.mock}`;
 
   constructor(private apiService: ApiService,
@@ -28,6 +46,7 @@ export class CatalogService {
     }), null)
       .catch(err => this.handleError(err, 'search'))
       .subscribe((results) => {
+        this.searchResults = results;
         this.searchResultsUpdated.emit(results);
       });
   }
@@ -36,9 +55,13 @@ export class CatalogService {
     return this.searchResults;
   }
 
+  getRecommendedBooks() {
+    return this.recommendedBooks;
+  }
+
   getBookDetails(isbn: String): Observable<Book> {
     return this.apiService.get<Book>('/books/' + isbn, null, null)
-    .catch(err => this.handleError(err, 'find'));
+      .catch(err => this.handleError(err, 'find'));
   }
 
   protected handleError(error: any, method: string) {

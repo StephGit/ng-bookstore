@@ -6,7 +6,7 @@ import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular
   template: `
     <div class="input-group">
       <input type="text" class="form-control" (keyup.enter)="onSearch(searchString)"
-             [(ngModel)]="searchString" placeholder="Search for a book...">
+             [(ngModel)]="searchString" placeholder="Search for a book..." autofocus>
       <span class="input-group-btn">
             <button class="btn btn-info" (click)="onSearch(searchString)">
              <i class="fa fa-search"></i>

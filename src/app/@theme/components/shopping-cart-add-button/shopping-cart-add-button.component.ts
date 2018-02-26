@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Book} from '../../../@core/model/book.model';
 import {ShoppingCartItem} from '../../../@core/model/shopping-cart-item.model';
 import {ShoppingCartService} from '../../../@core/services/shopping-cart.service';

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { NbMenuService, NbSidebarService, NbThemeService} from '@nebular/theme';
+import {NbThemeService} from '@nebular/theme';
 import {CatalogService} from '../../../@core/services/catalog.service';
 import {User} from '../../../@core/model/user.model';
 import {CurrentUserService} from '../../../@core/services/current-user.service';
@@ -24,8 +24,7 @@ export class HeaderComponent implements OnInit {
     { title: 'Account', link: '/account/overview'},
     { title: 'Logout', link: '/account/logout'}];
 
-  constructor(private sidebarService: NbSidebarService,
-              private catalogService: CatalogService,
+  constructor(private catalogService: CatalogService,
               private currentUserService: CurrentUserService,
               private router: Router,
               private themeService: NbThemeService) {
@@ -37,16 +36,6 @@ export class HeaderComponent implements OnInit {
       (userData: User) => {
         this.currentUser = userData;
       });
-  }
-
-  toggleSidebar(): boolean {
-    this.sidebarService.toggle(true, 'menu-sidebar');
-    return false;
-  }
-
-  toggleSettings(): boolean {
-    this.sidebarService.toggle(false, 'settings-sidebar');
-    return false;
   }
 
   goToHome() {

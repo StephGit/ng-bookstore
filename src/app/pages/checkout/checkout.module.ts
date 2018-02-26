@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
-import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import {CheckoutComponent} from "./checkout.component";
-import {CheckoutRoutingModule} from "./checkout.routing.module";
+import {CheckoutComponent} from './checkout.component';
+import {CheckoutRoutingModule} from './checkout.routing.module';
 
 
 @NgModule({
   imports: [
     ThemeModule,
-    CheckoutRoutingModule
+    CheckoutRoutingModule,
   ],
   declarations: [
-    CheckoutComponent
+    CheckoutComponent,
   ],
 })
 export class CheckoutModule { }

@@ -1,15 +1,13 @@
 import {Component, OnInit} from '@angular/core';
-import {CatalogService} from "../../@core/services/catalog.service";
-import {ShoppingCartService} from "../../@core/services/shopping-cart.service";
-import {ShoppingCart} from "../../@core/model/shopping-cart.model";
-import {Book} from "../../@core/model/book.model";
-import {ShoppingCartItem} from "../../@core/model/shopping-cart-item.model";
-import {Router} from "@angular/router";
+import {ShoppingCartService} from '../../@core/services/shopping-cart.service';
+import {ShoppingCart} from '../../@core/model/shopping-cart.model';
+import {ShoppingCartItem} from '../../@core/model/shopping-cart-item.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-shopping-cart',
   templateUrl: './shopping-cart.component.html',
-  styleUrls: ['./shopping-cart.component.scss']
+  styleUrls: ['./shopping-cart.component.scss'],
 })
 export class ShoppingCartComponent implements OnInit {
 

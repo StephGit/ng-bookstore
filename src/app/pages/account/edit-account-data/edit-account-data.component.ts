@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
 import {AdDirective} from '../../../@theme/directives/ad.directive';
 import {AdItem} from '../../../@core/model/ad-item.model';
 import {AdService} from '../../../@core/services/ad.service';

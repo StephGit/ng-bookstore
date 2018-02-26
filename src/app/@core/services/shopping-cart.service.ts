@@ -1,5 +1,4 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {ApiService} from './api.service';
+import {Injectable} from '@angular/core';
 import {ShoppingCart} from '../model/shopping-cart.model';
 import {Book} from '../model/book.model';
 import {ShoppingCartItem} from '../model/shopping-cart-item.model';

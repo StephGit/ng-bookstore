@@ -31,8 +31,7 @@ export class CustomerService {
       'email': credentials.email,
       'password': credentials.password,
     });
-    // TODO add type to get call
-    return this.apiService.get<any>(this.path + '/login', null , headers )
+    return this.apiService.get<number>(this.path + '/login', null , headers )
       .map((data) => {
         const user = new User(data, credentials.email, credentials.password);
         this.currentUserService.setAuth(user);
@@ -88,12 +87,6 @@ export class CustomerService {
         return data;
       })
       .catch(err => this.handleError(err, 'changePassword'));
-  }
-
-
-  protected  extractData(res: Response) {
-    const body = res.json();
-    return body || {};
   }
 
   protected handleError(error: any, method: string) {

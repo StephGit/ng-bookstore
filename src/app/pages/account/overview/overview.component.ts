@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Customer} from '../../../@core/model/customer.model';
 import {CustomerService} from '../../../@core/services/customer.service';
 import {CurrentUserService} from '../../../@core/services/current-user.service';

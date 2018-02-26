@@ -7,52 +7,35 @@ import {
   NbActionsModule,
   NbCardModule,
   NbLayoutModule,
-  NbMenuModule,
-  NbRouteTabsetModule,
   NbSearchModule,
-  NbSidebarModule,
-  NbTabsetModule,
   NbThemeModule,
   NbUserModule,
-  NbCheckboxModule,
-} from '@nebular/theme';
+  } from '@nebular/theme';
 
 import {
+  BookListComponent,
+  ChangeAddressDataComponent,
+  ChangePasswordComponent,
+  ChangePaymentDataComponent,
+  ChangeUserDataComponent,
   FooterComponent,
   HeaderComponent,
   ShoppingCartAddButtonComponent,
   SearchInputComponent,
-  TinyMCEComponent,
 } from './components';
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
-import {
-  SampleLayoutComponent,
-} from './layouts';
-import { DEFAULT_THEME } from './styles/theme.default';
-import { COSMIC_THEME } from './styles/theme.cosmic';
-import {ToasterModule} from 'angular2-toaster';
-import {CreditcardYearDirective} from './directives/creditcard-year.directive';
-import {AdDirective} from './directives/ad.directive';
-import {ProvideParentFormDirective} from './directives/provide-parent-form.directive';
-import {BookListComponent} from './components/book-list-item/book-list.component';
-import {ChangeAddressDataComponent} from './components/change-address-data/change-address-data.component';
-import {ChangePaymentDataComponent} from './components/change-payment-data/change-payment-data.component';
-import {ChangePasswordComponent} from './components/change-password/change-password.component';
-import {ChangeUserDataComponent} from './components/change-user-data/change-user-data.component';
+import { LayoutComponent} from './layout';
+import { ToasterModule } from 'angular2-toaster';
+import {AdDirective, CreditcardYearDirective, ProvideParentFormDirective} from './directives';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, ToasterModule];
 
 const NB_MODULES = [
   NbCardModule,
   NbLayoutModule,
-  NbTabsetModule,
-  NbRouteTabsetModule,
-  NbMenuModule,
   NbUserModule,
   NbActionsModule,
   NbSearchModule,
-  NbSidebarModule,
-  NbCheckboxModule,
   NgbModule,
 ];
 
@@ -62,8 +45,7 @@ const COMPONENTS = [
   BookListComponent,
   FooterComponent,
   SearchInputComponent,
-  TinyMCEComponent,
-  SampleLayoutComponent,
+  LayoutComponent,
   ChangeUserDataComponent,
   ChangeAddressDataComponent,
   ChangePaymentDataComponent,
@@ -86,12 +68,9 @@ const DIRECTIVES = [
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
     {
-      name: 'cosmic',
+      name: 'default',
     },
-    [ DEFAULT_THEME, COSMIC_THEME ],
   ).providers,
-  ...NbSidebarModule.forRoot().providers,
-  ...NbMenuModule.forRoot().providers,
 ];
 
 @NgModule({

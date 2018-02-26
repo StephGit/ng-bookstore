@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {CatalogService} from "../../@core/services/catalog.service";
-import {Observable} from "rxjs/Observable";
-import {ActivatedRoute, ParamMap, Router} from "@angular/router";
+import {CatalogService} from '../../@core/services/catalog.service';
+import {Observable} from 'rxjs/Observable';
+import {ActivatedRoute, ParamMap} from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import {Book} from "../../@core/model/book.model";
+import {Book} from '../../@core/model/book.model';
 
 @Component({
   selector: 'ngx-details',
   templateUrl: './details.component.html',
-  styleUrls: ['./details.component.scss']
+  styleUrls: ['./details.component.scss'],
 })
 export class DetailsComponent implements OnInit {
 

@@ -5,12 +5,11 @@ import 'rxjs/add/operator/withLatestFrom';
 import 'rxjs/add/operator/delay';
 import {BodyOutputType, Toast, ToasterConfig, ToasterService} from 'angular2-toaster';
 import 'style-loader!angular2-toaster/toaster.css';
-import {NotificationService} from '../../../@core/services/notification.service';
+import {NotificationService} from '../../@core/services/notification.service';
 
-// TODO: move layouts into the framework
 @Component({
-  selector: 'ngx-sample-layout',
-  styleUrls: ['./sample.layout.scss'],
+  selector: 'ngx-layout',
+  styleUrls: ['./layout.scss'],
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
       <nb-layout-header fixed>
@@ -28,17 +27,11 @@ import {NotificationService} from '../../../@core/services/notification.service'
     </nb-layout>
   `,
 })
-export class SampleLayoutComponent implements OnDestroy {
+export class LayoutComponent implements OnDestroy {
   layout: any = {
     name: 'One Column',
     icon: 'nb-layout-default',
     id: 'one-column',
-    selected: true,
-  };
-  sidebar: any = {
-    name: 'Left Sidebar',
-    icon: 'nb-layout-sidebar-left',
-    id: 'left',
     selected: true,
   };
 
@@ -64,12 +57,6 @@ export class SampleLayoutComponent implements OnDestroy {
   isHideOnClick = true;
   isDuplicatesPrevented = false;
   isCloseButton = true;
-
-  types: string[] = ['default', 'info', 'success', 'warning', 'error'];
-  animations: string[] = ['fade', 'flyLeft', 'flyRight', 'slideDown', 'slideUp'];
-  positions: string[] = ['toast-top-full-width', 'toast-bottom-full-width', 'toast-top-left', 'toast-top-center',
-    'toast-top-right', 'toast-bottom-right', 'toast-bottom-center', 'toast-bottom-left', 'toast-center'];
-
 
   private showToast(type: string, title: string, body: string) {
     this.config = new ToasterConfig({

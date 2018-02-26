@@ -29,7 +29,7 @@ export class CatalogService {
       authors: 'Doug Lowe',
       isbn: '1119247799',
       price: '39.99',
-    }, {title: 'Java All-in-One For Dummies ', authors: 'Doug Lowe', isbn: '1119247799', price: '39.99'}]
+    }, {title: 'Java All-in-One For Dummies ', authors: 'Doug Lowe', isbn: '1119247799', price: '39.99'}];
   isMockEnabled = `${environment.mock}`;
 
   constructor(private apiService: ApiService,

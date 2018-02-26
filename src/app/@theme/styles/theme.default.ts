@@ -62,27 +62,5 @@ export const DEFAULT_THEME = {
       areaGradTo: 'rgba(235, 238, 242, 0.5)',
       shadowLineDarkBg: 'rgba(0, 0, 0, 0)',
     },
-
-    bubbleMap: {
-      titleColor: '#484848',
-      areaColor: '#dddddd',
-      areaHoverColor: '#cccccc',
-      areaBorderColor: '#ebeef2',
-    },
-
-    echarts: {
-      bg: '#ffffff',
-      textColor: '#484848',
-      axisLineColor: '#bbbbbb',
-      splitLineColor: '#ebeef2',
-      itemHoverShadowColor: 'rgba(0, 0, 0, 0.5)',
-      tooltipBackgroundColor: '#6a7985',
-      areaOpacity: '0.7',
-    },
-
-    chartjs: {
-      axisLineColor: '#cccccc',
-      textColor: '#484848',
-    },
   },
 };

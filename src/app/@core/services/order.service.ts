@@ -30,7 +30,6 @@ export class OrderService {
       .catch(err => this.handleError(err, 'find'));
   }
 
-  // TODO map
   public searchOrders(customerNr: number, year: number): Observable<any> {
     return this.apiService.get<Order []>('/orders', new HttpParams({
       fromObject: {

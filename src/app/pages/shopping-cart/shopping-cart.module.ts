@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
-import { NgxEchartsModule } from 'ngx-echarts';
 
 import { ThemeModule } from '../../@theme/theme.module';
-import {ShoppingCartComponent} from "./shopping-cart.component";
-import {ShoppingCartRoutingModule} from "./shopping-cart-routing.module";
+import {ShoppingCartComponent} from './shopping-cart.component';
+import {ShoppingCartRoutingModule} from './shopping-cart-routing.module';
 
 
 @NgModule({
   imports: [
     ThemeModule,
-    ShoppingCartRoutingModule
+    ShoppingCartRoutingModule,
   ],
   declarations: [
-    ShoppingCartComponent
+    ShoppingCartComponent,
   ],
 })
 export class ShoppingCartModule { }

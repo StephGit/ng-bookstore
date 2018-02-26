@@ -12,6 +12,14 @@ import {OrderStatus} from '../../../../@core/model/order-status.model';
       </nb-card-header>
       <nb-card-body>
         <div class="row">
+          <div class="col-md-12">
+            <select class="form-control" name="year" id="year"
+                    [(ngModel)]="currentYear" (ngModelChange)="changeYear()">
+              <option *ngFor="let c of years" [value]="c">{{c}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
           <div class="list-group col-md-12">
             <div class="col-md-12">
               <table class="table">
@@ -47,15 +55,26 @@ import {OrderStatus} from '../../../../@core/model/order-status.model';
 })
 export class OrderListComponent {
 
+  years: number [] = new Array<number>(11);
+  currentYear: number;
   @Input() orders: Order [];
   @Output() onCancelOrder: EventEmitter<Order> = new EventEmitter();
+  @Output() onYearChanged: EventEmitter<number> = new EventEmitter();
 
 
   constructor() {
+    this.currentYear = new Date().getFullYear();
+    for (let y = 0; y < this.years.length; y++) {
+      this.years[y] = this.currentYear - y;
+    }
   }
 
   canCancelOrder(o: Order) {
     return o.status === OrderStatus.ACCEPTED || o.status === OrderStatus.PROCESSING;
+  }
+
+  changeYear() {
+    this.onYearChanged.emit(this.currentYear)
   }
 
   cancelOrder(o: Order) {

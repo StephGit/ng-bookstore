@@ -38,8 +38,8 @@ testpassword: testertest
 - [x] Checkout overview - A
 - [ ] Checkout address selection - S
 - [ ] Admin component to add books
-- [ ] view and cancel order on account view - A
-- [ ] guards for order placement/ checkout
+- [x] view and cancel order on account view - A
+- [x] guards for order placement/ checkout
 - [x] Total price on checkout view - A
 - [ ] Make error service return errors - S
 - [ ] I18n

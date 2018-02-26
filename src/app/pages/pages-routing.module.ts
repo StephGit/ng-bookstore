@@ -3,6 +3,7 @@ import {NgModule} from '@angular/core';
 
 import {PagesComponent} from './pages.component';
 import {DashboardComponent} from './dashboard/dashboard.component';
+import {AuthGuardService} from '../@core/services/auth-guard.service';
 
 const routes: Routes = [{
   path: '',
@@ -19,6 +20,7 @@ const routes: Routes = [{
   }, {
     path: 'checkout',
     loadChildren: './checkout/checkout.module#CheckoutModule',
+    canActivate: [AuthGuardService],
   }, {
     path: 'details',
     loadChildren: './details/details.module#DetailsModule',

@@ -3,10 +3,13 @@ import {ShoppingCart} from '../model/shopping-cart.model';
 import {Book} from '../model/book.model';
 import {ShoppingCartItem} from '../model/shopping-cart-item.model';
 import {environment} from '../../../environments/environment';
+import {User} from '../model/user.model';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class ShoppingCartService {
-
+  private cartItemsCountSubject = new BehaviorSubject<number>(0);
+  public currentCartItemsCount = this.cartItemsCountSubject.asObservable();
   currentShoppingCart: ShoppingCart = new ShoppingCart();
   isMockEnabled = `${environment.mock}`;
   private STORAGE_KEY: string = 'shopping-cart';
@@ -25,19 +28,20 @@ export class ShoppingCartService {
           ));
         this.currentShoppingCart = storedShoppingCart;
       }
+      this.cartItemsCountSubject.next(this.currentShoppingCart.items.length);
     }
     return this.currentShoppingCart;
   }
 
   public addItemToShoppingCart(item: ShoppingCartItem) {
     this.currentShoppingCart.addItem(item);
+    this.cartItemsCountSubject.next(this.currentShoppingCart.items.length);
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.currentShoppingCart));
   }
 
   public removeItemFromShoppingCart(item: ShoppingCartItem) {
     this.currentShoppingCart.removeItem(item);
+    this.cartItemsCountSubject.next(this.currentShoppingCart.items.length);
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.currentShoppingCart));
   }
-
-
 }

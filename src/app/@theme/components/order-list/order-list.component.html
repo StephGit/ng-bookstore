@@ -1,0 +1,54 @@
+<nb-card class="orders">
+  <nb-card-header>
+    Your Orders:
+  </nb-card-header>
+  <nb-card-body>
+    <div class="row">
+      <div class="col-md-12">
+        <select class="form-control" name="year" id="year"
+                [(ngModel)]="currentYear" (ngModelChange)="changeYear()">
+          <option *ngFor="let c of years" [value]="c">{{c}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="list-group col-md-12">
+        <div *ngIf="!orders || orders.length === 0">
+          <div class="form-alert">
+            <p>
+              <ngb-alert type="info" [dismissible]="false">
+                <strong>No Orders found</strong>
+              </ngb-alert>
+            </p>
+          </div>
+        </div>
+        <div *ngIf="orders && orders.length > 0" class="col-md-12">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Date</th>
+              <th scope="col">Status</th>
+              <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let o of orders">
+              <td scope="row">{{o.nr}}</td>
+              <td>{{o.amount | currency:'USD'}}</td>
+              <td>{{o.date | date:'yyyy-MM-dd HH:mm'}}</td>
+              <td>{{o.status}}</td>
+              <td>
+                <button *ngIf="canCancelOrder(o)" (click)="cancelOrder(o)"
+                        class="btn btn-success">Cancel
+                </button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

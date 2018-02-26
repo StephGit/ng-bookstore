@@ -6,6 +6,7 @@ import {User} from '../../../@core/model/user.model';
 import {CurrentUserService} from '../../../@core/services/current-user.service';
 import {Router} from '@angular/router';
 import {NbUserMenuItem} from '@nebular/theme/components/user/user.component';
+import {ShoppingCartService} from '../../../@core/services/shopping-cart.service';
 
 @Component({
   selector: 'ngx-header',
@@ -13,7 +14,7 @@ import {NbUserMenuItem} from '@nebular/theme/components/user/user.component';
   templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
-
+  cartItems: number;
   currentUser: User;
   picture = 'assets/images/user.png';
 
@@ -24,6 +25,7 @@ export class HeaderComponent implements OnInit {
   constructor(private catalogService: CatalogService,
               private currentUserService: CurrentUserService,
               private router: Router,
+              private shoppingCartService: ShoppingCartService,
               private themeService: NbThemeService) {
   }
 
@@ -33,6 +35,8 @@ export class HeaderComponent implements OnInit {
       (userData: User) => {
         this.currentUser = userData;
       });
+    this.shoppingCartService.currentCartItemsCount.subscribe(
+      count => { this.cartItems = count; });
   }
 
   goToHome() {

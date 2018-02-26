@@ -9,7 +9,9 @@
   <nb-action class="control-item search">
     <ngx-search-input (search)="startSearch($event)"></ngx-search-input>
   </nb-action>
-  <nb-action class="control-item" (click)="navigateToShoppingCart()"  icon="ion-ios-cart-outline">
+  <nb-action (click)="navigateToShoppingCart()" class="control-item" title="ShoppingCart">
+      <i class="control-icon ion-ios-cart-outline"></i>
+      <span *ngIf="cartItems !== undefined && cartItems > 0" class="badge">{{cartItems}}</span>
   </nb-action>
   <nb-action>
     <div *ngIf="currentUser?.email" class="user-container with-menu">

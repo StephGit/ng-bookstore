@@ -11,7 +11,7 @@ import {ChangePaymentDataComponent} from '../../@theme/components/change-payment
 import {ChangePasswordComponent} from '../../@theme/components/change-password/change-password.component';
 import {OverviewComponent} from './overview/overview.component';
 import {EditAccountDataComponent} from './edit-account-data/edit-account-data.component';
-import {OrderListComponent} from './overview/order-list/order-list.component';
+import {OrderListComponent} from '../../@theme/components/order-list/order-list.component';
 
 
 @NgModule({

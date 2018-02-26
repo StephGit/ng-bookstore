@@ -36,7 +36,7 @@ testpassword: testertest
 - [x] Handle errors from backend - i.e. see notifications on components page - A
 - [x] Shopping cart - A --> table with isbn, title, price, recalculate totalprice when quantity updated ngModelChange="updateTotalPrice"
 - [x] Checkout overview - A
-- [ ] Checkout address selection - S
+- [x] Checkout address selection - S
 - [x] view and cancel order on account view - A
 - [x] guards for order placement/ checkout
 - [x] Total price on checkout view - A

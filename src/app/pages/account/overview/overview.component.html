@@ -6,46 +6,8 @@
   </div>
 </nb-card-header>
 <div class="row" *ngIf="customer">
-  <div class="col-lg-6 col-md-6 col-sm-12">
-    <div class="row"><h5 class="title col-12 grid-h">Contact/Address:</h5></div>
-    <div class="row">
-      <div class="label col-5 col-md-4">Name:</div>
-      <div class="content col-7 col-md-8">{{customer.firstName}} {{customer.lastName}}</div>
-    </div>
-    <div class="row">
-      <div class="label col-5 col-md-4">Email:</div>
-      <div class="content col-7 col-md-8">{{customer.email}}</div>
-    </div>
-    <div class="row">
-      <div class="label col-5 col-md-4">Street:</div>
-      <div class="content   col-7 col-md-8">{{customer.address.street}}</div>
-    </div>
-    <div class="row">
-      <div class="label col-5 col-md-4">Postcode/City:</div>
-      <div class="content   col-7 col-md-8">{{customer.address.postalCode}} {{customer.address.city}}</div>
-    </div>
-    <div class="row">
-      <div class="label col-5 col-md-4">Country:</div>
-      <div class="content col-7 col-md-8">{{Country[customer.address.country]}}</div>
-    </div>
-  </div>
-  <div class="col-lg-6 col-md-6 col-sm-12">
-    <div class="row"><h5 class="title col-12 grid-h">Payment Information:</h5></div>
-    <div class="row">
-      <div class="label col-5 col-md-4">Card-Type:</div>
-      <div class="content col-7 col-md-8">{{customer.creditCard.type}}</div>
-    </div>
-    <div class="row">
-      <div class="label col-5 col-md-4">Cardnumber:</div>
-      <div class="content col-7 col-md-8">{{customer.creditCard.number}}</div>
-    </div>
-    <div class="row">
-      <div class="label col-5 col-md-4">Expiration:</div>
-      <div class="content   col-7 col-md-8">
-        {{customer.creditCard.expirationMonth}}/{{customer.creditCard.expirationYear}}
-      </div>
-    </div>
-  </div>
+  <ngx-address-data-view class="col-lg-6 col-md-6 col-sm-12" [customer]="customer" [title]="title"></ngx-address-data-view>
+  <ngx-payment-data-view class="col-lg-6 col-md-6 col-sm-12" [customer]="customer"></ngx-payment-data-view>
 </div>
 <div class="d-flex justify-content-center btn-change">
   <button class="btn btn-primary btn-md multibtn"

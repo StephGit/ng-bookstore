@@ -2,32 +2,33 @@ import {Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/c
 import {AdDirective} from '../../../@theme/directives/ad.directive';
 import {AdItem} from '../../../@core/model/ad-item.model';
 import {AdService} from '../../../@core/services/ad.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../../../@core/services/notification.service';
 import {CustomerService} from '../../../@core/services/customer.service';
 
 @Component({
   selector: 'ngx-edit-account-data',
   templateUrl: './edit-account-data.component.html',
-  styleUrls: ['./edit-account-data.component.scss'],
 })
 export class EditAccountDataComponent implements OnInit {
   @ViewChild(AdDirective) adHost: AdDirective;
   adItem: AdItem;
   submitted: boolean = false;
+  returnUrl: string;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver,
               private customerService: CustomerService,
               private notificationService: NotificationService,
               private adService: AdService,
-              private router: Router) { }
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.adService.currentAd.subscribe(
       item => {
         this.adItem = item;
      });
-
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.loadComponent();
   }
 
@@ -42,7 +43,7 @@ export class EditAccountDataComponent implements OnInit {
       (componentRef.instance).user = this.adItem.user;
       (componentRef.instance).customer = this.adItem.customer;
     } else {
-      this.navigateToOverview();
+      this.navigateBack();
     }
   }
 
@@ -55,7 +56,7 @@ export class EditAccountDataComponent implements OnInit {
         .update(this.adItem.customer)
         .subscribe(
           result => {
-            this.navigateToOverview();
+            this.navigateBack();
             this.notificationService.success(this.adItem.title + ' sucessfully changed', 'Update ' + this.adItem.title);
           },
           error => {
@@ -70,7 +71,7 @@ export class EditAccountDataComponent implements OnInit {
       .changePassword(this.adItem.user)
       .subscribe(
         result => {
-          this.navigateToOverview();
+          this.navigateBack();
           this.notificationService.success('Password sucessfully changed', 'Update Password');
         },
         error => {
@@ -78,7 +79,8 @@ export class EditAccountDataComponent implements OnInit {
         },
       );
   }
-  navigateToOverview() {
-    this.router.navigate(['/account/overview']);
+
+  navigateBack() {
+    this.router.navigate([this.returnUrl]);
   }
 }

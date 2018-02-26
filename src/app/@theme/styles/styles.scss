@@ -21,7 +21,9 @@
   @include ngx-pace-theme();
 };
 
-
+.multibtn {
+  margin: 3px;
+}
 
 .pointer {
   cursor: pointer !important;

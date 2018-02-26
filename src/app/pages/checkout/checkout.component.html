@@ -30,8 +30,14 @@
     </div>
     <div class="row">
       <div class="col-md-12 menu">
-        <div class="totalprice">Total price: {{ totalPrice | currency:'USD'}}</div>
-        <button class="btn btn-success checkout-btn" (click)="placeOrder()">Place Order</button>
+        <div class="col-12 totalprice">Total price: {{ totalPrice | currency:'USD'}}</div>
+        <div class="row customer-data">
+          <ngx-address-data-view class="col-lg-6 col-md-6 col-sm-12" [customer]="customer" [title]="titleCustomer"></ngx-address-data-view>
+          <ngx-payment-data-view class="col-lg-6 col-md-6 col-sm-12" [customer]="customer"></ngx-payment-data-view>
+        </div>
+        <button class="btn btn-primary btn-md multibtn" (click)="updateAddress()">Edit Address</button>
+        <button class="btn btn-primary btn-md multibtn" (click)="updateCreditCard()">Edit Payment-Data</button>
+        <button class="btn btn-success checkout-btn multibtn" (click)="placeOrder()">Place Order</button>
       </div>
     </div>
   </nb-card-body>

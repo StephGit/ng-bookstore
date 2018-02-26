@@ -13,6 +13,7 @@ import {
   } from '@nebular/theme';
 
 import {
+  AddressDataViewComponent,
   BookListComponent,
   ChangeAddressDataComponent,
   ChangePasswordComponent,
@@ -20,9 +21,11 @@ import {
   ChangeUserDataComponent,
   FooterComponent,
   HeaderComponent,
-  ShoppingCartAddButtonComponent,
+  PaymentDataViewComponent,
   SearchInputComponent,
+  ShoppingCartAddButtonComponent,
 } from './components';
+
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { LayoutComponent} from './layout';
 import { ToasterModule } from 'angular2-toaster';
@@ -40,16 +43,18 @@ const NB_MODULES = [
 ];
 
 const COMPONENTS = [
-  HeaderComponent,
-  ShoppingCartAddButtonComponent,
+  AddressDataViewComponent,
   BookListComponent,
   FooterComponent,
-  SearchInputComponent,
-  LayoutComponent,
   ChangeUserDataComponent,
   ChangeAddressDataComponent,
   ChangePaymentDataComponent,
   ChangePasswordComponent,
+  HeaderComponent,
+  LayoutComponent,
+  PaymentDataViewComponent,
+  SearchInputComponent,
+  ShoppingCartAddButtonComponent,
 ];
 
 const PIPES = [

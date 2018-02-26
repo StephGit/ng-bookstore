@@ -5,6 +5,12 @@ import {OrderService} from '../../@core/services/order.service';
 import {NotificationService} from '../../@core/services/notification.service';
 import {OrderItem} from '../../@core/model/oder-item.model';
 import {Router} from '@angular/router';
+import {Customer} from '../../@core/model/customer.model';
+import {CustomerService} from '../../@core/services/customer.service';
+import {ChangePaymentDataComponent} from '../../@theme/components/change-payment-data/change-payment-data.component';
+import {AdItem} from '../../@core/model/ad-item.model';
+import {ChangeAddressDataComponent} from '../../@theme/components/change-address-data/change-address-data.component';
+import {AdService} from '../../@core/services/ad.service';
 
 @Component({
   selector: 'ngx-checkout',
@@ -13,14 +19,20 @@ import {Router} from '@angular/router';
 })
 export class CheckoutComponent implements OnInit {
 
+  customer: Customer;
   currentShoppingCart: ShoppingCart;
+  titleCustomer: string = 'Shipping-Address:';
 
-  constructor(private shoppingCartService: ShoppingCartService, private orderService: OrderService,
+  constructor(private adService: AdService,
+              private shoppingCartService: ShoppingCartService,
+              private customerService: CustomerService,
+              private orderService: OrderService,
               private notficationService: NotificationService, private router: Router) {
   }
 
   ngOnInit() {
     this.currentShoppingCart = this.shoppingCartService.getCurrentShoppingCart();
+    this.customerService.currentCustomer.subscribe( value => this.customer = value);
   }
 
   placeOrder() {
@@ -31,8 +43,15 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-
   get totalPrice(): number { return this.currentShoppingCart.getTotalPrice(); }
 
+  updateAddress() {
+    this.adService.setAd(new AdItem(ChangeAddressDataComponent, 'Address', null, this.customer));
+    this.router.navigate(['/account/edit'], {queryParams: {returnUrl: '/checkout'}});
+  }
 
+  updateCreditCard() {
+    this.adService.setAd(new AdItem(ChangePaymentDataComponent, 'Credit-Card', null, this.customer));
+    this.router.navigate(['/account/edit'], {queryParams: {returnUrl: '/checkout'}});
+  }
 }

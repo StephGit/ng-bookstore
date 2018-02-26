@@ -5,7 +5,7 @@
       <p></p>
       <ng-template ngxAdHost></ng-template>
       <div class="d-flex justify-content-center">
-        <a class="btn btn-lg btn-hero-success multibtn" routerLink="/account/overview">Cancel</a>
+        <a class="btn btn-lg btn-hero-success multibtn" (click)="navigateBack()">Cancel</a>
         <button [disabled]="submitted || !form.valid" class="btn btn-lg btn-hero-success multibtn"
                 [class.btn-pulse]="submitted">
           Save

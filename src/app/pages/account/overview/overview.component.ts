@@ -25,7 +25,8 @@ export class OverviewComponent implements OnInit {
   user: User;
   orders: Order [];
   loading: boolean = true;
-  Country: typeof Country = Country;
+  title: string = 'Contact/Address:';
+
   orderYear = new Date().getFullYear();
 
   constructor(private adService: AdService,
@@ -65,17 +66,17 @@ export class OverviewComponent implements OnInit {
 
   updatePassword() {
     this.adService.setAd(new AdItem(ChangePasswordComponent, 'Password', this.user, null));
-    this.router.navigate(['/account/edit'])
+    this.router.navigate(['/account/edit'], {queryParams: {returnUrl: '/account/overview'}});
   }
 
   updateAddress() {
     this.adService.setAd(new AdItem(ChangeAddressDataComponent, 'Address', null, this.customer));
-    this.router.navigate(['/account/edit'])
+    this.router.navigate(['/account/edit'], {queryParams: {returnUrl: '/account/overview'}});
   }
 
   updateCreditCard() {
     this.adService.setAd(new AdItem(ChangePaymentDataComponent, 'Credit-Card', null, this.customer));
-    this.router.navigate(['/account/edit'])
+    this.router.navigate(['/account/edit'], {queryParams: {returnUrl: '/account/overview'}});
   }
 
   cancelOrder(o: Order) {

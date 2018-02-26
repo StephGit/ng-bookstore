@@ -41,25 +41,23 @@ export class OverviewComponent implements OnInit {
     this.currentUserService.currentUser
       .subscribe(user => {
         this.user = user;
+        this.customerService.find(this.user.id)
+          .subscribe(
+            result => {
+              this.loading = false;
+              this.customerService.currentCustomer
+                .subscribe(customer => {
+                  this.customer = customer;
+                  this.getOrders();
+                });
+            },
+            error => {
+              this.notificationService.error(
+                'There is a problem with your account. Please login again!', 'Account error');
+              this.router.navigate(['/account/logout']);
+            },
+          );
       });
-
-    this.customerService.find(this.user.id)
-      .subscribe(
-        result => {
-          this.loading = false;
-          this.customerService.currentCustomer
-            .subscribe(customer => {
-              this.customer = customer;
-              this.getOrders();
-            });
-        },
-        error => {
-          this.notificationService.error(
-            'There is a problem with your account. Please login again!', 'Account error');
-          this.router.navigate(['/account/logout']);
-        },
-      );
-
 
 
   }
@@ -86,8 +84,13 @@ export class OverviewComponent implements OnInit {
     });
   }
 
+  yearChanged(year: number) {
+    this.orderYear = year;
+    this.getOrders();
+  }
 
-  private getOrders() {
+
+  getOrders() {
     this.orderService.searchOrders(this.customer.nr, this.orderYear)
       .subscribe(
         result => {

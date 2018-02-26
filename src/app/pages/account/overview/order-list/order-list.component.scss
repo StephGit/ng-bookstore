@@ -1,0 +1,19 @@
+@import '../../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  nb-card {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+
+    margin-top: 2em;
+  }
+
+  nb-card-header {
+    border-bottom: none !important;
+  }
+
+  .form-alert {
+    margin-top: 2em;
+  }
+
+}

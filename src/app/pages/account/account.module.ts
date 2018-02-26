@@ -27,7 +27,7 @@ import {OrderListComponent} from './overview/order-list/order-list.component';
     LogoutComponent,
     OverviewComponent,
     EditAccountDataComponent,
-    OrderListComponent
+    OrderListComponent,
   ],
   entryComponents: [
     ChangeUserDataComponent,

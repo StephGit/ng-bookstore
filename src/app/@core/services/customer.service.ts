@@ -63,11 +63,6 @@ export class CustomerService {
   update(customer): Observable<Customer> {
     return this.apiService
       .put(this.path + '/' + customer.nr, customer, null)
-      .map(data => {
-        // Update the currentCustomer observable
-        this.currentCustomerSubject.next(data);
-        return data;
-      })
       .catch(err => this.handleError(err, 'update'));
   }
 
@@ -103,7 +98,7 @@ export class CustomerService {
 
   protected handleError(error: any, method: string) {
     this.notificationService.error(
-      this.errorService.getCustomerError({method: method, status: error.status}), 'Customer error');
+      this.errorService.getCustomerError(method + error.status), 'Customer error');
     return Observable.throw(error);
   }
 }

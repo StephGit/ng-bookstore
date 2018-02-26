@@ -48,7 +48,7 @@ export class OrderService {
 
   protected handleError(error: any, method: string) {
     this.notificationService.error(
-      this.errorService.getOrderError([method, error.status]), 'Order error');
+      this.errorService.getOrderError(method + error.status), 'Order error');
     return Observable.throw(error);
   }
 

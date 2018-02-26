@@ -4,7 +4,6 @@ import {OrderStatus} from '../../../../@core/model/order-status.model';
 
 @Component({
   selector: 'ngx-order-list',
-  styleUrls: ['./order-list.component.scss'],
   template: `
     <nb-card class="orders">
       <nb-card-header>

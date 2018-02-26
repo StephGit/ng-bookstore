@@ -49,7 +49,7 @@ export class ApiService {
   put(path: string, body: Object = {}, headers: HttpHeaders): Observable<any> {
     return this.http.put(
       `${this.apiUrl}${path}`,
-      JSON.stringify(body),
+      body,
       {headers: this.setHeaders(headers)},
     )
       .catch((error) => this.handleError(error))

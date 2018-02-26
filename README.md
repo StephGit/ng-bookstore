@@ -31,7 +31,7 @@ testpassword: testertest
 - [x] Login and Register - S
 - [x] Account - S
 - [x] Make Dynamic Form Valdiation work - S
-- [ ] Make great changes happen again - you'll love it - S 
+- [x] Make great changes happen again - you'll love it - S 
 - [x] Book-Detail - A
 - [x] Handle errors from backend - i.e. see notifications on components page - A
 - [x] Shopping cart - A --> table with isbn, title, price, recalculate totalprice when quantity updated ngModelChange="updateTotalPrice"
@@ -41,7 +41,7 @@ testpassword: testertest
 - [ ] view and cancel order on account view - A
 - [ ] guards for order placement/ checkout
 - [x] Total price on checkout view - A
-- [ ] Make error service return errors - S
+- [x] Make error service return errors - S
 - [ ] I18n
 - [ ] Redux state handling
 

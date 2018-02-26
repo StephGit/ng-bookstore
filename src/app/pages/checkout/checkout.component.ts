@@ -4,6 +4,7 @@ import {ShoppingCartService} from '../../@core/services/shopping-cart.service';
 import {OrderService} from '../../@core/services/order.service';
 import {NotificationService} from '../../@core/services/notification.service';
 import {OrderItem} from '../../@core/model/oder-item.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-checkout',
@@ -15,7 +16,7 @@ export class CheckoutComponent implements OnInit {
   currentShoppingCart: ShoppingCart;
 
   constructor(private shoppingCartService: ShoppingCartService, private orderService: OrderService,
-              private notficationService: NotificationService) {
+              private notficationService: NotificationService, private router: Router) {
   }
 
   ngOnInit() {
@@ -26,6 +27,7 @@ export class CheckoutComponent implements OnInit {
     const orderItems: OrderItem [] = this.currentShoppingCart.items.map(i => new OrderItem(i.book.isbn, i.quantity));
     this.orderService.placeOrder(orderItems).subscribe((result) => {
       this.notficationService.success('Order with number: ' + result.nr + ' successfully places', 'Order placed');
+      this.router.navigate(['/account/overview'])
     })
   }
 

@@ -4,6 +4,7 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 import 'rxjs/add/operator/distinctUntilChanged';
 import {User} from '../model/user.model';
+import {Observable} from 'rxjs/Observable';
 
 
 
@@ -13,7 +14,7 @@ export class CurrentUserService {
   public currentUser = this.currentUserSubject.asObservable().distinctUntilChanged();
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
-  public isAuthenticated = this.isAuthenticatedSubject.asObservable();
+  public isAuthenticated: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
   constructor (
   ) {}

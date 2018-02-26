@@ -1,0 +1,23 @@
+<div class="col-lg-6 col-md-6 col-sm-12">
+  <div class="row"><h5 class="title col-12 grid-h">{{title}}</h5></div>
+  <div class="row">
+    <div class="label col-5 col-md-4">Name:</div>
+    <div class="content col-7 col-md-8">{{customer.firstName}} {{customer.lastName}}</div>
+  </div>
+  <div class="row">
+    <div class="label col-5 col-md-4">Email:</div>
+    <div class="content col-7 col-md-8">{{customer.email}}</div>
+  </div>
+  <div class="row">
+    <div class="label col-5 col-md-4">Street:</div>
+    <div class="content   col-7 col-md-8">{{customer.address.street}}</div>
+  </div>
+  <div class="row">
+    <div class="label col-5 col-md-4">Postcode/City:</div>
+    <div class="content   col-7 col-md-8">{{customer.address.postalCode}} {{customer.address.city}}</div>
+  </div>
+  <div class="row">
+    <div class="label col-5 col-md-4">Country:</div>
+    <div class="content col-7 col-md-8">{{Country[customer.address.country]}}</div>
+  </div>
+</div>

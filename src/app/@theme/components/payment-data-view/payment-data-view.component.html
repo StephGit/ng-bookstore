@@ -1,0 +1,17 @@
+<div class="col-lg-6 col-md-6 col-sm-12">
+  <div class="row"><h5 class="title col-12 grid-h">Payment Information:</h5></div>
+  <div class="row">
+    <div class="label col-5 col-md-4">Card-Type:</div>
+    <div class="content col-7 col-md-8">{{customer.creditCard.type}}</div>
+  </div>
+  <div class="row">
+    <div class="label col-5 col-md-4">Cardnumber:</div>
+    <div class="content col-7 col-md-8">{{customer.creditCard.number}}</div>
+  </div>
+  <div class="row">
+    <div class="label col-5 col-md-4">Expiration:</div>
+    <div class="content   col-7 col-md-8">
+      {{customer.creditCard.expirationMonth}}/{{customer.creditCard.expirationYear}}
+    </div>
+  </div>
+</div>

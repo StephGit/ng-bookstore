@@ -37,7 +37,6 @@ testpassword: testertest
 - [x] Shopping cart - A --> table with isbn, title, price, recalculate totalprice when quantity updated ngModelChange="updateTotalPrice"
 - [x] Checkout overview - A
 - [ ] Checkout address selection - S
-- [ ] Admin component to add books - A
 - [x] view and cancel order on account view - A
 - [x] guards for order placement/ checkout
 - [x] Total price on checkout view - A

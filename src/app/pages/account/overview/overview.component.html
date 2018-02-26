@@ -60,7 +60,7 @@
           (click)="updateCreditCard()">Edit Payment-Data
   </button>
 </div>
-<div class="row" *ngIf="orders !== undefined && orders !== null">
+<div class="row" *ngIf="orders !== undefined && orders !== null && orders.length > 0">
   <ngx-order-list [orders]="orders" (onCancelOrder)="cancelOrder($event)"></ngx-order-list>
 </div>
 

@@ -66,7 +66,7 @@ export class CatalogService {
 
   protected handleError(error: any, method: string) {
     this.notificationService.error(
-      this.errorService.getCatalogError([method, error.status]), 'Catalog error');
+      this.errorService.getCatalogError(method + error.status), 'Catalog error');
     return Observable.throw(error);
   }
 

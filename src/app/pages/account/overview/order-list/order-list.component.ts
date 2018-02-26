@@ -4,6 +4,7 @@ import {OrderStatus} from '../../../../@core/model/order-status.model';
 
 @Component({
   selector: 'ngx-order-list',
+  styleUrls: ['./order-list.component.scss'],
   template: `
     <nb-card class="orders">
       <nb-card-header>
@@ -20,7 +21,16 @@ import {OrderStatus} from '../../../../@core/model/order-status.model';
         </div>
         <div class="row">
           <div class="list-group col-md-12">
-            <div class="col-md-12">
+            <div *ngIf="!orders || orders.length === 0">
+              <div class="form-alert">
+                <p>
+                  <ngb-alert type="info" [dismissible]="false">
+                    <strong>No Orders found</strong>
+                  </ngb-alert>
+                </p>
+              </div>
+            </div>
+            <div *ngIf="orders && orders.length > 0" class="col-md-12">
               <table class="table">
                 <thead>
                 <tr>

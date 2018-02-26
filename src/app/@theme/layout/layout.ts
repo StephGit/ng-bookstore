@@ -12,7 +12,7 @@ import {NotificationService} from '../../@core/services/notification.service';
   styleUrls: ['./layout.scss'],
   template: `
     <nb-layout [center]="layout.id === 'center-column'" windowMode>
-      <nb-layout-header fixed>
+      <nb-layout-header>
         <ngx-header></ngx-header>
       </nb-layout-header>
 

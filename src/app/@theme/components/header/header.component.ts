@@ -14,9 +14,6 @@ import {NbUserMenuItem} from '@nebular/theme/components/user/user.component';
 })
 export class HeaderComponent implements OnInit {
 
-
-  @Input() position = 'normal';
-
   currentUser: User;
   picture = 'assets/images/user.png';
 

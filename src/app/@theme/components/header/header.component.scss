@@ -15,7 +15,6 @@
   .right {
     order: 1;
     width: 100%;
-    flex-direction: row-reverse;
   }
 
   .logo-containter {
@@ -94,6 +93,16 @@
 
   @include media-breakpoint-down(sm) {
 
+    .header-container {
+      .logo {
+        font-size: 1.25rem;
+      }
+    }
+
+    nb-action {
+      padding: 0 0.5em;
+    }
+
     nb-user /deep/ .user-name {
       display: none;
     }
@@ -101,15 +110,19 @@
 
   @include media-breakpoint-down(is) {
 
-    .header-container {
-      .logo {
-        font-size: 1.25rem;
-      }
+    flex-flow: row wrap;
+    justify-content: center;
+
+    .left {
+      display: flex;
+      order: 0;
+    }
+    .right {
+      order: 1;
+      width: 100%;
     }
 
-    nb-action:not(.toggle-layout) {
-      padding: 0;
-    }
+
   }
 }
 

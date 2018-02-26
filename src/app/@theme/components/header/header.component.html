@@ -1,16 +1,16 @@
-<div class="header-container"
-     [class.left]="position === 'normal'"
-     [class.right]="position === 'inverse'">
+<div class="header-container left">
   <div class="logo-containter">
     <div class="logo" (click)="goToHome()">ng-<span>bookstore</span></div>
   </div>
 </div>
-
 <nb-actions
   size="medium"
-  class="header-container"
-  [class.right]="position === 'normal'"
-  [class.left]="position === 'inverse'">
+  class="header-container right">
+  <nb-action class="control-item search">
+    <ngx-search-input (search)="startSearch($event)"></ngx-search-input>
+  </nb-action>
+  <nb-action class="control-item" (click)="navigateToShoppingCart()"  icon="ion-ios-cart-outline">
+  </nb-action>
   <nb-action>
     <div *ngIf="currentUser?.email" class="user-container with-menu">
       <nb-user [menu]="items" [onlyPicture]="true" [picture]="picture">
@@ -18,9 +18,5 @@
     </div>
     <a *ngIf="!currentUser.email" (click)="navigateToLogin()" class="pointer">Login</a>
   </nb-action>
-  <nb-action class="control-item" (click)="navigateToShoppingCart()"  icon="ion-ios-cart-outline">
-  </nb-action>
-  <nb-action class="control-item search">
-  <ngx-search-input (search)="startSearch($event)"></ngx-search-input>
-  </nb-action>
 </nb-actions>
+

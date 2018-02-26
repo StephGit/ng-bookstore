@@ -6,12 +6,13 @@ import { Component, EventEmitter, Output} from '@angular/core';
   template: `
     <div class="input-group">
       <input type="text" class="form-control" (keyup.enter)="onSearch(searchString)"
-             [(ngModel)]="searchString" placeholder="Search for a book..." autofocus>
+             [(ngModel)]="searchString" placeholder="Search for a book..." autofocus />
+      <i class="fa fa-search mobilesubmit"></i>
       <span class="input-group-btn">
             <button class="btn btn-info" (click)="onSearch(searchString)">
              <i class="fa fa-search"></i>
             </button>
-          </span>
+      </span>
     </div>
   `,
 })

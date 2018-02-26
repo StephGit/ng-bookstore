@@ -7,6 +7,10 @@
     flex: 0.15 !important;
   }
 
+  nb-layout-header nav {
+    height: auto !important;
+  }
+
   /* stylelint-disable */
   toaster-container /deep/ {
     #toast-container .toast-close-button {
@@ -24,9 +28,6 @@
 
   @include media-breakpoint-down(sm) {
 
-    nb-layout-header nav {
-     height: 5.75em !important;
-    }
 
 
     .main-btn {

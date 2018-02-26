@@ -1,5 +1,7 @@
 // themes - our custom or/and out of the box themes
 @import 'themes';
+@import '../../../../node_modules/bootstrap/scss/mixins/breakpoints';
+@import '../../../../node_modules/@nebular/theme/styles/global/bootstrap/breakpoints';
 
 // framework component themes (styles tied to theme variables)
 @import '~@nebular/theme/styles/globals';
@@ -19,6 +21,15 @@
   @include ngx-pace-theme();
 };
 
+
+
 .pointer {
   cursor: pointer !important;
+}
+
+@include media-breakpoint-down(sm) {
+  nb-layout-header nav {
+    height: auto !important;
+    padding: 1.25em 0.2em !important;
+  }
 }

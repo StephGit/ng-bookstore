@@ -13,6 +13,7 @@ import {AdService} from '../../../@core/services/ad.service';
 import {ChangeAddressDataComponent} from '../../../@theme/components/change-address-data/change-address-data.component';
 import {ChangePaymentDataComponent} from '../../../@theme/components/change-payment-data/change-payment-data.component';
 import {Order} from '../../../@core/model/order.model';
+import {ChangeContactDataComponent} from '../../../@theme/components/change-contact-data/change-contact-data.component';
 
 @Component({
   selector: 'ngx-overview',
@@ -70,7 +71,7 @@ export class OverviewComponent implements OnInit {
   }
 
   updateAddress() {
-    this.adService.setAd(new AdItem(ChangeAddressDataComponent, 'Address', null, this.customer));
+    this.adService.setAd(new AdItem(ChangeContactDataComponent, 'Contact/Address', this.user, this.customer));
     this.router.navigate(['/account/edit'], {queryParams: {returnUrl: '/account/overview'}});
   }
 

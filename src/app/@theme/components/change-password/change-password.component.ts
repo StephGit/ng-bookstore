@@ -8,7 +8,6 @@ import {NgForm} from '@angular/forms';
   templateUrl: './change-password.component.html',
 })
 export class ChangePasswordComponent {
-  @ViewChild(NgForm) form;
   @Input() user: User;
   @Input() customer: Customer;
 

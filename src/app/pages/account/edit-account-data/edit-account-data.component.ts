@@ -48,7 +48,7 @@ export class EditAccountDataComponent implements OnInit {
   }
 
   update() {
-    if (this.adItem.user != null) {
+    if (this.adItem.user != null && this.adItem.user.confirmPassword !== undefined) {
       this.updatePassword();
     } else {
       this.submitted = true;

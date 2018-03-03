@@ -15,7 +15,7 @@ import {
 import {
   AddressDataViewComponent,
   BookListComponent,
-  ChangeAddressDataComponent,
+  ChangeAddressDataComponent, ChangeContactDataComponent,
   ChangePasswordComponent,
   ChangePaymentDataComponent,
   ChangeUserDataComponent,
@@ -48,6 +48,7 @@ const COMPONENTS = [
   FooterComponent,
   ChangeUserDataComponent,
   ChangeAddressDataComponent,
+  ChangeContactDataComponent,
   ChangePaymentDataComponent,
   ChangePasswordComponent,
   HeaderComponent,

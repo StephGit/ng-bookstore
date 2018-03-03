@@ -84,6 +84,7 @@ export class CustomerService {
     return this.apiService
       .put(this.path + '/login', user.password, headers)
       .map(data => {
+        user.confirmPassword = undefined;
         return data;
       })
       .catch(err => this.handleError(err, 'changePassword'));

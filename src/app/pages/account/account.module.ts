@@ -12,6 +12,7 @@ import {ChangePasswordComponent} from '../../@theme/components/change-password/c
 import {OverviewComponent} from './overview/overview.component';
 import {EditAccountDataComponent} from './edit-account-data/edit-account-data.component';
 import {OrderListComponent} from '../../@theme/components/order-list/order-list.component';
+import {ChangeContactDataComponent} from '../../@theme/components';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import {OrderListComponent} from '../../@theme/components/order-list/order-list.
   entryComponents: [
     ChangeUserDataComponent,
     ChangeAddressDataComponent,
+    ChangeContactDataComponent,
     ChangePaymentDataComponent,
     ChangePasswordComponent,
   ],

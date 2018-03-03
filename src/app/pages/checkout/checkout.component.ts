@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ShoppingCart} from '../../@core/model/shopping-cart.model';
 import {ShoppingCartService} from '../../@core/services/shopping-cart.service';
 import {OrderService} from '../../@core/services/order.service';
@@ -7,19 +7,21 @@ import {OrderItem} from '../../@core/model/oder-item.model';
 import {Router} from '@angular/router';
 import {Customer} from '../../@core/model/customer.model';
 import {CustomerService} from '../../@core/services/customer.service';
-import {ChangePaymentDataComponent} from '../../@theme/components/change-payment-data/change-payment-data.component';
+import {ChangePaymentDataComponent} from '../../@theme/components';
 import {AdItem} from '../../@core/model/ad-item.model';
-import {ChangeAddressDataComponent} from '../../@theme/components/change-address-data/change-address-data.component';
+import {ChangeAddressDataComponent} from '../../@theme/components';
 import {AdService} from '../../@core/services/ad.service';
 import {CatalogService} from '../../@core/services/catalog.service';
+import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'ngx-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss'],
 })
-export class CheckoutComponent implements OnInit {
-
+export class CheckoutComponent implements OnInit, OnDestroy {
+  destroy$ = new Subject<void>();
   customer: Customer;
   currentShoppingCart: ShoppingCart;
   titleCustomer: string = 'Shipping-Address:';
@@ -36,7 +38,11 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit() {
     this.currentShoppingCart = this.shoppingCartService.getCurrentShoppingCart();
-    this.customerService.currentCustomer.subscribe(value => this.customer = value);
+    this.customerService.currentCustomer$.takeUntil(this.destroy$).subscribe(value => this.customer = value);
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
   }
 
   placeOrder() {

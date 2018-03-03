@@ -1,27 +1,27 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Customer} from '../../../@core/model/customer.model';
 import {CustomerService} from '../../../@core/services/customer.service';
 import {CurrentUserService} from '../../../@core/services/current-user.service';
 import {User} from '../../../@core/model/user.model';
 import {Router} from '@angular/router';
 import {NotificationService} from '../../../@core/services/notification.service';
-import {Country} from '../../../@core/model/country.model';
 import {OrderService} from '../../../@core/services/order.service';
-import {ChangePasswordComponent} from '../../../@theme/components/change-password/change-password.component';
+import {ChangePasswordComponent} from '../../../@theme/components';
 import {AdItem} from '../../../@core/model/ad-item.model';
 import {AdService} from '../../../@core/services/ad.service';
-import {ChangeAddressDataComponent} from '../../../@theme/components/change-address-data/change-address-data.component';
-import {ChangePaymentDataComponent} from '../../../@theme/components/change-payment-data/change-payment-data.component';
+import {ChangePaymentDataComponent} from '../../../@theme/components';
 import {Order} from '../../../@core/model/order.model';
-import {ChangeContactDataComponent} from '../../../@theme/components/change-contact-data/change-contact-data.component';
+import {ChangeContactDataComponent} from '../../../@theme/components';
+import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'ngx-overview',
   templateUrl: './overview.component.html',
   styleUrls: ['./overview.component.scss'],
 })
-export class OverviewComponent implements OnInit {
-
+export class OverviewComponent implements OnInit, OnDestroy {
+  destroy$ = new Subject<void>();
   customer: Customer;
   user: User;
   orders: Order [];
@@ -39,17 +39,19 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-
-    this.currentUserService.currentUser
+    this.currentUserService.currentUser$
+      .takeUntil(this.destroy$)
       .subscribe(user => {
         this.user = user;
       });
 
     this.customerService.find(this.user.id)
+      .takeUntil(this.destroy$)
       .subscribe(
         result => {
           this.loading = false;
-          this.customerService.currentCustomer
+          this.customerService.currentCustomer$
+            .takeUntil(this.destroy$)
             .subscribe(customer => {
               this.customer = customer;
               this.getOrders();
@@ -61,8 +63,10 @@ export class OverviewComponent implements OnInit {
           this.router.navigate(['/account/logout']);
         },
       );
+  }
 
-
+  ngOnDestroy() {
+    this.destroy$.next();
   }
 
   updatePassword() {
@@ -96,6 +100,7 @@ export class OverviewComponent implements OnInit {
 
   getOrders() {
     this.orderService.searchOrders(this.customer.nr, this.orderYear)
+      .takeUntil(this.destroy$)
       .subscribe(
         result => {
           // hack since date from backend is not a valid javascript date format

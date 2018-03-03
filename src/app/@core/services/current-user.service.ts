@@ -11,10 +11,10 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class CurrentUserService {
   private currentUserSubject = new BehaviorSubject<User>(new User());
-  public currentUser = this.currentUserSubject.asObservable().distinctUntilChanged();
+  public currentUser$ = this.currentUserSubject.asObservable().distinctUntilChanged();
 
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
-  public isAuthenticated: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+  public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
   constructor (
   ) {}

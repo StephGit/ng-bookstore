@@ -9,7 +9,7 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 @Injectable()
 export class ShoppingCartService {
   private cartItemsCountSubject = new BehaviorSubject<number>(0);
-  public currentCartItemsCount = this.cartItemsCountSubject.asObservable();
+  public currentCartItemsCount$ = this.cartItemsCountSubject.asObservable();
   currentShoppingCart: ShoppingCart = new ShoppingCart();
   isMockEnabled = `${environment.mock}`;
   private STORAGE_KEY: string = 'shopping-cart';

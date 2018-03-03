@@ -3,21 +3,20 @@ import {Observable} from 'rxjs/Observable';
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 import {HttpHeaders} from '@angular/common/http';
 import {ApiService} from './api.service';
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 import {Customer} from '../model/customer.model';
 import {NotificationService} from './notification.service';
 import {CurrentUserService} from './current-user.service';
 import {User} from '../model/user.model';
 import {ErrorService} from './error.service';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class CustomerService {
 
   private path = '/customers';
   private currentCustomerSubject = new BehaviorSubject<Customer>(new Customer());
-  public currentCustomer = this.currentCustomerSubject.asObservable().distinctUntilChanged();
+  public currentCustomer$ = this.currentCustomerSubject.asObservable().distinctUntilChanged();
 
   constructor (
     private apiService: ApiService,

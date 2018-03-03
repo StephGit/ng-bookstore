@@ -1,33 +1,19 @@
 import { Component, OnDestroy } from '@angular/core';
-
-import {Subscription} from 'rxjs/Subscription';
-import 'rxjs/add/operator/withLatestFrom';
-import 'rxjs/add/operator/delay';
 import {BodyOutputType, Toast, ToasterConfig, ToasterService} from 'angular2-toaster';
 import 'style-loader!angular2-toaster/toaster.css';
 import {NotificationService} from '../../@core/services/notification.service';
+import 'rxjs/add/operator/withLatestFrom';
+import 'rxjs/add/operator/delay';
+import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'ngx-layout',
   styleUrls: ['./layout.scss'],
-  template: `
-    <nb-layout [center]="layout.id === 'center-column'" windowMode>
-      <nb-layout-header fixed>
-        <ngx-header></ngx-header>
-      </nb-layout-header>
-
-      <nb-layout-column class="main-content">
-        <toaster-container [toasterconfig]="config"></toaster-container>
-        <ng-content select="router-outlet"></ng-content>
-      </nb-layout-column>
-
-      <nb-layout-footer fixed>
-        <ngx-footer></ngx-footer>
-      </nb-layout-footer>
-    </nb-layout>
-  `,
+  templateUrl: './layout.html',
 })
 export class LayoutComponent implements OnDestroy {
+  destroy$ = new Subject<void>();
   layout: any = {
     name: 'One Column',
     icon: 'nb-layout-default',
@@ -35,12 +21,10 @@ export class LayoutComponent implements OnDestroy {
     selected: true,
   };
 
-  protected notificate$: Subscription;
-
   constructor(private toasterService: ToasterService,
               private notificationService: NotificationService) {
 
-   this.notificate$ = this.notificationService.getMessage().subscribe((notification) => {
+   this.notificationService.getMessage().takeUntil(this.destroy$).subscribe((notification) => {
       this.showToast(notification.type, notification.title, notification.text);
     });
   }
@@ -80,6 +64,6 @@ export class LayoutComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.notificate$.unsubscribe();
+    this.destroy$.next();
   }
 }

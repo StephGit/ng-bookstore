@@ -1,10 +1,5 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 export const environment = {
   production: true,
-  api_url: 'http://shibsp.ti.bfh.ch:8003/bookstore/api',
+  api_url: 'https://shibsp.ti.bfh.ch:8103/bookstore/api',
   mock: false,
 };

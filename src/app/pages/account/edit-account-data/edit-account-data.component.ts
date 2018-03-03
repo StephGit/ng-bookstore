@@ -1,18 +1,21 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {AdDirective} from '../../../@theme/directives/ad.directive';
 import {AdItem} from '../../../@core/model/ad-item.model';
 import {AdService} from '../../../@core/services/ad.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../../../@core/services/notification.service';
 import {CustomerService} from '../../../@core/services/customer.service';
+import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'ngx-edit-account-data',
   templateUrl: './edit-account-data.component.html',
 })
-export class EditAccountDataComponent implements OnInit {
+export class EditAccountDataComponent implements OnInit, OnDestroy {
   @ViewChild(AdDirective) adHost: AdDirective;
   adItem: AdItem;
+  destroy$ = new Subject<void>();
   submitted: boolean = false;
   returnUrl: string;
 
@@ -24,12 +27,16 @@ export class EditAccountDataComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.adService.currentAd.subscribe(
+    this.adService.currentAd$.takeUntil(this.destroy$).subscribe(
       item => {
         this.adItem = item;
      });
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     this.loadComponent();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
   }
 
   private loadComponent() {
@@ -54,6 +61,7 @@ export class EditAccountDataComponent implements OnInit {
       this.submitted = true;
       this.customerService
         .update(this.adItem.customer)
+        .takeUntil(this.destroy$)
         .subscribe(
           result => {
             this.navigateBack();
@@ -69,6 +77,7 @@ export class EditAccountDataComponent implements OnInit {
   updatePassword() {
     this.customerService
       .changePassword(this.adItem.user)
+      .takeUntil(this.destroy$)
       .subscribe(
         result => {
           this.navigateBack();

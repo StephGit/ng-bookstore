@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {NbThemeService} from '@nebular/theme';
 import {CatalogService} from '../../../@core/services/catalog.service';
 import {User} from '../../../@core/model/user.model';
@@ -7,13 +6,16 @@ import {CurrentUserService} from '../../../@core/services/current-user.service';
 import {Router} from '@angular/router';
 import {NbUserMenuItem} from '@nebular/theme/components/user/user.component';
 import {ShoppingCartService} from '../../../@core/services/shopping-cart.service';
+import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
+  destroy$ = new Subject<void>();
   cartItems: number;
   currentUser: User;
   picture = 'assets/images/user.png';
@@ -30,13 +32,16 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.themeService.changeTheme('default');
-    this.currentUserService.currentUser.subscribe(
+    this.currentUserService.currentUser$.takeUntil(this.destroy$).subscribe(
       (userData: User) => {
         this.currentUser = userData;
       });
-    this.shoppingCartService.currentCartItemsCount.subscribe(
+    this.shoppingCartService.currentCartItemsCount$.takeUntil(this.destroy$).subscribe(
       count => { this.cartItems = count; });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
   }
 
   goToHome() {

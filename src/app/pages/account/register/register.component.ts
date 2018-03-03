@@ -1,17 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CustomerService} from '../../../@core/services/customer.service';
 import {Customer} from '../../../@core/model/customer.model';
 import {User} from '../../../@core/model/user.model';
 import {Address} from '../../../@core/model/address.model';
 import {CreditCard} from '../../../@core/model/creditcard.model';
+import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'ngx-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy {
+  destroy$ = new Subject<void>();
   customer: Customer;
   user: User;
   submitted: boolean = false;
@@ -31,10 +34,15 @@ export class RegisterComponent implements OnInit {
     this.customer.creditCard = new CreditCard();
   }
 
+  ngOnDestroy() {
+    this.destroy$.next();
+  }
+
   doRegister() {
     this.submitted = true;
     this.customerService
       .register(this.customer, this.user.password)
+      .takeUntil(this.destroy$)
       .subscribe(
         result => {
           this.router.navigate([this.returnUrl]);

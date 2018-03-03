@@ -4,7 +4,8 @@
   </nb-card-header>
   <nb-card-body>
     <div class="row">
-      <div class="list-group col-md-12">
+      <div class="list-group col-md-12"
+           *ngIf="currentShoppingCart && currentShoppingCart.items && currentShoppingCart.items.length > 0">
         <div *ngFor="let i of currentShoppingCart.items">
           <div class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="wrapper">
@@ -28,12 +29,21 @@
                 </select>
               </div>
               <div class="col-md-2">
-              <button type="button" (click)="removeFromShoppingCart(i)" class="btn btn-danger btn-icon">
-                <i class="fa fa-trash"></i>
-              </button>
+                <button type="button" (click)="removeFromShoppingCart(i)" class="btn btn-danger btn-icon">
+                  <i class="fa fa-trash"></i>
+                </button>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div *ngIf="!currentShoppingCart || !currentShoppingCart.items || currentShoppingCart.items.length === 0">
+        <div class="form-alert">
+          <p>
+            <ngb-alert type="info" [dismissible]="false">
+              <strong>Your shopping cart is empty</strong>
+            </ngb-alert>
+          </p>
         </div>
       </div>
     </div>

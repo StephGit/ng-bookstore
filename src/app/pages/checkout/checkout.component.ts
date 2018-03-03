@@ -11,6 +11,7 @@ import {ChangePaymentDataComponent} from '../../@theme/components/change-payment
 import {AdItem} from '../../@core/model/ad-item.model';
 import {ChangeAddressDataComponent} from '../../@theme/components/change-address-data/change-address-data.component';
 import {AdService} from '../../@core/services/ad.service';
+import {CatalogService} from '../../@core/services/catalog.service';
 
 @Component({
   selector: 'ngx-checkout',
@@ -22,17 +23,20 @@ export class CheckoutComponent implements OnInit {
   customer: Customer;
   currentShoppingCart: ShoppingCart;
   titleCustomer: string = 'Shipping-Address:';
+  isOrderPlaced: boolean = false;
 
   constructor(private adService: AdService,
               private shoppingCartService: ShoppingCartService,
               private customerService: CustomerService,
               private orderService: OrderService,
-              private notficationService: NotificationService, private router: Router) {
+              private notficationService: NotificationService,
+              private catalogService: CatalogService,
+              private router: Router) {
   }
 
   ngOnInit() {
     this.currentShoppingCart = this.shoppingCartService.getCurrentShoppingCart();
-    this.customerService.currentCustomer.subscribe( value => this.customer = value);
+    this.customerService.currentCustomer.subscribe(value => this.customer = value);
   }
 
   placeOrder() {
@@ -40,11 +44,15 @@ export class CheckoutComponent implements OnInit {
     this.orderService.placeOrder(orderItems).subscribe((result) => {
       this.notficationService.success('Order with number: ' + result.nr + ' successfully places', 'Order placed');
       this.shoppingCartService.clearCart();
-      this.router.navigate(['/account/overview'])
-    })
+      this.catalogService.resetAddedToCartFlag();
+      this.router.navigate(['/account/overview']);
+    });
+    this.isOrderPlaced = true;
   }
 
-  get totalPrice(): number { return this.currentShoppingCart.getTotalPrice(); }
+  get totalPrice(): number {
+    return this.currentShoppingCart.getTotalPrice();
+  }
 
   updateAddress() {
     this.adService.setAd(new AdItem(ChangeAddressDataComponent, 'Address', null, this.customer));

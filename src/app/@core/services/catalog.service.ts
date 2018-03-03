@@ -51,6 +51,13 @@ export class CatalogService {
       });
   }
 
+  resetAddedToCartFlag() {
+    this.searchResults.forEach(b => {
+      b.isAddedToCart = false;
+    });
+    this.searchResultsUpdated.emit(this.searchResults);
+  }
+
   getPreviousSearchResults() {
     return this.searchResults;
   }

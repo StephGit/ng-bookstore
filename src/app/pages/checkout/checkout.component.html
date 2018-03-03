@@ -37,7 +37,7 @@
         </div>
         <button class="btn btn-primary btn-md multibtn" (click)="updateAddress()">Edit Address</button>
         <button class="btn btn-primary btn-md multibtn" (click)="updateCreditCard()">Edit Payment-Data</button>
-        <button class="btn btn-success checkout-btn multibtn" (click)="placeOrder()">Place Order</button>
+        <button class="btn btn-success checkout-btn multibtn" [disabled]="isOrderPlaced" (click)="placeOrder()">Place Order</button>
       </div>
     </div>
   </nb-card-body>

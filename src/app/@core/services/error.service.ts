@@ -15,6 +15,7 @@ export class ErrorService {
 
   private setCustomerErrors() {
     this.customerErrors.set('register400', 'Invalid registration data');
+    this.customerErrors.set('register409', 'Email is allready used by a customer');
     this.customerErrors.set('login401', 'Email or password is incorrect');
     this.customerErrors.set('login404', 'Email or password is incorrect');
     this.customerErrors.set('changePassword404', 'Email is incorrect');

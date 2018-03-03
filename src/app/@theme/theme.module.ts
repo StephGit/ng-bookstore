@@ -29,7 +29,7 @@ import {
 import { CapitalizePipe, PluralPipe, RoundPipe, TimingPipe } from './pipes';
 import { LayoutComponent} from './layout';
 import { ToasterModule } from 'angular2-toaster';
-import {AdDirective, CreditcardYearDirective, ProvideParentFormDirective} from './directives';
+import {AdDirective, CreditcardYearDirective, EqualDirective, ProvideParentFormDirective} from './directives';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, ToasterModule];
 
@@ -68,6 +68,7 @@ const PIPES = [
 const DIRECTIVES = [
   AdDirective,
   CreditcardYearDirective,
+  EqualDirective,
   ProvideParentFormDirective,
 ];
 

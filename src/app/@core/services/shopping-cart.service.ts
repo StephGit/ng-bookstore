@@ -39,6 +39,10 @@ export class ShoppingCartService {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.currentShoppingCart));
   }
 
+  public clearCart() {
+    this.currentShoppingCart.items = [];
+  }
+
   public removeItemFromShoppingCart(item: ShoppingCartItem) {
     this.currentShoppingCart.removeItem(item);
     this.cartItemsCountSubject.next(this.currentShoppingCart.items.length);

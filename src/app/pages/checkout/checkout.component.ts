@@ -39,6 +39,7 @@ export class CheckoutComponent implements OnInit {
     const orderItems: OrderItem [] = this.currentShoppingCart.items.map(i => new OrderItem(i.book.isbn, i.quantity));
     this.orderService.placeOrder(orderItems).subscribe((result) => {
       this.notficationService.success('Order with number: ' + result.nr + ' successfully places', 'Order placed');
+      this.shoppingCartService.clearCart();
       this.router.navigate(['/account/overview'])
     })
   }

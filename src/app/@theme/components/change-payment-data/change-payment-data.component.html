@@ -16,9 +16,8 @@
     <label for="input-cardnumber" class="sr-only">Card number</label>
     <input [(ngModel)]="customer.creditCard.number" name="cardnumber" id="input-cardnumber"
            #cardnumber="ngModel"
-           class="form-control" placeholder="Card number" pattern="^(\d{4}[-. ]?){4}|(\d{4}[-. ]?\d{6}[-. ]?\d{5})$"
+           class="form-control" placeholder="Card number" pattern="^(?:\d[ -]*?){16}$"
            [class.form-control-danger]="cardnumber.invalid && cardnumber.touched"
-           ngModel
            required>
     <small class="form-text error" *ngIf="cardnumber.invalid && cardnumber.touched && cardnumber.errors?.required">
       CreditCard is required!
@@ -36,14 +35,18 @@
              type="number"
              pattern="^(1[0-2]|[1-9])$"
              required
-             ngModel
+             ngxCreditcardMonth="year"
              minlength="1" maxlength="2">
       <small class="form-text error" *ngIf="expMonth.invalid && expMonth.touched && expMonth.errors?.required">
-        Expiration month is required!
+        The expiration month is required!
       </small>
       <small class="form-text error"
              *ngIf="expMonth.invalid && expMonth.touched && (expMonth.errors?.minlength || expMonth.errors?.pattern)">
-        Month is not valid.
+        Only values between 1 - 12 are valid.
+      </small>
+      <small class="form-text error"
+             *ngIf="expMonth.invalid && expMonth.touched && expMonth.errors?.month">
+        {{expMonth.errors.month.message}}
       </small>
     </div>
     <div class="col-sm-6 form-group">
@@ -52,9 +55,8 @@
              class="form-control" placeholder="Year"
              [class.form-control-danger]="year.invalid && year.touched"
              required
-             ngModel
              type="number"
-             ngxCreditcardYear>
+             ngxCreditcardYear="expMonth">
       <small class="form-text error" *ngIf="year.invalid && year.touched && year.errors?.required">
         Year is required!
       </small>

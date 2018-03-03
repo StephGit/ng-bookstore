@@ -5,6 +5,6 @@
  */
 export const environment = {
   production: true,
-  api_url: 'http://localhost:8080/bookstore/api',
+  api_url: 'http://shibsp.ti.bfh.ch:8003/bookstore/api',
   mock: false,
 };

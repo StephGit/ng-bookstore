@@ -10,6 +10,6 @@
 
 export const environment = {
   production: false,
-  api_url: 'http://distsys.ch:8080/bookstore/api',
+  api_url: 'http://shibsp.ti.bfh.ch:8003/bookstore/api',
   mock: true,
 };

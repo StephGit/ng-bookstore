@@ -66,6 +66,7 @@ export class OverviewComponent implements OnInit {
   }
 
   updatePassword() {
+    this.user.confirmPassword = undefined;
     this.adService.setAd(new AdItem(ChangePasswordComponent, 'Password', this.user, null));
     this.router.navigate(['/account/edit'], {queryParams: {returnUrl: '/account/overview'}});
   }

@@ -34,6 +34,7 @@ export class CustomerService {
       .map((data) => {
         const user = new User(data, credentials.email, credentials.password);
         this.currentUserService.setAuth(user);
+        this.find(user.id).subscribe(result => result);
         return user;
       })
       .catch(err => this.handleError(err, 'login'));

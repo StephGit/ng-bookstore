@@ -24,7 +24,6 @@ export class OverviewComponent implements OnInit, OnDestroy {
   customer: Customer;
   user: User;
   orders: Order [];
-  loading: boolean = true;
   title: string = 'Contact/Address:';
 
   orderYear = new Date().getFullYear();
@@ -44,25 +43,13 @@ export class OverviewComponent implements OnInit, OnDestroy {
         this.user = user;
       });
 
-    this.customerService.find(this.user.id)
+    this.customerService.currentCustomer$
       .takeUntil(this.destroy$)
-      .subscribe(
-        result => {
-          this.loading = false;
-          this.customerService.currentCustomer$
-            .takeUntil(this.destroy$)
-            .subscribe(customer => {
-              this.customer = customer;
-              this.getOrders();
-            });
-        },
-        error => {
-          this.notificationService.error(
-            'There is a problem with your account. Please login again!', 'Account error');
-          this.router.navigate(['/account/logout']);
-        },
-      );
-  }
+      .subscribe(customer => {
+        this.customer = customer;
+        this.getOrders();
+      });
+    }
 
   ngOnDestroy() {
     this.destroy$.next();

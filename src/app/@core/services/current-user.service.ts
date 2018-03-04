@@ -7,7 +7,6 @@ import {User} from '../model/user.model';
 import {Observable} from 'rxjs/Observable';
 
 
-
 @Injectable()
 export class CurrentUserService {
   private currentUserSubject = new BehaviorSubject<User>(new User());
@@ -16,16 +15,17 @@ export class CurrentUserService {
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
 
-  constructor (
-  ) {}
+  constructor () {}
 
   // This runs once on application startup.
   populate() {
     const user = JSON.parse(localStorage.getItem('currentUser'));
     if (user) {
       this.setAuth(user);
+      return user.id;
     } else {
       this.purgeAuth();
+      return null;
     }
   }
 

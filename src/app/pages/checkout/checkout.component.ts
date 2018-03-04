@@ -14,8 +14,6 @@ import {AdService} from '../../@core/services/ad.service';
 import {CatalogService} from '../../@core/services/catalog.service';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
-import {User} from '../../@core/model/user.model';
-import {CurrentUserService} from '../../@core/services/current-user.service';
 
 @Component({
   selector: 'ngx-checkout',
@@ -28,7 +26,6 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   currentShoppingCart: ShoppingCart;
   titleCustomer: string = 'Shipping-Address:';
   isOrderPlaced: boolean = false;
-  user: User;
 
   constructor(private adService: AdService,
               private shoppingCartService: ShoppingCartService,
@@ -36,31 +33,12 @@ export class CheckoutComponent implements OnInit, OnDestroy {
               private orderService: OrderService,
               private notficationService: NotificationService,
               private catalogService: CatalogService,
-              private currentUserService: CurrentUserService,
               private router: Router) {
   }
 
   ngOnInit() {
     this.currentShoppingCart = this.shoppingCartService.getCurrentShoppingCart();
-
-    // TODO same code as in overview.component.ts
-    this.currentUserService.currentUser$
-      .takeUntil(this.destroy$)
-      .subscribe(user => {
-        this.user = user;
-        // FIXME does the code below belong here? we can only find the customer after we received t he current user
-      });
-    this.customerService.find(this.user.id)
-      .takeUntil(this.destroy$)
-      .subscribe(
-        result => {
-          this.customerService.currentCustomer$
-            .takeUntil(this.destroy$)
-            .subscribe(customer => {
-              this.customer = customer;
-            });
-        },
-      );
+    this.customerService.currentCustomer$.takeUntil(this.destroy$).subscribe(value => this.customer = value);
   }
 
   ngOnDestroy() {

@@ -33,6 +33,7 @@ import {
   AdDirective, CreditcardMonthDirective, CreditcardYearDirective, EqualDirective,
   ProvideParentFormDirective,
 } from './directives';
+import {PrettifyAuthorsPipe} from './pipes/prettify-authors.pipe';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule, ToasterModule];
 
@@ -63,6 +64,7 @@ const COMPONENTS = [
 
 const PIPES = [
   CapitalizePipe,
+  PrettifyAuthorsPipe,
   PluralPipe,
   RoundPipe,
   TimingPipe,

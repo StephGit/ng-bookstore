@@ -12,7 +12,7 @@
               <div class="details col-md-4">
                 <div class="title">{{ i.book.title }}</div>
                 <div class="authors">
-                  <div class="desc">by {{ i.book.authors }}</div>
+                  <div class="desc">by {{ i.book.authors | ngxPrettifyAuthors}}</div>
                 </div>
                 <div class="isbn">
                   <div class="desc">{{ i.book.isbn }}</div>

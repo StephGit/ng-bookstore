@@ -26,15 +26,3 @@ This project was generated with [Angular CLI 1.6.7](https://cli.angular.io/) and
 
 - [ ] I18n
 - [ ] Redux state handling
-
-
-
-## Releasenotes
-
-1. Kunde kann seine E-Mail nach der Registrierung ändern. Falls er die E-Mail ändert, wird nur die Mailadresse
-des Customers geändert. Der Username bleibt gleich. (Fehlverhalten bei Fischlis-Store -> Register und Mailadresse ändern- Login nicht mehr möglich)
-2. State wird hauptsächlich über Services gehandelt. Komponenten sind weitgehend dumm gehalten. 
-Hierbei wird auf der Komponente über OnInit eine Subscribtion auf ein Subject erstellt und OnDestroy
-die Subscription aufgehoben. 
-3. Speziell implementiert wurde eine ComponentFactory, welche dynamisch die notwendigen
- Komponenten für die Edit-Komponente bereitstellt.

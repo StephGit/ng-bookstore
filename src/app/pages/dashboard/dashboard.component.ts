@@ -31,7 +31,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   navigateToDetails(isbn) {
     this.router.navigate(['/details/' + isbn]);
-
   }
 
   ngOnDestroy() {

@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
     if (userId !== null) {
       this.customerService.find(userId).subscribe(
         result => result);
-      this.shoppingCartService.getCurrentShoppingCart();
     }
+    this.shoppingCartService.getCurrentShoppingCart();
   }
 }

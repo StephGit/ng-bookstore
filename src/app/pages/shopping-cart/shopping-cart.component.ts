@@ -36,4 +36,8 @@ export class ShoppingCartComponent implements OnInit {
   navigateToCheckout() {
     this.router.navigate(['/checkout'])
   }
+
+  navigateToDetails(isbn) {
+    this.router.navigate(['/details/' + isbn]);
+  }
 }

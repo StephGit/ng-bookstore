@@ -9,7 +9,7 @@
         <div *ngFor="let i of currentShoppingCart.items">
           <div class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="wrapper">
-              <div class="details col-md-4">
+              <div class="details col-md-4 pointer" (click)="navigateToDetails(i.book.isbn)">
                 <div class="title">{{ i.book.title }}</div>
                 <div class="authors">
                   <div class="desc">by {{ i.book.authors | ngxPrettifyAuthors}}</div>

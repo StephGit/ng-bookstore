@@ -29,6 +29,10 @@
   cursor: pointer !important;
 }
 
+.nb-theme-default .form-text {
+  color: #4b4b4b;
+}
+
 @include media-breakpoint-down(sm) {
   nb-layout-header nav {
     height: auto !important;

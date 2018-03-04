@@ -15,8 +15,7 @@ export class CreditcardYearDirective implements Validator {
     const maxYear = currentYear + 10;
     const currentMonth = new Date().getMonth() + 1;
     const monthControl = c.root.get(this.validateMonth);
-    const month = monthControl !== null ? monthControl.value : 0;
-
+    const month = (monthControl !== undefined && monthControl !== null ) ? monthControl.value : 0;
     let isValid = !isNaN(value) && value >= currentYear && value <= maxYear;
     const message = {
       'years': {

@@ -31,9 +31,9 @@
     <div class="row">
       <div class="col-md-12 menu">
         <div class="col-12 totalprice">Total price: {{ totalPrice | currency:'USD'}}</div>
-        <div class="row customer-data">
-          <ngx-address-data-view class="col-lg-6 col-md-6 col-sm-12" [customer]="customer" [title]="titleCustomer"></ngx-address-data-view>
-          <ngx-payment-data-view class="col-lg-6 col-md-6 col-sm-12" [customer]="customer"></ngx-payment-data-view>
+        <div class="row customer-data" *ngIf="customer">
+          <ngx-address-data-view *ngIf="customer.address" class="col-lg-6 col-md-6 col-sm-12" [customer]="customer" [title]="titleCustomer"></ngx-address-data-view>
+          <ngx-payment-data-view *ngIf="customer.creditCard" class="col-lg-6 col-md-6 col-sm-12" [customer]="customer"></ngx-payment-data-view>
         </div>
         <button class="btn btn-primary btn-md multibtn" (click)="updateAddress()">Edit Address</button>
         <button class="btn btn-primary btn-md multibtn" (click)="updateCreditCard()">Edit Payment-Data</button>

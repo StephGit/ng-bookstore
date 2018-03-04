@@ -18,8 +18,9 @@
     &:hover {
       background-color: #a5d7ff;
     }
+
     .book-img {
-      max-height: 160px;
+      height: 160px;
     }
 
     $bevel: btn-hero-bevel(nb-theme(card-bg));
@@ -30,43 +31,9 @@
       padding: 0.625rem;
     }
 
-    .icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 5.75rem;
-      height: 4.75rem;
-      font-size: 3.75rem;
-      border-radius: nb-theme(card-border-radius);
-      transition: width 0.4s ease;
-      transform: translate3d(0, 0, 0);
-      -webkit-transform-style: preserve-3d;
-      -webkit-backface-visibility: hidden;
-      color: nb-theme(color-white);
-
-      &.primary {
-        @include btn-hero-primary-gradient();
-        @include btn-hero-primary-bevel-glow-shadow();
-      }
-      &.success {
-        @include btn-hero-success-gradient();
-        @include btn-hero-success-bevel-glow-shadow();
-      }
-      &.info {
-        @include btn-hero-info-gradient();
-        @include btn-hero-info-bevel-glow-shadow();
-      }
-      &.warning {
-        @include btn-hero-warning-gradient();
-        @include btn-hero-warning-bevel-glow-shadow();
-      }
-
-    }
-
     .details {
       display: flex;
       flex-direction: column;
-      justify-content: center;
       height: 100%;
       padding: 0 0.5rem 0 0.75rem;
       border-left: 1px solid transparent;

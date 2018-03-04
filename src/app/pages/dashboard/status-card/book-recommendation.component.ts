@@ -2,8 +2,8 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Router} from '@angular/router';
 
 @Component({
-  selector: 'ngx-status-card',
-  styleUrls: ['./status-card.component.scss'],
+  selector: 'ngx-book-recommendation',
+  styleUrls: ['./book-recommendation.component.scss'],
   template: `
     <nb-card (click)="bookSelected(isbn)">
       <!--<div class="icon-container">-->
@@ -12,8 +12,8 @@ import {Router} from '@angular/router';
         <!--</div>-->
       <!--</div>-->
       <div class="details">
-        <div >
-          <img class="book-img" src="https://images-na.ssl-images-amazon.com/images/I/41KJV7-HS0L.jpg">
+        <div class="preview">
+          <img class="book-img" src="{{imgUrl}}">
         </div>
         <div class="title">{{ title }}</div>
         <div class="authors"><div class="desc">by {{ authors }}</div></div>
@@ -23,13 +23,13 @@ import {Router} from '@angular/router';
     </nb-card>
   `,
 })
-export class StatusCardComponent {
+export class BookRecommendationComponent {
 
   @Input() title: string;
   @Input() authors: string;
   @Input() isbn: string;
   @Input() price: string;
-  @Input() type: string;
+  @Input() imgUrl: string;
 
   @Output() onBookSelected: EventEmitter<string> = new EventEmitter();
 

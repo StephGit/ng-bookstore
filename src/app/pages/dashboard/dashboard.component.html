@@ -7,9 +7,9 @@
       <div class="col-md-12">
         <div class="row">
           <div *ngFor="let b of recommendedBooks" class="col-md-2">
-            <ngx-status-card title="{{b.title}}" authors="{{b.authors}}" isbn="{{b.isbn}}" price="{{b.price}}"
-                             type="info" (onBookSelected)="navigateToDetails($event)">
-            </ngx-status-card>
+            <ngx-book-recommendation title="{{b.title}}" authors="{{b.authors}}" isbn="{{b.isbn}}" price="{{b.price}}"
+                             imgUrl="{{b.imgUrl}}" (onBookSelected)="navigateToDetails($event)">
+            </ngx-book-recommendation>
           </div>
         </div>
       </div>

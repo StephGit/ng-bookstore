@@ -17,8 +17,7 @@ import 'rxjs/add/operator/takeUntil';
 
 @Component({
   selector: 'ngx-overview',
-  templateUrl: './overview.component.html',
-  styleUrls: ['./overview.component.scss'],
+  templateUrl: './overview.component.html',  styleUrls: ['./overview.component.scss'],
 })
 export class OverviewComponent implements OnInit, OnDestroy {
   destroy$ = new Subject<void>();

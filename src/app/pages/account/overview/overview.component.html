@@ -6,8 +6,8 @@
   </div>
 </nb-card-header>
 <div class="row" *ngIf="customer">
-  <ngx-address-data-view class="col-lg-6 col-md-6 col-sm-12" [customer]="customer" [title]="title"></ngx-address-data-view>
-  <ngx-payment-data-view class="col-lg-6 col-md-6 col-sm-12" [customer]="customer"></ngx-payment-data-view>
+  <ngx-address-data-view *ngIf="customer.address" class="col-lg-6 col-md-6 col-sm-12" [customer]="customer" [title]="title"></ngx-address-data-view>
+  <ngx-payment-data-view *ngIf="customer.creditCard"  class="col-lg-6 col-md-6 col-sm-12" [customer]="customer"></ngx-payment-data-view>
 </div>
 <div class="d-flex justify-content-center btn-change">
   <button class="btn btn-primary btn-md multibtn"

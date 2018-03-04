@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 
 import { ThemeModule } from '../../@theme/theme.module';
 import { DashboardComponent } from './dashboard.component';
-import { StatusCardComponent } from './status-card/status-card.component';
+import {BookRecommendationComponent} from './status-card/book-recommendation.component';
 
 
 @NgModule({
@@ -11,7 +11,7 @@ import { StatusCardComponent } from './status-card/status-card.component';
   ],
   declarations: [
     DashboardComponent,
-    StatusCardComponent,
+    BookRecommendationComponent,
   ],
 })
 export class DashboardModule { }

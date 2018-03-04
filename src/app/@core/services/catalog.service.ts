@@ -72,10 +72,6 @@ export class CatalogService {
         }
         this.searchResults = results;
         this.searchResultsUpdated.emit(results);
-        if (results.length === 0) {
-          this.notificationService.info(
-            'No book available for this search parameter. Please try again.', 'No book found');
-        }
       });
   }
 

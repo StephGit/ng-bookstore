@@ -67,6 +67,9 @@ export class CatalogService {
     }), null)
       .catch(err => this.handleError(err, 'search'))
       .subscribe((results) => {
+        if (results.length === 0) {
+          this.notificationService.info('no books found for this keywords', null);
+        }
         this.searchResults = results;
         this.searchResultsUpdated.emit(results);
       });

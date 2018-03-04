@@ -33,7 +33,7 @@ export class LayoutComponent implements OnDestroy {
 
   position = 'toast-top-left';
   animationType = 'fade';
-  timeout = 5000;
+  timeout = 3500;
   toastsLimit = 5;
   type = 'default';
 

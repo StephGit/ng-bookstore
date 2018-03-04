@@ -19,11 +19,11 @@ export class CatalogService {
     price: '39.99',
     imgUrl: 'https://images-na.ssl-images-amazon.com/images/I/51h0WwyqCYL._SL160_.jpg',
   }, {
-    title: 'Java: A Beginner\'s Guide, Seventh Edition',
-    authors: 'Herbert Schildt',
-    isbn: '1259589315',
-    price: '24.66',
-    imgUrl: 'https://images-na.ssl-images-amazon.com/images/I/41SfK-5%2BD9L._SL160_.jpg',
+    title: 'Clean Code: A Handbook of Agile Software Craftsmanship',
+    authors: 'Robert C. Martin',
+    isbn: '0132350882',
+    price: '38.39',
+    imgUrl: 'https://images-na.ssl-images-amazon.com/images/I/41TINACY3hL._SL160_.jpg',
   },
     {
       title: 'Java EE 7: The Big Picture',

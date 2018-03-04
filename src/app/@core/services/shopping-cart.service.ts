@@ -20,9 +20,9 @@ export class ShoppingCartService {
   public getCurrentShoppingCart() {
     if (!this.currentShoppingCart.items || this.currentShoppingCart.items.length === 0) {
       const cartFromStorage = JSON.parse(localStorage.getItem(this.STORAGE_KEY));
-      if (cartFromStorage && cartFromStorage._items) {
+      if (cartFromStorage && cartFromStorage.items) {
         const storedShoppingCart = new ShoppingCart();
-        cartFromStorage._items.forEach(i =>
+        cartFromStorage.items.forEach(i =>
           storedShoppingCart.addItem(new ShoppingCartItem(
             new Book(i.book.isbn, i.book.authors, i.book.title, i.book.price), i.quantity),
           ));

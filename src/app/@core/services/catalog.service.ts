@@ -76,10 +76,12 @@ export class CatalogService {
   }
 
   resetAddedToCartFlag() {
-    this.searchResults.forEach(b => {
-      b.isAddedToCart = false;
-    });
-    this.searchResultsUpdated.emit(this.searchResults);
+    if (this.searchResults && this.searchResults.length > 0) {
+      this.searchResults.forEach(b => {
+        b.isAddedToCart = false;
+      });
+      this.searchResultsUpdated.emit(this.searchResults);
+    }
   }
 
   getPreviousSearchResults() {

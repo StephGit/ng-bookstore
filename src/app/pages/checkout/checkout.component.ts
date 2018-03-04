@@ -48,12 +48,16 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   placeOrder() {
     const orderItems: OrderItem [] = this.currentShoppingCart.items.map(i => new OrderItem(i.book.isbn, i.quantity));
     this.orderService.placeOrder(orderItems).subscribe((result) => {
-      this.notficationService.success('Order with number: ' + result.nr + ' successfully places', 'Order placed');
-      this.shoppingCartService.clearCart();
-      this.catalogService.resetAddedToCartFlag();
-      this.router.navigate(['/account/overview']);
-    });
+        this.notficationService.success('Order with number: ' + result.nr + ' successfully places', 'Order placed');
+        this.shoppingCartService.clearCart();
+        this.catalogService.resetAddedToCartFlag();
+        this.router.navigate(['/account/overview']);
+      },
+      (error) => {
+        this.isOrderPlaced = false;
+      });
     this.isOrderPlaced = true;
+
   }
 
   get totalPrice(): number {

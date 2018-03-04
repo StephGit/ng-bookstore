@@ -14,7 +14,7 @@ import {NotificationService} from '../../../@core/services/notification.service'
             <div class="details col-md-4" (click)="bookSelected(b.isbn)">
               <div class="title">{{ b.title }}</div>
               <div class="authors">
-                <div class="desc">by {{ b.authors }}</div>
+                <div class="desc">by {{ b.authors | ngxPrettifyAuthors}}</div>
               </div>
               <div class="isbn">
                 <div class="desc">{{ b.isbn }}</div>

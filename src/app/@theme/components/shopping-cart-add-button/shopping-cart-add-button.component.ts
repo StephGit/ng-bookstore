@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Book} from '../../../@core/model/book.model';
 import {ShoppingCartItem} from '../../../@core/model/shopping-cart-item.model';
 import {ShoppingCartService} from '../../../@core/services/shopping-cart.service';
@@ -14,12 +14,21 @@ import {NotificationService} from '../../../@core/services/notification.service'
     </button>
   `,
 })
-export class ShoppingCartAddButtonComponent {
+export class ShoppingCartAddButtonComponent implements OnInit {
   @Input()
   book: Book;
 
   constructor(private cartService: ShoppingCartService, private notificationService: NotificationService) {
   }
+
+  ngOnInit() {
+    this.cartService.getCurrentShoppingCart().items.forEach(item => {
+      if (item.book.isbn === this.book.isbn) {
+        this.book.isAddedToCart = true;
+      }
+    });
+  }
+
 
   addToShoppingCart(book: Book) {
     book.isAddedToCart = true;

@@ -1,5 +1,6 @@
 <nb-card-header>
   <h2 class="title">Account Overview</h2>
+  <h6>Username: {{user.email}}</h6>
 </nb-card-header>
 <div class="row" *ngIf="customer">
   <ngx-address-data-view *ngIf="customer.address" class="col-lg-6 col-md-6 col-sm-12" [customer]="customer" [title]="title"></ngx-address-data-view>

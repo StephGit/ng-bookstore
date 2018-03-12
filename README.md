@@ -24,5 +24,8 @@ This project was generated with [Angular CLI 1.6.7](https://cli.angular.io/) and
 
 ## TODOs
 
+- [ ] CreditCard-Fields as Dropdown
+- [ ] Copy Editable Objects 
+- [ ] Add Security Interceptor
 - [ ] I18n
 - [ ] Redux state handling

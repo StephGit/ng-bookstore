@@ -8,6 +8,7 @@ import {CustomerService} from '../../../@core/services/customer.service';
 import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/takeUntil';
 
+
 @Component({
   selector: 'ngx-edit-account-data',
   templateUrl: './edit-account-data.component.html',
@@ -50,7 +51,7 @@ export class EditAccountDataComponent implements OnInit, OnDestroy {
       (componentRef.instance).user = this.adItem.user;
       (componentRef.instance).customer = this.adItem.customer;
     } else {
-      this.navigateBack();
+      this.navigateBack(false);
     }
   }
 
@@ -64,7 +65,7 @@ export class EditAccountDataComponent implements OnInit, OnDestroy {
         .takeUntil(this.destroy$)
         .subscribe(
           result => {
-            this.navigateBack();
+            this.navigateBack(false);
             this.notificationService.success(this.adItem.title + ' sucessfully changed', 'Update ' + this.adItem.title);
           },
           error => {
@@ -80,7 +81,7 @@ export class EditAccountDataComponent implements OnInit, OnDestroy {
       .takeUntil(this.destroy$)
       .subscribe(
         result => {
-          this.navigateBack();
+          this.navigateBack(false);
           this.notificationService.success('Password sucessfully changed', 'Update Password');
         },
         error => {
@@ -89,7 +90,10 @@ export class EditAccountDataComponent implements OnInit, OnDestroy {
       );
   }
 
-  navigateBack() {
+  navigateBack(canceled: boolean) {
+    if (canceled) {
+      this.customerService.find(this.adItem.customer.nr).subscribe(result => result);
+    }
     this.router.navigate([this.returnUrl]);
   }
 }

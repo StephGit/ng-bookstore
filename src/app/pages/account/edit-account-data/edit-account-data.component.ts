@@ -6,8 +6,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../../../@core/services/notification.service';
 import {CustomerService} from '../../../@core/services/customer.service';
 import {Subject} from 'rxjs/Subject';
-import {Customer} from '../../../@core/model/customer.model';
-import {User} from '../../../@core/model/user.model';
 import 'rxjs/add/operator/takeUntil';
 
 

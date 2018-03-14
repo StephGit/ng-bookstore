@@ -6,9 +6,10 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NotificationService} from '../../../@core/services/notification.service';
 import {CustomerService} from '../../../@core/services/customer.service';
 import {Subject} from 'rxjs/Subject';
+import {Customer} from '../../../@core/model/customer.model';
+import {User} from '../../../@core/model/user.model';
 import 'rxjs/add/operator/takeUntil';
-import {Customer} from "../../../@core/model/customer.model";
-import {User} from "../../../@core/model/user.model";
+
 
 @Component({
   selector: 'ngx-edit-account-data',
@@ -16,8 +17,6 @@ import {User} from "../../../@core/model/user.model";
 })
 export class EditAccountDataComponent implements OnInit, OnDestroy {
   @ViewChild(AdDirective) adHost: AdDirective;
-  customer: Customer;
-  user: User;
   adItem: AdItem;
   destroy$ = new Subject<void>();
   submitted: boolean = false;
@@ -46,32 +45,29 @@ export class EditAccountDataComponent implements OnInit, OnDestroy {
   private loadComponent() {
     if (this.adItem.component !== undefined && this.adItem.component !== null) {
       const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.adItem.component);
-      this.user = { ...this.adItem.user };
-      this.customer = { ...this.adItem.customer };
 
       const viewContainerRef = this.adHost.viewContainerRef;
       viewContainerRef.clear();
 
       const componentRef = viewContainerRef.createComponent(componentFactory);
-      (componentRef.instance).user = this.user;
-      (componentRef.instance).customer = this.customer;
+      (componentRef.instance).user = this.adItem.user;
+      (componentRef.instance).customer = this.adItem.customer;
     } else {
-      this.navigateBack();
+      this.navigateBack(false);
     }
   }
 
   update() {
-    if (this.user != null && this.user.confirmPassword !== undefined) {
+    if (this.adItem.user != null && this.adItem.user.confirmPassword !== undefined) {
       this.updatePassword();
     } else {
       this.submitted = true;
       this.customerService
-        .update(this.customer)
+        .update(this.adItem.customer)
         .takeUntil(this.destroy$)
         .subscribe(
           result => {
-            this.customerService.find(this.customer.nr);
-            this.navigateBack();
+            this.navigateBack(false);
             this.notificationService.success(this.adItem.title + ' sucessfully changed', 'Update ' + this.adItem.title);
           },
           error => {
@@ -83,11 +79,11 @@ export class EditAccountDataComponent implements OnInit, OnDestroy {
 
   updatePassword() {
     this.customerService
-      .changePassword(this.user)
+      .changePassword(this.adItem.user)
       .takeUntil(this.destroy$)
       .subscribe(
         result => {
-          this.navigateBack();
+          this.navigateBack(false);
           this.notificationService.success('Password sucessfully changed', 'Update Password');
         },
         error => {
@@ -96,7 +92,10 @@ export class EditAccountDataComponent implements OnInit, OnDestroy {
       );
   }
 
-  navigateBack() {
+  navigateBack(canceled: boolean) {
+    if (canceled) {
+      this.customerService.find(this.adItem.customer.nr).subscribe(result => result);
+    }
     this.router.navigate([this.returnUrl]);
   }
 }
